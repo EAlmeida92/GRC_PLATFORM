@@ -1,0 +1,112 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+
+<!DOCTYPE html>
+<html>
+
+
+    @{
+        var ANO_VERSAO_REAL = @ViewData["ANO_VERSAO_REAL"];
+        var ANO_VERSAO_ANTE = @ViewData["ANO_VERSAO_ANTE"];
+        var MES_ACUM_REAL = @ViewData["MES_ACUM_REAL"];
+        var MES_ACUM_ANTE = @ViewData["MES_ACUM_ANTE"];
+        var MES_INI_PER_REAL = @ViewData["MES_INI_PER_REAL"];
+        var MES_INI_PER_ANTE = @ViewData["MES_INI_PER_ANTE"];
+        var MES_FIN_PER_REAL = @ViewData["MES_FIN_PER_REAL"];
+        var MES_FIN_PER_ANTE = @ViewData["MES_FIN_PER_ANTE"];
+        var TIPO_VERSAO = @ViewData["tipo_versao"];
+    }
+
+
+
+<body style="border: 0;   margin: 0 !important; padding: 0 !important" onload="subst()">
+
+
+
+    <h4 id="oculta">"NOTA TA: não apagar"</h4>
+
+    <div id="corpo_cabecalho_pag_1" style="display:none">
+        <section style="background-color: #fff">  </section>
+        <div style="background-color: #7ac0da;
+        background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
+        background-image: -webkit-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
+        color: #3e5667;
+        padding: 20px 40px 30px 40px;">
+            <hgroup style="color: #fff">
+                <h1>Plataforma Decisões Inteligentes</h1>
+
+            </hgroup>
+            <p>
+
+            </p>
+        </div>
+    </div>
+
+    <div id="corpo_cabecalho_rest_pag" style="display:none">
+        <table style="width: 100%;  border-bottom:1pt solid black">
+            <tr>  <td align="left" style="width: 25%; vertical-align:middle" id="logotipo">
+    @if (Request.IsAuthenticated)
+            {
+        <text>
+
+
+            @{ string IdentifyUser = User.Identity.Name;
+                string caracter = "#";
+                int Identifycaracter = IdentifyUser.IndexOf(caracter);
+                var IdentifyLength = IdentifyUser.Length - Identifycaracter;
+                var User1 = IdentifyUser.Substring(0, Identifycaracter);
+                var Conexao = IdentifyUser.Substring(Identifycaracter + 1, IdentifyLength - 1);
+                var logo_conexao = "/images/logo_" + @Conexao + ".png";
+
+            }
+            <img src=@logo_conexao style="width:170px; height:70px; vertical-align:middle" />
+
+        </text>}
+</td>
+                <td align="center" style="width: 25%"></td>
+                <td align="right" style="width: 50%; vertical-align:middle">
+                    @if (TIPO_VERSAO.Equals("versao_ante"))
+                    { <h2 style="color:#595959;vertical-align:middle"> @ViewData["Titulo_relatorio1"]</h2> <h3 style="color:#595959;vertical-align:middle"> @Html.Raw(ViewData["MES_ACUM_ANTE_EXTENSO"]) de @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_ANTE))) </h3>}
+                    else
+                    { <h2 style="color:#595959;vertical-align:middle"> @ViewData["Titulo_relatorio1"]</h2> <h3 style="color:#595959;vertical-align:middle"> @Html.Raw(ViewData["MES_ACUM_REAL_EXTENSO"]) de @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_REAL))) </h3> }
+                </td>
+            
+
+            </tr>
+        </table>
+    </div>
+
+
+    <script>
+        function subst() {
+            var vars = {};
+            var x = document.location.search.substring(1).split('&');
+            for (var i in x) { var z = x[i].split('=', 2); vars[z[0]] = unescape(z[1]); }
+            var x = ['frompage', 'topage', 'page', 'webpage', 'section', 'subsection', 'subsubsection'];
+            for (var i in x) {
+                var y = document.getElementsByClassName(x[i]);
+                for (var j = 0; j < y.length; ++j) y[j].textContent = vars[x[i]];
+            }
+            if (vars['page'] == 1) { // If page is 1, set FakeHeaders display to none
+                document.getElementById("oculta").style.display = 'none';
+                var corpo_cabecalho_pag_1 = document.getElementById("corpo_cabecalho_pag_1").innerHTML;
+                document.body.innerHTML += corpo_cabecalho_pag_1;
+            } else {
+                document.getElementById("oculta").style.display = 'none';
+                var corpo_cabecalho_rest_pag = document.getElementById("corpo_cabecalho_rest_pag").innerHTML;
+                document.body.innerHTML += corpo_cabecalho_rest_pag;
+            }
+
+        }
+
+
+    </script>
+</body>
+</html>

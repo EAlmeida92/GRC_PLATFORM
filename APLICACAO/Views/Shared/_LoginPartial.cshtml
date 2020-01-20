@@ -1,0 +1,25 @@
+﻿@if (Request.IsAuthenticated) {
+    <text>
+
+          
+   @{ string IdentifyUser = User.Identity.Name;
+      string caracter = "#";
+      int Identifycaracter = IdentifyUser.IndexOf(caracter);
+      var IdentifyLength = IdentifyUser.Length - Identifycaracter;
+      var User1 = IdentifyUser.Substring(0, Identifycaracter);
+      var Conexao = IdentifyUser.Substring(Identifycaracter + 1, IdentifyLength - 1);
+
+
+    }    
+        Olá @Html.ActionLink(User1, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" }),  está conectado à @Conexao 
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        }
+    </text>
+} else {
+    <ul>
+        <li>@Html.ActionLink("Registe-se", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

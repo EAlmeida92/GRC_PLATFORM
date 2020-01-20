@@ -1,0 +1,68 @@
+﻿@model APLICACAO.Models.NewuserModel
+@{
+    ViewBag.Title = "Novo Utilizador";
+}
+
+<script type="text/javascript">
+
+    document.querySelector('html').style.minWidth = "150px";
+
+</script>
+
+ @{ string IdentifyUser = User.Identity.Name;
+      string caracter = "#";
+      int Identifycaracter = IdentifyUser.IndexOf(caracter);
+      var IdentifyLength = IdentifyUser.Length - Identifycaracter;
+      var User1 = IdentifyUser.Substring(0, Identifycaracter);
+      var Conexao = IdentifyUser.Substring(Identifycaracter + 1, IdentifyLength - 1);
+
+
+    } 
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>Criar um novo utilizador para a sua conexão @Conexao.</h2>
+</hgroup>
+  
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+             @*NOTA TA: Aqui acrescentei a conexao que fica escondida*@    
+               @Html.HiddenFor(m => Conexao)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+            </li>
+
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ConfirmPassword)
+                @Html.PasswordFor(m => m.ConfirmPassword)
+            </li>
+        </ol>
+            </fieldset>
+
+        <input type="submit" value="Registar o Utilizador" />
+
+}
+
+@using (Html.BeginForm("PROC_GRC_CRIA_CONF_USER", "GRC", FormMethod.Get))
+{
+          
+        <input type="submit" value="Configurar o Utilizador" />
+
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

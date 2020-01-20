@@ -1,0 +1,1030 @@
+﻿@{
+    ViewBag.Title = "BALANCO_NCRF_COMP";
+}
+
+
+
+
+<style id="ccs_style" type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        text-align: right;
+        
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+        text-align: right;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-rubrica
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+
+    }
+        .webgrid-total
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+        text-align: right;   
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+       .webgrid-rubrica-sub
+    {
+         text-align: center;
+        background-color: #3c48ea;   
+        color: white;
+        padding: 3px 7px 2px;
+
+    }
+.webgrid-total-TOTAL
+    {
+         text-align: center;
+        background-color: #02020a;   
+        color: white;
+        padding: 3px 7px 2px;
+    }
+
+.input {
+     width: 50px;
+     height: 25px;
+
+        text-align: justify;
+        background-color: #EAF2D3;
+        padding: 3px 4px 2px;
+       text-overflow:clip;
+    
+    }
+        .GRAVAR
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        color:#eaf2d3;
+         background-color: #d2d4f1        
+    }
+    .campocalc_resultado  {
+         background-color: #E3DFFF;
+         text-align: center;
+    }
+    .calcular
+{display:none;
+ width:100%;
+ text-align:center;
+ 
+}
+    /*NOTA table::AQUI DEFINO  O  STYLE DOS BOTÕES*/
+
+.btn:focus, .btn::-moz-focus-inner{
+  outline:none;
+  border:none;
+}
+.btn{
+  font-family: arial;
+  font-size:14px;
+  text-transform: uppercase;
+  font-weight:700;
+  border:none;
+  padding:10px;
+  cursor: pointer;
+  display:inline-block;
+  text-decoration: none;
+  width: auto;
+}
+.btn-green{
+  background:green;
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 #006000 /*rgba(0, 96, 0, 0.6)*/;
+    width: auto;
+}
+.btn-green:hover{
+  background:#006000;
+  box-shadow:0 5px 0 #003f00;
+}
+.btn-blue{
+  background:rgba(0,0,139, 0.6);
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 rgba(0,0,59, 0.6);
+    width: auto;
+}
+.btn-blue:hover{
+  background:#2153a2;
+  box-shadow:0 5px 0 #00003B;
+}
+.btn-purple{
+  background:purple; opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #670167 /*rgba(103, 1, 103, 0.6)*/;
+    width: auto;
+}
+.btn-purple:hover{
+  background:#670167;
+  box-shadow:0 5px 0 #470047;
+}
+.btn-red{
+  background:red; opacity:0.7;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #d20000 /*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-red:hover{
+  background:#d20000;
+  box-shadow:0 5px 0 #b00000;
+}
+.btn-orange{
+  background:rgb(204 , 112 , 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(204 , 112 , 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-orange:hover{
+  background:rgb(204 , 112 , 0);
+  box-shadow:0 5px 0 rgb(204 , 112 , 0);
+}
+.btn-brown{
+  background:rgb(102, 0, 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(102, 0, 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-brown:hover{
+  background:rgb(102, 0, 0);
+  box-shadow:0 5px 0 rgb(102, 0, 0);
+}
+.btn-green:active,.btn-blue:active, .btn-purple:active, .btn-red:active, .btn-orange:active, .btn-brown:active{
+  position:relative;
+  top:5px;
+  box-shadow:inherit;
+}
+    </style>
+@{
+    var ANO_VERSAO_REAL = @ViewData["ANO_VERSAO_REAL"];
+    var ANO_VERSAO_ANTE = @ViewData["ANO_VERSAO_ANTE"];
+    var MES_ACUM_REAL = @ViewData["MES_ACUM_REAL"];        
+    var MES_ACUM_ANTE = @ViewData["MES_ACUM_ANTE"];
+    var MES_INI_PER_REAL = @ViewData["MES_INI_PER_REAL"];
+    var MES_INI_PER_ANTE = @ViewData["MES_INI_PER_ANTE"];
+    var MES_FIN_PER_REAL = @ViewData["MES_FIN_PER_REAL"];
+    var MES_FIN_PER_ANTE = @ViewData["MES_FIN_PER_ANTE"]; 
+}
+
+
+<h2>BALANÇO NCRF - COMPARATIVO @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_REAL))) vs @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_ANTE)))</h2>
+<p></p>
+<button type="button" name="Mostrar" id="Mostrar" class="btn-brown"> Configurar Intervalos de Análise</button>
+<p></p>
+<div class="calcular">
+    <h3 style="background-color:blueviolet; color:white;">Estamos a calcular os dados desta tabela. Iremos refrescando a página até que toda a tabela esteja calculada. </h3>
+    <p style="padding-bottom:5px"></p>
+</div>
+<table id="BALANCO_NCFR_COMP" class="webgrid-table" border="1">
+             <tr class="oculta_na_impressao">
+                  <td class="webgrid-header"> Mês Final </td>
+         <td class="webgrid-header"> </td>
+         <td class="webgrid-header"> <div id="grid_mes_acum_ano_n"> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new {  Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO="",  MES_INI_PER="",  MES_FIN_PER="",  MES_ACUM="MES_ACUM", TIPO_APUR_CMVMC=""}) </div>   </td>
+         <td class="webgrid-header"> <div id="grid_mes_acum_ano_n-1"> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new {  Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO="",  MES_INI_PER="",  MES_FIN_PER="",  MES_ACUM="MES_ACUM", TIPO_APUR_CMVMC=""}) </div>   </td>
+          <td class="webgrid-header"> </td>
+         <td class="webgrid-header"> </td>
+          </tr>
+    <tr>
+        <td class="webgrid-header"> Rúbrica </td> 
+       
+        <td class="webgrid-header"> Total  do ano @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_ANTE)))  </td>
+         <td class="webgrid-header"> Acum de Jan a 
+@{if (MES_ACUM_ANTE.Equals("1")){ <text>Jan</text>;} else 
+{ if (MES_ACUM_ANTE.Equals("2")){ <text>Fev</text>;} else
+{ if (MES_ACUM_ANTE.Equals("3")){ <text>Mar</text>;} else
+{ if (MES_ACUM_ANTE.Equals("4")){ <text>Abr</text>;} else
+{ if (MES_ACUM_ANTE.Equals("5")){ <text>Mai</text>;} else 
+{ if (MES_ACUM_ANTE.Equals("6")){ <text>Jun</text>;} else 
+{ if (MES_ACUM_ANTE.Equals("7")){ <text>Jul</text>;} else
+{ if (MES_ACUM_ANTE.Equals("8")){ <text>Ago</text>;} else 
+{ if (MES_ACUM_ANTE.Equals("9")){ <text>Set</text>;} else
+{ if (MES_ACUM_ANTE.Equals("10")){ <text>Out</text>;} else 
+{ if (MES_ACUM_ANTE.Equals("11")){ <text>Nov</text>;} else
+{ if (MES_ACUM_ANTE.Equals("12")){ <text>Dez</text>;} }}}}}}}}}}}} 
+             de @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_ANTE)))  </td>
+        <td class="webgrid-header"> Acum de Jan a 
+@{if (MES_ACUM_REAL.Equals("1")){ <text>Jan</text>;} else 
+{ if (MES_ACUM_REAL.Equals("2")){ <text>Fev</text>;} else
+{ if (MES_ACUM_REAL.Equals("3")){ <text>Mar</text>;} else
+{ if (MES_ACUM_REAL.Equals("4")){ <text>Abr</text>;} else
+{ if (MES_ACUM_REAL.Equals("5")){ <text>Mai</text>;} else 
+{ if (MES_ACUM_REAL.Equals("6")){ <text>Jun</text>;} else 
+{ if (MES_ACUM_REAL.Equals("7")){ <text>Jul</text>;} else
+{ if (MES_ACUM_REAL.Equals("8")){ <text>Ago</text>;} else 
+{ if (MES_ACUM_REAL.Equals("9")){ <text>Set</text>;} else
+{ if (MES_ACUM_REAL.Equals("10")){ <text>Out</text>;} else 
+{ if (MES_ACUM_REAL.Equals("11")){ <text>Nov</text>;} else
+{ if (MES_ACUM_REAL.Equals("12")){ <text>Dez</text>;} }}}}}}}}}}}} 
+             de @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_REAL)))  </td>
+        <td class="webgrid-header"> Var Acum % </td>
+        <td class="webgrid-header"> Var Acum </td>
+
+</tr>
+<tr>
+    <td  class="webgrid-rubrica"> Activos fixos tangíveis                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_TANG_ANTE_TOTAL" itemid="NCRF_ANC_ACTIV_TANG_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_TANG_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_TANG_ANTE_ACUM" itemid="NCRF_ANC_ACTIV_TANG_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_TANG_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_TANG_REAL_ACUM" itemid="NCRF_ANC_ACTIV_TANG_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_TANG_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_ACTIV_TANG_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_TANG_REAL_ACUM"]); decimal NCRF_ANC_ACTIV_TANG_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_TANG_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_TANG_COMP_ACUM_P" >@if (NCRF_ANC_ACTIV_TANG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_TANG_REAL_ACUM/NCRF_ANC_ACTIV_TANG_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_TANG_COMP_ACUM_B" >@if (NCRF_ANC_ACTIV_TANG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_TANG_REAL_ACUM-NCRF_ANC_ACTIV_TANG_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Propriedades de investimentos                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_PROP_INV_ANTE_TOTAL" itemid="NCRF_ANC_PROP_INV_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PROP_INV_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_PROP_INV_ANTE_ACUM" itemid="NCRF_ANC_PROP_INV_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PROP_INV_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_PROP_INV_REAL_ACUM" itemid="NCRF_ANC_PROP_INV_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PROP_INV_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_PROP_INV_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_PROP_INV_REAL_ACUM"]); decimal NCRF_ANC_PROP_INV_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_PROP_INV_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_PROP_INV_COMP_ACUM_P" >@if (NCRF_ANC_PROP_INV_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_PROP_INV_REAL_ACUM/NCRF_ANC_PROP_INV_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_PROP_INV_COMP_ACUM_B" >@if (NCRF_ANC_PROP_INV_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_PROP_INV_REAL_ACUM-NCRF_ANC_PROP_INV_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Goodwill                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_TOTAL" itemid="NCRF_ANC_ACTIV_INTANG_GOOD_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_ACUM" itemid="NCRF_ANC_ACTIV_INTANG_GOOD_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_INTANG_GOOD_REAL_ACUM" itemid="NCRF_ANC_ACTIV_INTANG_GOOD_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_INTANG_GOOD_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_ACTIV_INTANG_GOOD_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_INTANG_GOOD_REAL_ACUM"]); decimal NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_INTANG_GOOD_COMP_ACUM_P" >@if (NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_INTANG_GOOD_REAL_ACUM/NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_INTANG_GOOD_COMP_ACUM_B" >@if (NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_INTANG_GOOD_REAL_ACUM-NCRF_ANC_ACTIV_INTANG_GOOD_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Activos intangíveis                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_INTANG_ANTE_TOTAL" itemid="NCRF_ANC_ACTIV_INTANG_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_INTANG_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_INTANG_ANTE_ACUM" itemid="NCRF_ANC_ACTIV_INTANG_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_INTANG_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_INTANG_REAL_ACUM" itemid="NCRF_ANC_ACTIV_INTANG_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_INTANG_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_ACTIV_INTANG_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_INTANG_REAL_ACUM"]); decimal NCRF_ANC_ACTIV_INTANG_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_INTANG_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_INTANG_COMP_ACUM_P" >@if (NCRF_ANC_ACTIV_INTANG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_INTANG_REAL_ACUM/NCRF_ANC_ACTIV_INTANG_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_INTANG_COMP_ACUM_B" >@if (NCRF_ANC_ACTIV_INTANG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_INTANG_REAL_ACUM-NCRF_ANC_ACTIV_INTANG_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Activos biológicos                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_BIOLOG_ANTE_TOTAL" itemid="NCRF_ANC_ACTIV_BIOLOG_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_BIOLOG_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_BIOLOG_ANTE_ACUM" itemid="NCRF_ANC_ACTIV_BIOLOG_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_BIOLOG_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_BIOLOG_REAL_ACUM" itemid="NCRF_ANC_ACTIV_BIOLOG_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_BIOLOG_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_ACTIV_BIOLOG_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_BIOLOG_REAL_ACUM"]); decimal NCRF_ANC_ACTIV_BIOLOG_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_BIOLOG_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_BIOLOG_COMP_ACUM_P" >@if (NCRF_ANC_ACTIV_BIOLOG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_BIOLOG_REAL_ACUM/NCRF_ANC_ACTIV_BIOLOG_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_BIOLOG_COMP_ACUM_B" >@if (NCRF_ANC_ACTIV_BIOLOG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_BIOLOG_REAL_ACUM-NCRF_ANC_ACTIV_BIOLOG_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Participações financeiras (MEP)                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_PART_FIN_MEP_ANTE_TOTAL" itemid="NCRF_ANC_PART_FIN_MEP_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PART_FIN_MEP_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_PART_FIN_MEP_ANTE_ACUM" itemid="NCRF_ANC_PART_FIN_MEP_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PART_FIN_MEP_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_PART_FIN_MEP_REAL_ACUM" itemid="NCRF_ANC_PART_FIN_MEP_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PART_FIN_MEP_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_PART_FIN_MEP_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_PART_FIN_MEP_REAL_ACUM"]); decimal NCRF_ANC_PART_FIN_MEP_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_PART_FIN_MEP_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_PART_FIN_MEP_COMP_ACUM_P" >@if (NCRF_ANC_PART_FIN_MEP_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_PART_FIN_MEP_REAL_ACUM/NCRF_ANC_PART_FIN_MEP_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_PART_FIN_MEP_COMP_ACUM_B" >@if (NCRF_ANC_PART_FIN_MEP_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_PART_FIN_MEP_REAL_ACUM-NCRF_ANC_PART_FIN_MEP_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Participações financeiras (outros métodos)                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_PART_FIN_OTR_MET_ANTE_TOTAL" itemid="NCRF_ANC_PART_FIN_OTR_MET_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PART_FIN_OTR_MET_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_PART_FIN_OTR_MET_ANTE_ACUM" itemid="NCRF_ANC_PART_FIN_OTR_MET_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PART_FIN_OTR_MET_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_PART_FIN_OTR_MET_REAL_ACUM" itemid="NCRF_ANC_PART_FIN_OTR_MET_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_PART_FIN_OTR_MET_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_PART_FIN_OTR_MET_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_PART_FIN_OTR_MET_REAL_ACUM"]); decimal NCRF_ANC_PART_FIN_OTR_MET_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_PART_FIN_OTR_MET_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_PART_FIN_OTR_MET_COMP_ACUM_P" >@if (NCRF_ANC_PART_FIN_OTR_MET_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_PART_FIN_OTR_MET_REAL_ACUM/NCRF_ANC_PART_FIN_OTR_MET_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_PART_FIN_OTR_MET_COMP_ACUM_B" >@if (NCRF_ANC_PART_FIN_OTR_MET_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_PART_FIN_OTR_MET_REAL_ACUM-NCRF_ANC_PART_FIN_OTR_MET_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Créditos a Receber                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_CRED_REC_ANTE_TOTAL" itemid="NCRF_ANC_CRED_REC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_CRED_REC_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_CRED_REC_ANTE_ACUM" itemid="NCRF_ANC_CRED_REC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_CRED_REC_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_CRED_REC_REAL_ACUM" itemid="NCRF_ANC_CRED_REC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_CRED_REC_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_CRED_REC_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_CRED_REC_REAL_ACUM"]); decimal NCRF_ANC_CRED_REC_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_CRED_REC_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_CRED_REC_COMP_ACUM_P" >@if (NCRF_ANC_CRED_REC_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_CRED_REC_REAL_ACUM/NCRF_ANC_CRED_REC_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_CRED_REC_COMP_ACUM_B" >@if (NCRF_ANC_CRED_REC_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_CRED_REC_REAL_ACUM-NCRF_ANC_CRED_REC_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Activos por impostos diferidos                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_TOTAL" itemid="NCRF_ANC_ACTIV_POR_IMP_DIF_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_ACUM" itemid="NCRF_ANC_ACTIV_POR_IMP_DIF_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_ACTIV_POR_IMP_DIF_REAL_ACUM" itemid="NCRF_ANC_ACTIV_POR_IMP_DIF_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_ACTIV_POR_IMP_DIF_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_ACTIV_POR_IMP_DIF_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_POR_IMP_DIF_REAL_ACUM"]); decimal NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_POR_IMP_DIF_COMP_ACUM_P" >@if (NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_POR_IMP_DIF_REAL_ACUM/NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_ACTIV_POR_IMP_DIF_COMP_ACUM_B" >@if (NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_ACTIV_POR_IMP_DIF_REAL_ACUM-NCRF_ANC_ACTIV_POR_IMP_DIF_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Investimentos Financeiros                            </td> 
+    <td style="text-align:right" id="NCRF_ANC_INV_FIN_OUT_ANTE_TOTAL" itemid="NCRF_ANC_INV_FIN_OUT_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_INV_FIN_OUT_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_INV_FIN_OUT_ANTE_ACUM" itemid="NCRF_ANC_INV_FIN_OUT_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_INV_FIN_OUT_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_ANC_INV_FIN_OUT_REAL_ACUM" itemid="NCRF_ANC_INV_FIN_OUT_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_INV_FIN_OUT_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_INV_FIN_OUT_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_INV_FIN_OUT_REAL_ACUM"]); decimal NCRF_ANC_INV_FIN_OUT_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_INV_FIN_OUT_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_ANC_INV_FIN_OUT_COMP_ACUM_P" >@if (NCRF_ANC_INV_FIN_OUT_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_INV_FIN_OUT_REAL_ACUM/NCRF_ANC_INV_FIN_OUT_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_ANC_INV_FIN_OUT_COMP_ACUM_B" >@if (NCRF_ANC_INV_FIN_OUT_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_INV_FIN_OUT_REAL_ACUM-NCRF_ANC_INV_FIN_OUT_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica-sub"> Activo não Corrente                            </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_ANC_TOTAL_ANTE_TOTAL" itemid="NCRF_ANC_TOTAL_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_TOTAL_ANTE_TOTAL"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_ANC_TOTAL_ANTE_ACUM" itemid="NCRF_ANC_TOTAL_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_TOTAL_ANTE_ACUM"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_ANC_TOTAL_REAL_ACUM" itemid="NCRF_ANC_TOTAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ANC_TOTAL_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ANC_TOTAL_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_TOTAL_REAL_ACUM"]); decimal NCRF_ANC_TOTAL_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ANC_TOTAL_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica-sub"  id="NCRF_ANC_TOTAL_COMP_ACUM_P" >@if (NCRF_ANC_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_TOTAL_REAL_ACUM/NCRF_ANC_TOTAL_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica-sub" id="NCRF_ANC_TOTAL_COMP_ACUM_B" >@if (NCRF_ANC_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ANC_TOTAL_REAL_ACUM-NCRF_ANC_TOTAL_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Inventários                            </td> 
+    <td style="text-align:right" id="NCRF_AC_INVENTARIOS_ANTE_TOTAL" itemid="NCRF_AC_INVENTARIOS_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INVENTARIOS_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_INVENTARIOS_ANTE_ACUM" itemid="NCRF_AC_INVENTARIOS_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INVENTARIOS_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_INVENTARIOS_REAL_ACUM" itemid="NCRF_AC_INVENTARIOS_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INVENTARIOS_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_INVENTARIOS_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_INVENTARIOS_REAL_ACUM"]); decimal NCRF_AC_INVENTARIOS_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_INVENTARIOS_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_INVENTARIOS_COMP_ACUM_P" >@if (NCRF_AC_INVENTARIOS_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_INVENTARIOS_REAL_ACUM/NCRF_AC_INVENTARIOS_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_INVENTARIOS_COMP_ACUM_B" >@if (NCRF_AC_INVENTARIOS_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_INVENTARIOS_REAL_ACUM-NCRF_AC_INVENTARIOS_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Activos biológicos                            </td> 
+    <td style="text-align:right" id="NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_TOTAL" itemid="NCRF_AC_INVENTARIOS_ACTI_BIOL_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_ACUM" itemid="NCRF_AC_INVENTARIOS_ACTI_BIOL_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_INVENTARIOS_ACTI_BIOL_REAL_ACUM" itemid="NCRF_AC_INVENTARIOS_ACTI_BIOL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INVENTARIOS_ACTI_BIOL_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_INVENTARIOS_ACTI_BIOL_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_INVENTARIOS_ACTI_BIOL_REAL_ACUM"]); decimal NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_INVENTARIOS_ACTI_BIOL_COMP_ACUM_P" >@if (NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_INVENTARIOS_ACTI_BIOL_REAL_ACUM/NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_INVENTARIOS_ACTI_BIOL_COMP_ACUM_B" >@if (NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_INVENTARIOS_ACTI_BIOL_REAL_ACUM-NCRF_AC_INVENTARIOS_ACTI_BIOL_ANTE_ACUM))))} </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Clientes                            </td> 
+    <td style="text-align:right" id="NCRF_AC_CLIENT_ANTE_TOTAL" itemid="NCRF_AC_CLIENT_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_CLIENT_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_CLIENT_ANTE_ACUM" itemid="NCRF_AC_CLIENT_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_CLIENT_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_CLIENT_REAL_ACUM" itemid="NCRF_AC_CLIENT_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_CLIENT_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_CLIENT_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_CLIENT_REAL_ACUM"]); decimal NCRF_AC_CLIENT_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_CLIENT_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_CLIENT_COMP_ACUM_P" >@if (NCRF_AC_CLIENT_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_CLIENT_REAL_ACUM/NCRF_AC_CLIENT_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_CLIENT_COMP_ACUM_B" >@if (NCRF_AC_CLIENT_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_CLIENT_REAL_ACUM-NCRF_AC_CLIENT_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Estado e outros entes públicos                            </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_DEV_ESTADO_ANTE_TOTAL" itemid="NCRF_AC_OTR_DEV_ESTADO_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_DEV_ESTADO_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_DEV_ESTADO_ANTE_ACUM" itemid="NCRF_AC_OTR_DEV_ESTADO_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_DEV_ESTADO_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_DEV_ESTADO_REAL_ACUM" itemid="NCRF_AC_OTR_DEV_ESTADO_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_DEV_ESTADO_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_OTR_DEV_ESTADO_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_OTR_DEV_ESTADO_REAL_ACUM"]); decimal NCRF_AC_OTR_DEV_ESTADO_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_OTR_DEV_ESTADO_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_OTR_DEV_ESTADO_COMP_ACUM_P" >@if (NCRF_AC_OTR_DEV_ESTADO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_OTR_DEV_ESTADO_REAL_ACUM/NCRF_AC_OTR_DEV_ESTADO_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_OTR_DEV_ESTADO_COMP_ACUM_B" >@if (NCRF_AC_OTR_DEV_ESTADO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_OTR_DEV_ESTADO_REAL_ACUM-NCRF_AC_OTR_DEV_ESTADO_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Outros créditos a receber                            </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_DEV_RECEB_ANTE_TOTAL" itemid="NCRF_AC_OTR_DEV_RECEB_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_DEV_RECEB_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_DEV_RECEB_ANTE_ACUM" itemid="NCRF_AC_OTR_DEV_RECEB_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_DEV_RECEB_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_DEV_RECEB_REAL_ACUM" itemid="NCRF_AC_OTR_DEV_RECEB_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_DEV_RECEB_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_OTR_DEV_RECEB_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_OTR_DEV_RECEB_REAL_ACUM"]); decimal NCRF_AC_OTR_DEV_RECEB_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_OTR_DEV_RECEB_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_OTR_DEV_RECEB_COMP_ACUM_P" >@if (NCRF_AC_OTR_DEV_RECEB_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_OTR_DEV_RECEB_REAL_ACUM/NCRF_AC_OTR_DEV_RECEB_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_OTR_DEV_RECEB_COMP_ACUM_B" >@if (NCRF_AC_OTR_DEV_RECEB_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_OTR_DEV_RECEB_REAL_ACUM-NCRF_AC_OTR_DEV_RECEB_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Diferimentos                            </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_TOTAL" itemid="NCRF_AC_OTR_ACT_DIF_GT_REC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_ACUM" itemid="NCRF_AC_OTR_ACT_DIF_GT_REC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_ACT_DIF_GT_REC_REAL_ACUM" itemid="NCRF_AC_OTR_ACT_DIF_GT_REC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_ACT_DIF_GT_REC_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_OTR_ACT_DIF_GT_REC_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_OTR_ACT_DIF_GT_REC_REAL_ACUM"]); decimal NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_OTR_ACT_DIF_GT_REC_COMP_ACUM_P" >@if (NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_OTR_ACT_DIF_GT_REC_REAL_ACUM/NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_OTR_ACT_DIF_GT_REC_COMP_ACUM_B" >@if (NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_OTR_ACT_DIF_GT_REC_REAL_ACUM-NCRF_AC_OTR_ACT_DIF_GT_REC_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Activos financeiros detidos para negociação                            </td> 
+    <td style="text-align:right" id="NCRF_AC_INST_FIN_PAR_NEGO_ANTE_TOTAL" itemid="NCRF_AC_INST_FIN_PAR_NEGO_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INST_FIN_PAR_NEGO_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_INST_FIN_PAR_NEGO_ANTE_ACUM" itemid="NCRF_AC_INST_FIN_PAR_NEGO_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INST_FIN_PAR_NEGO_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_INST_FIN_PAR_NEGO_REAL_ACUM" itemid="NCRF_AC_INST_FIN_PAR_NEGO_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INST_FIN_PAR_NEGO_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_INST_FIN_PAR_NEGO_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_INST_FIN_PAR_NEGO_REAL_ACUM"]); decimal NCRF_AC_INST_FIN_PAR_NEGO_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_INST_FIN_PAR_NEGO_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_INST_FIN_PAR_NEGO_COMP_ACUM_P" >@if (NCRF_AC_INST_FIN_PAR_NEGO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_INST_FIN_PAR_NEGO_REAL_ACUM/NCRF_AC_INST_FIN_PAR_NEGO_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_INST_FIN_PAR_NEGO_COMP_ACUM_B" >@if (NCRF_AC_INST_FIN_PAR_NEGO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_INST_FIN_PAR_NEGO_REAL_ACUM-NCRF_AC_INST_FIN_PAR_NEGO_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Outros activos financeiros                            </td> 
+    <td style="text-align:right" id="NCRF_AC_INST_FIN_OUTR_ANTE_TOTAL" itemid="NCRF_AC_INST_FIN_OUTR_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INST_FIN_OUTR_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_INST_FIN_OUTR_ANTE_ACUM" itemid="NCRF_AC_INST_FIN_OUTR_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INST_FIN_OUTR_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_INST_FIN_OUTR_REAL_ACUM" itemid="NCRF_AC_INST_FIN_OUTR_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_INST_FIN_OUTR_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_INST_FIN_OUTR_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_INST_FIN_OUTR_REAL_ACUM"]); decimal NCRF_AC_INST_FIN_OUTR_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_INST_FIN_OUTR_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_INST_FIN_OUTR_COMP_ACUM_P" >@if (NCRF_AC_INST_FIN_OUTR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_INST_FIN_OUTR_REAL_ACUM/NCRF_AC_INST_FIN_OUTR_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_INST_FIN_OUTR_COMP_ACUM_B" >@if (NCRF_AC_INST_FIN_OUTR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_INST_FIN_OUTR_REAL_ACUM-NCRF_AC_INST_FIN_OUTR_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Activos não correntes detidos para venda                            </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_ACT_DET_VEND_ANTE_TOTAL" itemid="NCRF_AC_OTR_ACT_DET_VEND_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_ACT_DET_VEND_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_ACT_DET_VEND_ANTE_ACUM" itemid="NCRF_AC_OTR_ACT_DET_VEND_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_ACT_DET_VEND_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_OTR_ACT_DET_VEND_REAL_ACUM" itemid="NCRF_AC_OTR_ACT_DET_VEND_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_OTR_ACT_DET_VEND_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_OTR_ACT_DET_VEND_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_OTR_ACT_DET_VEND_REAL_ACUM"]); decimal NCRF_AC_OTR_ACT_DET_VEND_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_OTR_ACT_DET_VEND_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_OTR_ACT_DET_VEND_COMP_ACUM_P" >@if (NCRF_AC_OTR_ACT_DET_VEND_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_OTR_ACT_DET_VEND_REAL_ACUM/NCRF_AC_OTR_ACT_DET_VEND_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_OTR_ACT_DET_VEND_COMP_ACUM_B" >@if (NCRF_AC_OTR_ACT_DET_VEND_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_OTR_ACT_DET_VEND_REAL_ACUM-NCRF_AC_OTR_ACT_DET_VEND_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Caixa e depósitos bancários                            </td> 
+    <td style="text-align:right" id="NCRF_AC_DISP_ANTE_TOTAL" itemid="NCRF_AC_DISP_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_DISP_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_DISP_ANTE_ACUM" itemid="NCRF_AC_DISP_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_DISP_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_AC_DISP_REAL_ACUM" itemid="NCRF_AC_DISP_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_DISP_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_DISP_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_DISP_REAL_ACUM"]); decimal NCRF_AC_DISP_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_DISP_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_AC_DISP_COMP_ACUM_P" >@if (NCRF_AC_DISP_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_DISP_REAL_ACUM/NCRF_AC_DISP_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_AC_DISP_COMP_ACUM_B" >@if (NCRF_AC_DISP_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_DISP_REAL_ACUM-NCRF_AC_DISP_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica-sub"> Activo Corrente                            </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_AC_TOTAL_ANTE_TOTAL" itemid="NCRF_AC_TOTAL_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_TOTAL_ANTE_TOTAL"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_AC_TOTAL_ANTE_ACUM" itemid="NCRF_AC_TOTAL_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_TOTAL_ANTE_ACUM"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_AC_TOTAL_REAL_ACUM" itemid="NCRF_AC_TOTAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_AC_TOTAL_REAL_ACUM"])))  </td> 
+@{decimal NCRF_AC_TOTAL_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_TOTAL_REAL_ACUM"]); decimal NCRF_AC_TOTAL_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_AC_TOTAL_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica-sub" id="NCRF_AC_TOTAL_COMP_ACUM_P" >@if (NCRF_AC_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_TOTAL_REAL_ACUM/NCRF_AC_TOTAL_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica-sub"" id="NCRF_AC_TOTAL_COMP_ACUM_B" >@if (NCRF_AC_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_AC_TOTAL_REAL_ACUM-NCRF_AC_TOTAL_ANTE_ACUM))))} </td>
+ </tr>    
+    <tr>
+    <td  class="webgrid-total-TOTAL"> Total do Ativo                            </td> 
+    <td class="webgrid-total-TOTAL" id="NCRF_ACTIVO_TOTAL_ANTE_TOTAL" itemid="NCRF_ACTIVO_TOTAL_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ACTIVO_TOTAL_ANTE_TOTAL"])))  </td> 
+    <td class="webgrid-total-TOTAL" id="NCRF_ACTIVO_TOTAL_ANTE_ACUM" itemid="NCRF_ACTIVO_TOTAL_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ACTIVO_TOTAL_ANTE_ACUM"])))  </td> 
+    <td class="webgrid-total-TOTAL" id="NCRF_ACTIVO_TOTAL_REAL_ACUM" itemid="NCRF_ACTIVO_TOTAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_ACTIVO_TOTAL_REAL_ACUM"])))  </td> 
+@{decimal NCRF_ACTIVO_TOTAL_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_ACTIVO_TOTAL_REAL_ACUM"]); decimal NCRF_ACTIVO_TOTAL_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_ACTIVO_TOTAL_ANTE_ACUM"]);}
+    <td class="webgrid-total-TOTAL" id="NCRF_ACTIVO_TOTAL_COMP_ACUM_P" >@if (NCRF_ACTIVO_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ACTIVO_TOTAL_REAL_ACUM/NCRF_ACTIVO_TOTAL_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-total-TOTAL" id="NCRF_ACTIVO_TOTAL_COMP_ACUM_B" >@if (NCRF_ACTIVO_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_ACTIVO_TOTAL_REAL_ACUM-NCRF_ACTIVO_TOTAL_ANTE_ACUM))))} </td>
+ </tr>
+
+<tr>
+    <td  class="webgrid-rubrica"> Capital realizado                            </td> 
+    <td style="text-align:right" id="NCRF_CP_CAPIT_ANTE_TOTAL" itemid="NCRF_CP_CAPIT_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_CAPIT_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_CAPIT_ANTE_ACUM" itemid="NCRF_CP_CAPIT_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_CAPIT_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_CAPIT_REAL_ACUM" itemid="NCRF_CP_CAPIT_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_CAPIT_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_CAPIT_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_CAPIT_REAL_ACUM"]); decimal NCRF_CP_CAPIT_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_CAPIT_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_CAPIT_COMP_ACUM_P" >@if (NCRF_CP_CAPIT_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_CAPIT_REAL_ACUM/NCRF_CP_CAPIT_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_CAPIT_COMP_ACUM_B" >@if (NCRF_CP_CAPIT_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_CAPIT_REAL_ACUM-NCRF_CP_CAPIT_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Acções (quotas) próprias                            </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_QUO_PRO_ANTE_TOTAL" itemid="NCRF_CP_INST_CAP_QUO_PRO_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_QUO_PRO_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_QUO_PRO_ANTE_ACUM" itemid="NCRF_CP_INST_CAP_QUO_PRO_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_QUO_PRO_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_QUO_PRO_REAL_ACUM" itemid="NCRF_CP_INST_CAP_QUO_PRO_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_QUO_PRO_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_INST_CAP_QUO_PRO_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_INST_CAP_QUO_PRO_REAL_ACUM"]); decimal NCRF_CP_INST_CAP_QUO_PRO_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_INST_CAP_QUO_PRO_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_INST_CAP_QUO_PRO_COMP_ACUM_P" >@if (NCRF_CP_INST_CAP_QUO_PRO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_INST_CAP_QUO_PRO_REAL_ACUM/NCRF_CP_INST_CAP_QUO_PRO_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_INST_CAP_QUO_PRO_COMP_ACUM_B" >@if (NCRF_CP_INST_CAP_QUO_PRO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_INST_CAP_QUO_PRO_REAL_ACUM-NCRF_CP_INST_CAP_QUO_PRO_ANTE_ACUM))))} </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Outros instrumentos de capital próprio                            </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_OTR_ANTE_TOTAL" itemid="NCRF_CP_INST_CAP_OTR_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_OTR_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_OTR_ANTE_ACUM" itemid="NCRF_CP_INST_CAP_OTR_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_OTR_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_OTR_REAL_ACUM" itemid="NCRF_CP_INST_CAP_OTR_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_OTR_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_INST_CAP_OTR_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_INST_CAP_OTR_REAL_ACUM"]); decimal NCRF_CP_INST_CAP_OTR_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_INST_CAP_OTR_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_INST_CAP_OTR_COMP_ACUM_P" >@if (NCRF_CP_INST_CAP_OTR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_INST_CAP_OTR_REAL_ACUM/NCRF_CP_INST_CAP_OTR_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_INST_CAP_OTR_COMP_ACUM_B" >@if (NCRF_CP_INST_CAP_OTR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_INST_CAP_OTR_REAL_ACUM-NCRF_CP_INST_CAP_OTR_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Prémio de emissão                            </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_PRE_EMI_ANTE_TOTAL" itemid="NCRF_CP_INST_CAP_PRE_EMI_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_PRE_EMI_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_PRE_EMI_ANTE_ACUM" itemid="NCRF_CP_INST_CAP_PRE_EMI_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_PRE_EMI_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_INST_CAP_PRE_EMI_REAL_ACUM" itemid="NCRF_CP_INST_CAP_PRE_EMI_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_INST_CAP_PRE_EMI_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_INST_CAP_PRE_EMI_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_INST_CAP_PRE_EMI_REAL_ACUM"]); decimal NCRF_CP_INST_CAP_PRE_EMI_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_INST_CAP_PRE_EMI_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_INST_CAP_PRE_EMI_COMP_ACUM_P" >@if (NCRF_CP_INST_CAP_PRE_EMI_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_INST_CAP_PRE_EMI_REAL_ACUM/NCRF_CP_INST_CAP_PRE_EMI_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_INST_CAP_PRE_EMI_COMP_ACUM_B" >@if (NCRF_CP_INST_CAP_PRE_EMI_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_INST_CAP_PRE_EMI_REAL_ACUM-NCRF_CP_INST_CAP_PRE_EMI_ANTE_ACUM))))} </td>
+ </tr>  
+<tr>
+    <td  class="webgrid-rubrica"> Reservas legais                            </td> 
+    <td style="text-align:right" id="NCRF_CP_RESER_LEG_ANTE_TOTAL" itemid="NCRF_CP_RESER_LEG_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RESER_LEG_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RESER_LEG_ANTE_ACUM" itemid="NCRF_CP_RESER_LEG_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RESER_LEG_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RESER_LEG_REAL_ACUM" itemid="NCRF_CP_RESER_LEG_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RESER_LEG_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_RESER_LEG_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RESER_LEG_REAL_ACUM"]); decimal NCRF_CP_RESER_LEG_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RESER_LEG_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_RESER_LEG_COMP_ACUM_P" >@if (NCRF_CP_RESER_LEG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RESER_LEG_REAL_ACUM/NCRF_CP_RESER_LEG_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_RESER_LEG_COMP_ACUM_B" >@if (NCRF_CP_RESER_LEG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RESER_LEG_REAL_ACUM-NCRF_CP_RESER_LEG_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Outras reservas                            </td> 
+    <td style="text-align:right" id="NCRF_CP_RESER_OTR_ANTE_TOTAL" itemid="NCRF_CP_RESER_OTR_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RESER_OTR_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RESER_OTR_ANTE_ACUM" itemid="NCRF_CP_RESER_OTR_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RESER_OTR_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RESER_OTR_REAL_ACUM" itemid="NCRF_CP_RESER_OTR_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RESER_OTR_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_RESER_OTR_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RESER_OTR_REAL_ACUM"]); decimal NCRF_CP_RESER_OTR_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RESER_OTR_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_RESER_OTR_COMP_ACUM_P" >@if (NCRF_CP_RESER_OTR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RESER_OTR_REAL_ACUM/NCRF_CP_RESER_OTR_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_RESER_OTR_COMP_ACUM_B" >@if (NCRF_CP_RESER_OTR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RESER_OTR_REAL_ACUM-NCRF_CP_RESER_OTR_ANTE_ACUM))))} </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Resultados transitados                            </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_RES_TRA_ANTE_TOTAL" itemid="NCRF_CP_RES_AJUS_RES_TRA_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_RES_TRA_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_RES_TRA_ANTE_ACUM" itemid="NCRF_CP_RES_AJUS_RES_TRA_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_RES_TRA_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_RES_TRA_REAL_ACUM" itemid="NCRF_CP_RES_AJUS_RES_TRA_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_RES_TRA_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_RES_AJUS_RES_TRA_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RES_AJUS_RES_TRA_REAL_ACUM"]); decimal NCRF_CP_RES_AJUS_RES_TRA_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RES_AJUS_RES_TRA_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_RES_AJUS_RES_TRA_COMP_ACUM_P" >@if (NCRF_CP_RES_AJUS_RES_TRA_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RES_AJUS_RES_TRA_REAL_ACUM/NCRF_CP_RES_AJUS_RES_TRA_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_RES_AJUS_RES_TRA_COMP_ACUM_B" >@if (NCRF_CP_RES_AJUS_RES_TRA_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RES_AJUS_RES_TRA_REAL_ACUM-NCRF_CP_RES_AJUS_RES_TRA_ANTE_ACUM))))} </td>
+ </tr>
+
+<tr>
+    <td  class="webgrid-rubrica"> Ajustamentos em activos financeiros                            </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_ACT_FIN_ANTE_TOTAL" itemid="NCRF_CP_RES_AJUS_ACT_FIN_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_ACT_FIN_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_ACT_FIN_ANTE_ACUM" itemid="NCRF_CP_RES_AJUS_ACT_FIN_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_ACT_FIN_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_ACT_FIN_REAL_ACUM" itemid="NCRF_CP_RES_AJUS_ACT_FIN_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_ACT_FIN_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_RES_AJUS_ACT_FIN_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RES_AJUS_ACT_FIN_REAL_ACUM"]); decimal NCRF_CP_RES_AJUS_ACT_FIN_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RES_AJUS_ACT_FIN_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_RES_AJUS_ACT_FIN_COMP_ACUM_P" >@if (NCRF_CP_RES_AJUS_ACT_FIN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RES_AJUS_ACT_FIN_REAL_ACUM/NCRF_CP_RES_AJUS_ACT_FIN_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_RES_AJUS_ACT_FIN_COMP_ACUM_B" >@if (NCRF_CP_RES_AJUS_ACT_FIN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RES_AJUS_ACT_FIN_REAL_ACUM-NCRF_CP_RES_AJUS_ACT_FIN_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Excedentes de revalorização                            </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_EXC_REV_ANTE_TOTAL" itemid="NCRF_CP_RES_AJUS_EXC_REV_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_EXC_REV_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_EXC_REV_ANTE_ACUM" itemid="NCRF_CP_RES_AJUS_EXC_REV_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_EXC_REV_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_RES_AJUS_EXC_REV_REAL_ACUM" itemid="NCRF_CP_RES_AJUS_EXC_REV_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_RES_AJUS_EXC_REV_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_RES_AJUS_EXC_REV_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RES_AJUS_EXC_REV_REAL_ACUM"]); decimal NCRF_CP_RES_AJUS_EXC_REV_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_RES_AJUS_EXC_REV_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_RES_AJUS_EXC_REV_COMP_ACUM_P" >@if (NCRF_CP_RES_AJUS_EXC_REV_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RES_AJUS_EXC_REV_REAL_ACUM/NCRF_CP_RES_AJUS_EXC_REV_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_RES_AJUS_EXC_REV_COMP_ACUM_B" >@if (NCRF_CP_RES_AJUS_EXC_REV_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_RES_AJUS_EXC_REV_REAL_ACUM-NCRF_CP_RES_AJUS_EXC_REV_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Outras variações de capital próprio                            </td> 
+    <td style="text-align:right" id="NCRF_CP_OTR_VAR_ANTE_TOTAL" itemid="NCRF_CP_OTR_VAR_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_OTR_VAR_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_OTR_VAR_ANTE_ACUM" itemid="NCRF_CP_OTR_VAR_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_OTR_VAR_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_OTR_VAR_REAL_ACUM" itemid="NCRF_CP_OTR_VAR_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_OTR_VAR_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_OTR_VAR_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_OTR_VAR_REAL_ACUM"]); decimal NCRF_CP_OTR_VAR_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_OTR_VAR_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_OTR_VAR_COMP_ACUM_P" >@if (NCRF_CP_OTR_VAR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_OTR_VAR_REAL_ACUM/NCRF_CP_OTR_VAR_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_OTR_VAR_COMP_ACUM_B" >@if (NCRF_CP_OTR_VAR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_OTR_VAR_REAL_ACUM-NCRF_CP_OTR_VAR_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Resultado liquido do exercício                            </td> 
+    <td style="text-align:right" id="NCRF_CP_OTR_RLE_ANTE_TOTAL" itemid="NCRF_CP_OTR_RLE_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_OTR_RLE_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_OTR_RLE_ANTE_ACUM" itemid="NCRF_CP_OTR_RLE_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_OTR_RLE_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_CP_OTR_RLE_REAL_ACUM" itemid="NCRF_CP_OTR_RLE_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_OTR_RLE_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_OTR_RLE_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_OTR_RLE_REAL_ACUM"]); decimal NCRF_CP_OTR_RLE_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_OTR_RLE_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_CP_OTR_RLE_COMP_ACUM_P" >@if (NCRF_CP_OTR_RLE_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_OTR_RLE_REAL_ACUM/NCRF_CP_OTR_RLE_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_CP_OTR_RLE_COMP_ACUM_B" >@if (NCRF_CP_OTR_RLE_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_OTR_RLE_REAL_ACUM-NCRF_CP_OTR_RLE_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica-sub"> Total do Capital Próprio                            </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_CP_TOTAL_ANTE_TOTAL" itemid="NCRF_CP_TOTAL_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_TOTAL_ANTE_TOTAL"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_CP_TOTAL_ANTE_ACUM" itemid="NCRF_CP_TOTAL_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_TOTAL_ANTE_ACUM"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_CP_TOTAL_REAL_ACUM" itemid="NCRF_CP_TOTAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_TOTAL_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_TOTAL_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_TOTAL_REAL_ACUM"]); decimal NCRF_CP_TOTAL_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_TOTAL_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica-sub" id="NCRF_CP_TOTAL_COMP_ACUM_P" >@if (NCRF_CP_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_TOTAL_REAL_ACUM/NCRF_CP_TOTAL_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica-sub" id="NCRF_CP_TOTAL_COMP_ACUM_B" >@if (NCRF_CP_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_TOTAL_REAL_ACUM-NCRF_CP_TOTAL_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Provisões                            </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_PROV_ANTE_TOTAL" itemid="NCRF_PNC_OTR_PROV_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_PROV_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_PROV_ANTE_ACUM" itemid="NCRF_PNC_OTR_PROV_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_PROV_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_PROV_REAL_ACUM" itemid="NCRF_PNC_OTR_PROV_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_PROV_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PNC_OTR_PROV_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_OTR_PROV_REAL_ACUM"]); decimal NCRF_PNC_OTR_PROV_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_OTR_PROV_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PNC_OTR_PROV_COMP_ACUM_P" >@if (NCRF_PNC_OTR_PROV_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_OTR_PROV_REAL_ACUM/NCRF_PNC_OTR_PROV_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PNC_OTR_PROV_COMP_ACUM_B" >@if (NCRF_PNC_OTR_PROV_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_OTR_PROV_REAL_ACUM-NCRF_PNC_OTR_PROV_ANTE_ACUM))))} </td>
+ </tr>
+   <tr>
+    <td  class="webgrid-rubrica"> Financiamentos obtidos                            </td> 
+    <td style="text-align:right" id="NCRF_PNC_FIN_ANTE_TOTAL" itemid="NCRF_PNC_FIN_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_FIN_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_FIN_ANTE_ACUM" itemid="NCRF_PNC_FIN_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_FIN_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_FIN_REAL_ACUM" itemid="NCRF_PNC_FIN_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_FIN_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PNC_FIN_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_FIN_REAL_ACUM"]); decimal NCRF_PNC_FIN_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_FIN_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PNC_FIN_COMP_ACUM_P" >@if (NCRF_PNC_FIN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_FIN_REAL_ACUM/NCRF_PNC_FIN_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PNC_FIN_COMP_ACUM_B" >@if (NCRF_PNC_FIN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_FIN_REAL_ACUM-NCRF_PNC_FIN_ANTE_ACUM))))} </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Responsabilidades por benefícios pós-emprego                            </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_RES_BEN_ANTE_TOTAL" itemid="NCRF_PNC_OTR_RES_BEN_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_RES_BEN_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_RES_BEN_ANTE_ACUM" itemid="NCRF_PNC_OTR_RES_BEN_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_RES_BEN_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_RES_BEN_REAL_ACUM" itemid="NCRF_PNC_OTR_RES_BEN_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_RES_BEN_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PNC_OTR_RES_BEN_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_OTR_RES_BEN_REAL_ACUM"]); decimal NCRF_PNC_OTR_RES_BEN_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_OTR_RES_BEN_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PNC_OTR_RES_BEN_COMP_ACUM_P" >@if (NCRF_PNC_OTR_RES_BEN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_OTR_RES_BEN_REAL_ACUM/NCRF_PNC_OTR_RES_BEN_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PNC_OTR_RES_BEN_COMP_ACUM_B" >@if (NCRF_PNC_OTR_RES_BEN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_OTR_RES_BEN_REAL_ACUM-NCRF_PNC_OTR_RES_BEN_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Passivos por impostos diferidos                            </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_PASS_IMP_ANTE_TOTAL" itemid="NCRF_PNC_OTR_PASS_IMP_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_PASS_IMP_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_PASS_IMP_ANTE_ACUM" itemid="NCRF_PNC_OTR_PASS_IMP_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_PASS_IMP_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_PASS_IMP_REAL_ACUM" itemid="NCRF_PNC_OTR_PASS_IMP_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_PASS_IMP_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PNC_OTR_PASS_IMP_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_OTR_PASS_IMP_REAL_ACUM"]); decimal NCRF_PNC_OTR_PASS_IMP_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_OTR_PASS_IMP_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PNC_OTR_PASS_IMP_COMP_ACUM_P" >@if (NCRF_PNC_OTR_PASS_IMP_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_OTR_PASS_IMP_REAL_ACUM/NCRF_PNC_OTR_PASS_IMP_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PNC_OTR_PASS_IMP_COMP_ACUM_B" >@if (NCRF_PNC_OTR_PASS_IMP_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_OTR_PASS_IMP_REAL_ACUM-NCRF_PNC_OTR_PASS_IMP_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Outras contas a pagar                            </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_CONT_PAG_ANTE_TOTAL" itemid="NCRF_PNC_OTR_CONT_PAG_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_CONT_PAG_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_CONT_PAG_ANTE_ACUM" itemid="NCRF_PNC_OTR_CONT_PAG_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_CONT_PAG_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PNC_OTR_CONT_PAG_REAL_ACUM" itemid="NCRF_PNC_OTR_CONT_PAG_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_OTR_CONT_PAG_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PNC_OTR_CONT_PAG_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_OTR_CONT_PAG_REAL_ACUM"]); decimal NCRF_PNC_OTR_CONT_PAG_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_OTR_CONT_PAG_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PNC_OTR_CONT_PAG_COMP_ACUM_P" >@if (NCRF_PNC_OTR_CONT_PAG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_OTR_CONT_PAG_REAL_ACUM/NCRF_PNC_OTR_CONT_PAG_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PNC_OTR_CONT_PAG_COMP_ACUM_B" >@if (NCRF_PNC_OTR_CONT_PAG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_OTR_CONT_PAG_REAL_ACUM-NCRF_PNC_OTR_CONT_PAG_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td class="webgrid-rubrica-sub"> Passivo Não Corrente                            </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_PNC_TOTAL_ANTE_TOTAL" itemid="NCRF_PNC_TOTAL_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_TOTAL_ANTE_TOTAL"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_PNC_TOTAL_ANTE_ACUM" itemid="NCRF_PNC_TOTAL_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_TOTAL_ANTE_ACUM"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_PNC_TOTAL_REAL_ACUM" itemid="NCRF_PNC_TOTAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PNC_TOTAL_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PNC_TOTAL_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_TOTAL_REAL_ACUM"]); decimal NCRF_PNC_TOTAL_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PNC_TOTAL_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica-sub" id="NCRF_PNC_TOTAL_COMP_ACUM_P" >@if (NCRF_PNC_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_TOTAL_REAL_ACUM/NCRF_PNC_TOTAL_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica-sub" id="NCRF_PNC_TOTAL_COMP_ACUM_B" >@if (NCRF_PNC_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PNC_TOTAL_REAL_ACUM-NCRF_PNC_TOTAL_ANTE_ACUM))))} </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Fornecedores                            </td> 
+    <td style="text-align:right" id="NCRF_PC_FORN_ANTE_TOTAL" itemid="NCRF_PC_FORN_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_FORN_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_FORN_ANTE_ACUM" itemid="NCRF_PC_FORN_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_FORN_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_FORN_REAL_ACUM" itemid="NCRF_PC_FORN_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_FORN_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PC_FORN_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_FORN_REAL_ACUM"]); decimal NCRF_PC_FORN_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_FORN_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PC_FORN_COMP_ACUM_P" >@if (NCRF_PC_FORN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_FORN_REAL_ACUM/NCRF_PC_FORN_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PC_FORN_COMP_ACUM_B" >@if (NCRF_PC_FORN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_FORN_REAL_ACUM-NCRF_PC_FORN_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Adiantamento de clientes                            </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_TOTAL" itemid="NCRF_PC_OTR_PAS_ADIAN_CLI_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_ACUM" itemid="NCRF_PC_OTR_PAS_ADIAN_CLI_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_ADIAN_CLI_REAL_ACUM" itemid="NCRF_PC_OTR_PAS_ADIAN_CLI_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_ADIAN_CLI_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PC_OTR_PAS_ADIAN_CLI_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_PAS_ADIAN_CLI_REAL_ACUM"]); decimal NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_PAS_ADIAN_CLI_COMP_ACUM_P" >@if (NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_PAS_ADIAN_CLI_REAL_ACUM/NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_PAS_ADIAN_CLI_COMP_ACUM_B" >@if (NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_PAS_ADIAN_CLI_REAL_ACUM-NCRF_PC_OTR_PAS_ADIAN_CLI_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Estado e outros entes públicos                            </td> 
+    <td style="text-align:right" id="NCRF_EPC_OTR_CRE_ESTADO_ANTE_TOTAL" itemid="NCRF_EPC_OTR_CRE_ESTADO_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_EPC_OTR_CRE_ESTADO_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_EPC_OTR_CRE_ESTADO_ANTE_ACUM" itemid="NCRF_EPC_OTR_CRE_ESTADO_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_EPC_OTR_CRE_ESTADO_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_EPC_OTR_CRE_ESTADO_REAL_ACUM" itemid="NCRF_EPC_OTR_CRE_ESTADO_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_EPC_OTR_CRE_ESTADO_REAL_ACUM"])))  </td> 
+@{decimal NCRF_EPC_OTR_CRE_ESTADO_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_EPC_OTR_CRE_ESTADO_REAL_ACUM"]); decimal NCRF_EPC_OTR_CRE_ESTADO_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_EPC_OTR_CRE_ESTADO_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_EPC_OTR_CRE_ESTADO_COMP_ACUM_P" >@if (NCRF_EPC_OTR_CRE_ESTADO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_EPC_OTR_CRE_ESTADO_REAL_ACUM/NCRF_EPC_OTR_CRE_ESTADO_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_EPC_OTR_CRE_ESTADO_COMP_ACUM_B" >@if (NCRF_EPC_OTR_CRE_ESTADO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_EPC_OTR_CRE_ESTADO_REAL_ACUM-NCRF_EPC_OTR_CRE_ESTADO_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Financiamentos obtidos                            </td> 
+    <td style="text-align:right" id="NCRF_PC_FIN_ANTE_TOTAL" itemid="NCRF_PC_FIN_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_FIN_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_FIN_ANTE_ACUM" itemid="NCRF_PC_FIN_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_FIN_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_FIN_REAL_ACUM" itemid="NCRF_PC_FIN_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_FIN_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PC_FIN_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_FIN_REAL_ACUM"]); decimal NCRF_PC_FIN_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_FIN_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PC_FIN_COMP_ACUM_P" >@if (NCRF_PC_FIN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_FIN_REAL_ACUM/NCRF_PC_FIN_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PC_FIN_COMP_ACUM_B" >@if (NCRF_PC_FIN_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_FIN_REAL_ACUM-NCRF_PC_FIN_ANTE_ACUM))))} </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Outras dividas a pagar                            </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_CRE_OTR_PAG_ANTE_TOTAL" itemid="NCRF_PC_OTR_CRE_OTR_PAG_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_CRE_OTR_PAG_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_CRE_OTR_PAG_ANTE_ACUM" itemid="NCRF_PC_OTR_CRE_OTR_PAG_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_CRE_OTR_PAG_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_CRE_OTR_PAG_REAL_ACUM" itemid="NCRF_PC_OTR_CRE_OTR_PAG_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_CRE_OTR_PAG_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PC_OTR_CRE_OTR_PAG_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_CRE_OTR_PAG_REAL_ACUM"]); decimal NCRF_PC_OTR_CRE_OTR_PAG_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_CRE_OTR_PAG_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_CRE_OTR_PAG_COMP_ACUM_P" >@if (NCRF_PC_OTR_CRE_OTR_PAG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_CRE_OTR_PAG_REAL_ACUM/NCRF_PC_OTR_CRE_OTR_PAG_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_CRE_OTR_PAG_COMP_ACUM_B" >@if (NCRF_PC_OTR_CRE_OTR_PAG_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_CRE_OTR_PAG_REAL_ACUM-NCRF_PC_OTR_CRE_OTR_PAG_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Diferimentos                            </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_DIFER_ANTE_TOTAL" itemid="NCRF_PC_OTR_PAS_DIFER_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_DIFER_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_DIFER_ANTE_ACUM" itemid="NCRF_PC_OTR_PAS_DIFER_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_DIFER_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_DIFER_REAL_ACUM" itemid="NCRF_PC_OTR_PAS_DIFER_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_DIFER_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PC_OTR_PAS_DIFER_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_PAS_DIFER_REAL_ACUM"]); decimal NCRF_PC_OTR_PAS_DIFER_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_PAS_DIFER_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_PAS_DIFER_COMP_ACUM_P" >@if (NCRF_PC_OTR_PAS_DIFER_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_PAS_DIFER_REAL_ACUM/NCRF_PC_OTR_PAS_DIFER_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_PAS_DIFER_COMP_ACUM_B" >@if (NCRF_PC_OTR_PAS_DIFER_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_PAS_DIFER_REAL_ACUM-NCRF_PC_OTR_PAS_DIFER_ANTE_ACUM))))} </td>
+ </tr>
+
+<tr>
+    <td  class="webgrid-rubrica"> Passivos financeiros detidos para negociação                            </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_DET_VEND_ANTE_TOTAL" itemid="NCRF_PC_OTR_PAS_DET_VEND_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_DET_VEND_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_DET_VEND_ANTE_ACUM" itemid="NCRF_PC_OTR_PAS_DET_VEND_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_DET_VEND_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_DET_VEND_REAL_ACUM" itemid="NCRF_PC_OTR_PAS_DET_VEND_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_DET_VEND_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PC_OTR_PAS_DET_VEND_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_PAS_DET_VEND_REAL_ACUM"]); decimal NCRF_PC_OTR_PAS_DET_VEND_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_PAS_DET_VEND_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_PAS_DET_VEND_COMP_ACUM_P" >@if (NCRF_PC_OTR_PAS_DET_VEND_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_PAS_DET_VEND_REAL_ACUM/NCRF_PC_OTR_PAS_DET_VEND_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_PAS_DET_VEND_COMP_ACUM_B" >@if (NCRF_PC_OTR_PAS_DET_VEND_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_PAS_DET_VEND_REAL_ACUM-NCRF_PC_OTR_PAS_DET_VEND_ANTE_ACUM))))} </td>
+ </tr>
+
+<tr>
+    <td  class="webgrid-rubrica"> Outros Passivos financeiros                            </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_OTR_ANTE_TOTAL" itemid="NCRF_PC_OTR_PAS_OTR_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_OTR_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_OTR_ANTE_ACUM" itemid="NCRF_PC_OTR_PAS_OTR_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_OTR_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_PC_OTR_PAS_OTR_REAL_ACUM" itemid="NCRF_PC_OTR_PAS_OTR_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_OTR_PAS_OTR_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PC_OTR_PAS_OTR_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_PAS_OTR_REAL_ACUM"]); decimal NCRF_PC_OTR_PAS_OTR_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_OTR_PAS_OTR_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_PAS_OTR_COMP_ACUM_P" >@if (NCRF_PC_OTR_PAS_OTR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_PAS_OTR_REAL_ACUM/NCRF_PC_OTR_PAS_OTR_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_PC_OTR_PAS_OTR_COMP_ACUM_B" >@if (NCRF_PC_OTR_PAS_OTR_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_OTR_PAS_OTR_REAL_ACUM-NCRF_PC_OTR_PAS_OTR_ANTE_ACUM))))} </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica-sub"> Passivo Corrente                           </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_PC_TOTAL_ANTE_TOTAL" itemid="NCRF_PC_TOTAL_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_TOTAL_ANTE_TOTAL"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_PC_TOTAL_ANTE_ACUM" itemid="NCRF_PC_TOTAL_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_TOTAL_ANTE_ACUM"])))  </td> 
+    <td class="webgrid-rubrica-sub" id="NCRF_PC_TOTAL_REAL_ACUM" itemid="NCRF_PC_TOTAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_PC_TOTAL_REAL_ACUM"])))  </td> 
+@{decimal NCRF_PC_TOTAL_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_TOTAL_REAL_ACUM"]); decimal NCRF_PC_TOTAL_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_PC_TOTAL_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica-sub" id="NCRF_PC_TOTAL_COMP_ACUM_P" >@if (NCRF_PC_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_TOTAL_REAL_ACUM/NCRF_PC_TOTAL_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica-sub" id="NCRF_PC_TOTAL_COMP_ACUM_B" >@if (NCRF_PC_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_PC_TOTAL_REAL_ACUM-NCRF_PC_TOTAL_ANTE_ACUM))))} </td>
+ </tr>
+    
+<tr>
+    <td class="webgrid-total-TOTAL"> Total do Capital Próprio+Passivo                           </td> 
+    <td class="webgrid-total-TOTAL" id="NCRF_CP_E_PASSIVO_TOTAL_ANTE_TOTAL" itemid="NCRF_CP_E_PASSIVO_TOTAL_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_E_PASSIVO_TOTAL_ANTE_TOTAL"])))  </td> 
+    <td class="webgrid-total-TOTAL" id="NCRF_CP_E_PASSIVO_TOTAL_ANTE_ACUM" itemid="NCRF_CP_E_PASSIVO_TOTAL_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_E_PASSIVO_TOTAL_ANTE_ACUM"])))  </td> 
+    <td class="webgrid-total-TOTAL" id="NCRF_CP_E_PASSIVO_TOTAL_REAL_ACUM" itemid="NCRF_CP_E_PASSIVO_TOTAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_CP_E_PASSIVO_TOTAL_REAL_ACUM"])))  </td> 
+@{decimal NCRF_CP_E_PASSIVO_TOTAL_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_E_PASSIVO_TOTAL_REAL_ACUM"]); decimal NCRF_CP_E_PASSIVO_TOTAL_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_CP_E_PASSIVO_TOTAL_ANTE_ACUM"]);}
+    <td class="webgrid-total-TOTAL" id="NCRF_CP_E_PASSIVO_TOTAL_COMP_ACUM_P" >@if (NCRF_CP_E_PASSIVO_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_E_PASSIVO_TOTAL_REAL_ACUM/NCRF_CP_E_PASSIVO_TOTAL_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-total-TOTAL" id="NCRF_CP_E_PASSIVO_TOTAL_COMP_ACUM_B" >@if (NCRF_CP_E_PASSIVO_TOTAL_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_CP_E_PASSIVO_TOTAL_REAL_ACUM-NCRF_CP_E_PASSIVO_TOTAL_ANTE_ACUM))))} </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Diferenças do Balanço                           </td> 
+    <td style="text-align:right" id="NCRF_DIF_BALANCO_ANTE_TOTAL" itemid="NCRF_DIF_BALANCO_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_DIF_BALANCO_ANTE_TOTAL"])))  </td> 
+    <td style="text-align:right" id="NCRF_DIF_BALANCO_ANTE_ACUM" itemid="NCRF_DIF_BALANCO_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_DIF_BALANCO_ANTE_ACUM"])))  </td> 
+    <td style="text-align:right" id="NCRF_DIF_BALANCO_REAL_ACUM" itemid="NCRF_DIF_BALANCO_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["NCRF_DIF_BALANCO_REAL_ACUM"])))  </td> 
+@{decimal NCRF_DIF_BALANCO_REAL_ACUM = Convert.ToInt32(@ViewData["NCRF_DIF_BALANCO_REAL_ACUM"]); decimal NCRF_DIF_BALANCO_ANTE_ACUM = Convert.ToInt32(@ViewData["NCRF_DIF_BALANCO_ANTE_ACUM"]);}
+    <td class="webgrid-rubrica" id="NCRF_DIF_BALANCO_COMP_ACUM_P" >@if (NCRF_DIF_BALANCO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_DIF_BALANCO_REAL_ACUM/NCRF_DIF_BALANCO_ANTE_ACUM*100)-100)))<text>%</text>} </td>
+    <td class="webgrid-rubrica" id="NCRF_DIF_BALANCO_COMP_ACUM_B" >@if (NCRF_DIF_BALANCO_ANTE_ACUM.Equals(0)) {<text>    -</text>} else {@Html.Raw((string.Format("{0:N}",(NCRF_DIF_BALANCO_REAL_ACUM-NCRF_DIF_BALANCO_ANTE_ACUM))))} </td>
+ </tr>
+
+
+  </table>
+<iframe id="txtArea1" style="display:none"></iframe>
+      <input type=button id="btnExport1" onclick="fnExcelReport('BALANCO_NCRF_COMP', 'Export HTML Table to Excel')" value="Excel" />
+
+
+<p></p>
+<p></p>
+<p></p>
+
+<div id="GRAVAROPER_DIRXX"  style="display:none">
+   
+
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", FormMethod.Get))
+    {
+       <div id="GRAVAR" class="GRAVAR">
+    @Html.ActionLink("GRAVAR","BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { 
+    Pesquisa_User = "tjalmeida",  id_camp = "id_camp", campocalc_resultado="campocalc_resultado"}, null)
+</div> 
+       
+    }
+</div>
+
+
+<div id="CONFIGURARXX" style="display:none">
+   
+
+    @using (Html.BeginForm("GRC_ALERTAS_RESUMO", "GRC", FormMethod.Get))
+    {
+       <div id="CONFIGURAR_CAMPO" class="CONFIGURAR_CAMPO">
+        @Html.ActionLink("Configurar","BI_CAMP_CALC", "BI", new { id_camp_calc = "id_camp_calc", Pesquisa_User = "tjalmeida", versao="versao"}, null)
+       </div> 
+            <p></p> 
+    }
+</div>
+  @section scripts {
+
+
+
+    <script type="text/javascript">
+
+
+        //NOTA TA: REFRESCA PAGINA DE 20 EM 20 SEGUNDOS SE HEXISTIREM CÉLULAS A CALCULAR
+
+        setTimeout(function () {
+            var num_car = $('#BALANCO_NCFR_COMP td').text().length
+            var num_car_ = $('#BALANCO_NCFR_COMP td').text().replace('calc', '').length
+
+            if (num_car == num_car_) { } else
+            {
+                window.location.reload(1);
+
+            }
+        }, 20000);
+
+
+
+        $(document).ready(function () {
+
+
+            var num_car = $('#BALANCO_NCFR_COMP td').text().length
+            var num_car_ = $('#BALANCO_NCFR_COMP td').text().replace('calc', '').length
+
+            if (num_car == num_car_) { } else
+            {
+
+                $(".calcular").attr('style', 'display:block');
+            }
+
+          
+           @*---------------------------------MONSTAR/OCULTAR LINHAS DE CONFIGURAÇÃO DE INTERVALOS DE MESES DA TABELA----------------------------------------------------------*@
+
+            $(function () {
+
+                $("#Mostrar").click(function () {
+                    //$("#grid00").show();
+                    if ($("#BALANCO_NCFR_COMP tr.oculta_na_impressao ").is(":visible") == false) { $("#BALANCO_NCFR_COMP tr.oculta_na_impressao").show(); } else { $("#BALANCO_NCFR_COMP tr.oculta_na_impressao").hide(); }
+                });
+                $("#BALANCO_NCFR_COMP tr.oculta_na_impressao").hide();
+            });
+
+            @*------------------------------OCUTO CABEÇALHOS DE GRELHA-------------------------------------------------------------*@
+
+
+            $("#grid th").find('"a[href*=' + "'" + "ID" + "&'" + ']"').parent().addClass('id');
+            $("#grid th").find('"a[href*=' + "'" + "id_camp_calc" + "&'" + ']"').parent().addClass('id_camp_calc');
+            $("#grid th").find('"a[href*=' + "'" + "desc_camp_calc" + "&'" + ']"').parent().addClass('desc_camp_calc');
+            //$("#grid th").find('"a[href*=' + "'" + "campocalc_resultado" + "&'" + ']"').parent().addClass('campocalc_resultado');
+
+            $("#grid ").find(".id").hide();
+            $("#grid ").find(".id_camp_calc").hide();
+            $("#grid ").find(".desc_camp_calc").hide();
+            var alt_Valor_da_Variavel = $("#grid th").parent().html().replace('Valor da Variavel', 'Mês');
+            $("#grid th").parent().html(alt_Valor_da_Variavel)
+
+            //--------------------------------TRATO os CAMPOS de SELECCAO DO MÊS--------------------------
+
+
+            $(".campocalc_resultado ").click(function () {
+
+
+                if ($(this).children().attr('class') != "input") {
+                    var id = $(this).parent().find(".id").html();
+                    var idconteudoOriginal = $(this).parent().parent().parent().parent().parent().attr('id');
+                    //var findidconteudoOriginal = '.' + idconteudoOriginal + '';
+
+
+                    var conteudoOriginal = $(this).text();
+
+
+
+                    var ReplaceHrefID = $("#GRAVAROPER_DIRXX form").html();
+
+
+
+                    $(this).html("<input class='input' value='" + conteudoOriginal + "'/>");
+                    $(this).children().first().focus();
+
+                }
+
+                // NOTA TA: Keypress significa que a instrução é cumprida quando o utilizador faz "enter"
+                $(this).children().first().keypress(function (e) {
+                    if (e.which == 13) {
+
+                        if ($(this).parent().parent().parent().parent().find('.GRAVAR').text() == "") {
+                            $(this).parent().parent().parent().parent().prepend(ReplaceHrefID);
+                        }
+                        else { $(this).parent().parent().parent().parent().find('.GRAVAR').html(ReplaceHrefID) }
+
+
+                        //NOTA TA: Aqui re-faço a href do botão com todos os campos preenchidos de origem
+                        var ValorInicial_id_camp = id;
+                        var ReplaceHref_id_camp = $(this).parent().parent().parent().parent().find('.GRAVAR').html().replace('id_camp=id_camp', 'id_camp' + '=' + ValorInicial_id_camp);
+                        $(this).parent().parent().parent().parent().find('.GRAVAR').html(ReplaceHref_id_camp);
+
+
+                        var hrefalterar1 = $(this).parent().parent().parent().parent().find('.GRAVAR').html();
+
+
+                        var valor = $(this).val()
+                        if ($(this).val() == "" || $(this).val() <= 0 || $(this).val() >= 13 || valor != parseInt(valor, 10)) {
+                            var novoConteudo = conteudoOriginal;
+                            alert("Por favor, Insira um Valor de 1 a 12.")
+                        }
+                        else {
+                            var novoConteudo = $(this).val();
+                        }
+
+
+
+
+                        $(this).parent().text(novoConteudo);
+                        $(this).parent().removeClass("celulaEmEdicao");
+
+
+                        var ReplaceHref1 = hrefalterar1.replace('campocalc_resultado=campocalc_resultado', 'campocalc_resultado' + '=' + novoConteudo);
+
+                        $('#' + idconteudoOriginal).find('.GRAVAR').html(ReplaceHref1);
+
+                        //-------------------INICIO: ACRESCENTEI para evitar passo debotão GRAVAR----
+                        var href_alt = document.querySelector('#' + idconteudoOriginal + ' .GRAVAR a').href
+                        var href_alt_ = href_alt.replace('"', '').replace('amp;', '').replace('amp;', '')
+
+                        var x = document.getElementsByClassName("GRAVAR");
+                        var i;
+                        for (i = 0; i < x.length; i++) {
+                            x[i].style.display = "none";
+
+                        }
+
+                        //alert(ReplaceHref1);
+
+                        window.location.href = href_alt_
+
+                        //-------------------FIM: ACRESCENTEI para evitar passo debotão GRAVAR----
+
+                    }
+
+                });
+
+
+            })
+
+             @*--------------------------Aqui trato o Botão para configuração do Campo-----------------------------------------------------------------*@
+
+
+
+
+            $(".webgrid-table td").click(function () {
+                var idconteudoOriginal = $(this).attr('itemid');
+                var versaoconteudoOriginal = $(this).attr('itemref');
+
+                //alert(idconteudoOriginal);
+                if (typeof idconteudoOriginal === "undefined")
+                { }
+                else {
+                    var ReplaceHrefID = $("#CONFIGURARXX form").html().replace('id_camp_calc=id_camp_calc', 'id_camp_calc' + '=' + idconteudoOriginal).replace('versao=versao', 'versao' + '=' + versaoconteudoOriginal);
+                    if ($(this).find('.CONFIGURAR_CAMPO').text() == "") {
+                        $(this).prepend(ReplaceHrefID);
+                    }
+                }
+
+                //alert($(this).find('.CONFIGURAR_CAMPO').text());
+            })
+
+        })
+
+    </script>
+    
+      
+       @*------------------------------EXTRACÇÃO PARA EXCEL--------------------------------------------------------*@
+    
+       <script type="text/javascript">
+           function fnExcelReport(table, name) {
+               var table1 = '#' + table
+               var ccs_style = $("#ccs_style").html();
+               var styletabela = $(table1).attr("class");
+               var indexOf_Ini_styletabela = $("#ccs_style").html().indexOf(styletabela)
+               var indexOf_Fim_styletabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).indexOf("}");
+               var ccs_style_tabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).substring(0, indexOf_Fim_styletabela).replace("{", "").replace(styletabela, "");
+
+
+               var tab_text = "<table style=" + "'" + ccs_style_tabela + "'" + "><tr>";
+               var textRange; var j = 0; var i = 0;
+               tab = document.getElementById(table); // id of table
+
+
+               for (j = 0 ; j < tab.rows.length ; j++) {
+                   if (tab.rows[j].className != "oculta_na_impressao") {
+                       //alert(tab.rows[j].className);
+                       var tab_rows = tab.rows[j].innerHTML;
+
+                       for (i = 0 ; i < tab.rows[j].cells.length ; i++) {
+
+                           var texto_linha = tab_rows;
+                           var style_celula_ini = texto_linha.indexOf('class="');
+                           var style_celula_fim = texto_linha.substring(style_celula_ini, 999999999999).replace('class="', '').indexOf('"');
+                           var style_celula = texto_linha.substring(style_celula_ini, 999999999999).replace('class="', '').substring(0, style_celula_fim);
+
+                           var indexOf_Ini_styletabela = $("#ccs_style").html().indexOf(style_celula)
+                           var indexOf_Fim_styletabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).indexOf("}");
+                           var ccs_style_tabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).substring(0, indexOf_Fim_styletabela).replace("{", "").replace(style_celula, "");
+
+                           tab_rows = tab_rows.replace('class="' + style_celula + '"', 'style="' + ccs_style_tabela + '"')
+
+                       }
+
+
+                   }
+                   else { tab_rows = '' }
+
+
+                   tab_text = tab_text + tab_rows + "</tr>";
+                   //tab_text=tab_text+"</tr>";
+               }
+
+               tab_text = tab_text + "</table>";
+               tab_text = tab_text.split('&nbsp;').join('.'); 
+               tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+               tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+               tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+               var ua = window.navigator.userAgent;
+               var msie = ua.indexOf("MSIE ");
+
+               if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+               {
+                   txtArea1.document.open("txt/html", "replace");
+                   txtArea1.document.write(tab_text);
+                   txtArea1.document.close();
+                   txtArea1.focus();
+                   sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+               }
+               else                 //other browser not tested on IE 11
+                   sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+
+               return (sa);
+           }
+            </script>
+
+}
+
+
+

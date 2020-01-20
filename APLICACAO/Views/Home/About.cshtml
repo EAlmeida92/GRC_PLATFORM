@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "About";
+}
+
+<script type="text/javascript">
+
+    document.querySelector('html').style.minWidth = "150px";
+
+</script>
+
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+    <h2>@ViewBag.Message</h2>
+</hgroup>
+
+<article>
+    <p>
+        Use this area to provide additional information.
+    </p>
+
+    <p>
+        Use this area to provide additional information.
+    </p>
+
+    <p>
+        Use this area to provide additional information.
+    </p>
+</article>
+
+<aside>
+    <h3>Aside Title</h3>
+    <p>
+        Use this area to provide additional information.
+    </p>
+    <ul>
+        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+        <li>@Html.ActionLink("About", "About", "Home")</li>
+        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+          @if (Request.IsAuthenticated) { <li>@Html.ActionLink("GRC", "GRC", "GRC")</li> } else {  <text> </text> }
+        
+    </ul>
+</aside>

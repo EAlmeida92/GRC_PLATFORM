@@ -1,0 +1,1498 @@
+﻿@{
+    ViewBag.Title = "INDICADORES_MENSAL_2";
+}
+
+
+
+
+<style id="ccs_style" type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        text-align: right;
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-rubrica
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+
+    }
+        .webgrid-total
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+        text-align: right;   
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+.webgrid-total-TOTAL
+    {
+         text-align: center;
+        background-color: #02020a;   
+        color: white;
+        padding: 3px 7px 2px;
+    }
+           .page-breaker {
+   display: block;
+   clear: both;
+   page-break-after: always;
+}
+           /*NOTA table::AQUI DEFINO  O  STYLE DOS BOTÕES*/
+
+.btn:focus, .btn::-moz-focus-inner{
+  outline:none;
+  border:none;
+}
+.btn{
+  font-family: arial;
+  font-size:14px;
+  text-transform: uppercase;
+  font-weight:700;
+  border:none;
+  padding:10px;
+  cursor: pointer;
+  display:inline-block;
+  text-decoration: none;
+  width: auto;
+}
+.btn-green{
+  background:green;
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 #006000 /*rgba(0, 96, 0, 0.6)*/;
+    width: auto;
+}
+.btn-green:hover{
+  background:#006000;
+  box-shadow:0 5px 0 #003f00;
+}
+.btn-blue{
+  background:rgba(0,0,139, 0.6);
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 rgba(0,0,59, 0.6);
+    width: auto;
+}
+.btn-blue:hover{
+  background:#2153a2;
+  box-shadow:0 5px 0 #00003B;
+}
+.btn-purple{
+  background:purple; opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #670167 /*rgba(103, 1, 103, 0.6)*/;
+    width: auto;
+}
+.btn-purple:hover{
+  background:#670167;
+  box-shadow:0 5px 0 #470047;
+}
+.btn-red{
+  background:red; opacity:0.7;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #d20000 /*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-red:hover{
+  background:#d20000;
+  box-shadow:0 5px 0 #b00000;
+}
+.btn-orange{
+  background:rgb(204 , 112 , 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(204 , 112 , 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-orange:hover{
+  background:rgb(204 , 112 , 0);
+  box-shadow:0 5px 0 rgb(204 , 112 , 0);
+}
+.btn-brown{
+  background:rgb(102, 0, 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(102, 0, 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-brown:hover{
+  background:rgb(102, 0, 0);
+  box-shadow:0 5px 0 rgb(102, 0, 0);
+}
+.btn-green:active,.btn-blue:active, .btn-purple:active, .btn-red:active, .btn-orange:active, .btn-brown:active{
+  position:relative;
+  top:5px;
+  box-shadow:inherit;
+}
+    </style>
+
+@{
+    var ANO_VERSAO_REAL = @ViewData["ANO_VERSAO_REAL"];
+    var MES_ACUM_REAL = @ViewData["MES_ACUM_REAL"];
+    var MES_INI_PER_REAL = @ViewData["MES_INI_PER_REAL"];
+    var MES_FIN_PER_REAL = @ViewData["MES_FIN_PER_REAL"];
+
+}
+
+
+<h2  id="indicadores_mensal_2_titulo_tabela">INDICADORES MENSAIS DE  @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_REAL)))</h2>
+
+<table id="INDICADORES_MENSAL_2"  class="webgrid-table" border="1">
+    <tr>
+        <td class="webgrid-header"> Rúbrica </td> 
+        <td class="webgrid-header"> Janeiro </td> 
+        <td class="webgrid-header"> Fevereiro </td>
+        <td class="webgrid-header"> Março  </td>
+        <td class="webgrid-header"> Abril  </td>
+        <td class="webgrid-header"> Maio  </td>
+        <td class="webgrid-header"> Junho  </td>
+        <td class="webgrid-header"> Julho  </td>
+        <td class="webgrid-header"> Agosto  </td>
+        <td class="webgrid-header"> Setembro  </td>
+        <td class="webgrid-header"> Outubro  </td>
+        <td class="webgrid-header"> Novembro  </td>
+        <td class="webgrid-header"> Dezembro  </td>
+        <td class="webgrid-header"> Total  </td>
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Volume Negócios                           </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="IND_VN_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_SF"])))  </td> 
+</tr>
+       <tr>
+    <td  class="webgrid-rubrica"> Margem Bruta                           </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="IND_MARG_BRUTA_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_SF"])))  </td> 
+</tr>
+      <tr>
+    <td  class="webgrid-rubrica"> Resultado Operacional                           </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="IND_RES_OPER_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_SF"])))  </td> 
+</tr>
+         <tr>
+    <td  class="webgrid-rubrica">  EBITDA                           </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="IND_EBITDA_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_SF"])))  </td> 
+</tr>
+        <tr>
+    <td  class="webgrid-rubrica">  Margem Bruta %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="IND_MARG_BRUTA_PERC_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_SF"])))  </td> 
+</tr>
+        <tr>
+    <td  class="webgrid-rubrica">  Margem EBITDA / Vendas %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="IND_MARG_EBITDA_PERC_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_SF"])))  </td> 
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica">  Margem Operacional / Vendas %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="IND_MARG_OPER_PERC_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_SF"])))  </td> 
+</tr>
+
+     </table>
+<iframe id="txtArea1" style="display:none"></iframe>
+<button type=button id="btnExport1" class="btn-blue" style="display:none" onclick="fnExcelReport('INDICADORES_MENSAL_2', 'Export HTML Table to Excel')">Excel</button>
+
+<div class="page-breaker"></div>
+
+
+<h2  id="indicadores_acum_2_titulo_tabela">INDICADORES ACUMULADOS DE  @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_REAL)))</h2>
+
+<table id="INDICADORES_ACUM_2"  class="webgrid-table" border="1">
+    <tr>
+        <td class="webgrid-header"> Rúbrica </td> 
+        <td class="webgrid-header"> Janeiro </td> 
+        <td class="webgrid-header"> Fevereiro </td>
+        <td class="webgrid-header"> Março  </td>
+        <td class="webgrid-header"> Abril  </td>
+        <td class="webgrid-header"> Maio  </td>
+        <td class="webgrid-header"> Junho  </td>
+        <td class="webgrid-header"> Julho  </td>
+        <td class="webgrid-header"> Agosto  </td>
+        <td class="webgrid-header"> Setembro  </td>
+        <td class="webgrid-header"> Outubro  </td>
+        <td class="webgrid-header"> Novembro  </td>
+        <td class="webgrid-header"> Dezembro  </td>
+      
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Volume Negócios                           </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_NOVEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+   
+</tr>
+       <tr>
+    <td  class="webgrid-rubrica"> Margem Bruta                           </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_NOVEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+
+</tr>
+      <tr>
+    <td  class="webgrid-rubrica"> Resultado Operacional                           </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_NOVEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+
+</tr>
+         <tr>
+    <td  class="webgrid-rubrica">  EBITDA                           </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_NOVEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+
+</tr>
+        <tr>
+    <td  class="webgrid-rubrica">  Margem Bruta %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_NOVEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+ 
+</tr>
+        <tr>
+    <td  class="webgrid-rubrica">  Margem EBITDA / Vendas %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_NOVEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica">  Margem Operacional / Vendas %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_NOVEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+ 
+</tr>
+
+
+               <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+                            
+               </tr>
+    <tr>
+    <td  class="webgrid-rubrica">  Rentabilidade do Capital Próprio (ROE)                           </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANO_N_DEZEMBRO"])))  </td> 
+    
+</tr>
+        <tr>
+    <td  class="webgrid-rubrica">  NFM/Vendas %                           </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM/VENDAS_PERC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM/VENDAS_PERC_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+            <tr>
+    <td  class="webgrid-rubrica">  Passivo Financeiro / Capital Próprio                           </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/CAP_PROPR_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/CAP_PROPR_ANO_N_DEZEMBRO"])))  </td> 
+ 
+</tr>
+                <tr>
+    <td  class="webgrid-rubrica">  Passivo Financeiro / EBITDA (Anualizado)                           </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC/EBITDA_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC/EBITDA_ANO_N_DEZEMBRO"])))  </td> 
+  
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica">  Encargos Financeiros / EBITDA %                          </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC/EBITDA_PERC_ANO_N_DEZEMBRO"])))  </td> 
+    
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica">  Rentabilidade do Cap. Utilizado (ROCE) %                          </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANO_N_DEZEMBRO"])))  </td> 
+   
+</tr>
+        <tr>
+    <td  class="webgrid-rubrica">  Valor Económico Acrescentado (EVA)                           </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+               <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               </tr>
+            <tr>
+    <td  class="webgrid-rubrica">  Fundo de Maneio                          </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+                <tr>
+    <td  class="webgrid-rubrica">  Necessidades de Fundo de Maneio                     </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+<tr>
+    <td  class="webgrid-rubrica">  Tesouraria Líquida                   </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica">  Autonomia Financeira %            </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+ <tr>
+    <td  class="webgrid-rubrica">  Passivo Financeiro           </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+               <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+   
+                    </tr>
+     <tr>
+    <td  class="webgrid-rubrica">  Nº de Trabalhadores         </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANO_N_DEZEMBRO"])))  </td> 
+ 
+</tr>
+ <tr>
+    <td  class="webgrid-rubrica">  Vendas por Trabalhador       </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS/TRABALH_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS/TRABALH_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+     <tr>
+    <td  class="webgrid-rubrica">  VAB por Trabalhador     </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB/TRABALH_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB/TRABALH_ANO_N_DEZEMBRO"])))  </td> 
+  
+</tr>
+<tr>
+    <td  class="webgrid-rubrica">  Gastos com Pessoal/VAB %     </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/VAB_PERC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/VAB_PERC_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica">  Gastos com Pessoal por Colaborador     </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL/TRABALH_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL/TRABALH_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+                   <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               </tr>
+    <tr>
+    <td  class="webgrid-rubrica">  Duração Média dos Stocks (PMS)   </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMS_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMS_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+<tr>
+    <td  class="webgrid-rubrica">  Prazo Médio de Recebimentos (PMR)    </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMR_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMR_ANO_N_DEZEMBRO"])))  </td> 
+ 
+</tr>
+     <tr>
+    <td  class="webgrid-rubrica">  Prazo Médio de Pagamentos (PMP)   </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="IND_PMP_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PMP_ANO_N_DEZEMBRO"])))  </td> 
+
+</tr>
+     </table>
+<iframe id="txtArea1" style="display:none"></iframe>
+      <input type=button id="btnExport1" onclick="fnExcelReport('INDICADORES_ACUM_2', 'Export HTML Table to Excel')" value="Excel" />
+
+
+<table id="INDICADORES_AUXILIAR_MENSAL_N_2"  class="webgrid-table" border="1">
+    <tr>
+        <td class="webgrid-header"> Rúbrica </td> 
+        <td class="webgrid-header"> Janeiro </td> 
+        <td class="webgrid-header"> Fevereiro </td>
+        <td class="webgrid-header"> Março  </td>
+        <td class="webgrid-header"> Abril  </td>
+        <td class="webgrid-header"> Maio  </td>
+        <td class="webgrid-header"> Junho  </td>
+        <td class="webgrid-header"> Julho  </td>
+        <td class="webgrid-header"> Agosto  </td>
+        <td class="webgrid-header"> Setembro  </td>
+        <td class="webgrid-header"> Outubro  </td>
+        <td class="webgrid-header"> Novembro  </td>
+        <td class="webgrid-header"> Dezembro  </td>
+</tr>
+        <tr>
+    <td  class="webgrid-rubrica"> Resultado Liquido em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="RES_LIQUIDO_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RES_LIQUIDO_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+        </tr>
+     <tr>
+    <td  class="webgrid-rubrica"> Capital Proprio em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CP_TOTAL_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="CP_TOTAL_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CP_TOTAL_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> NFM - Necessidades de Fundo de Maneio em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="NFM_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Vendas dos ùltimos 12 Meses em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="VENDAS_ULT_12_MESES_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ULT_12_MESES_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+        </tr>
+     <tr>
+    <td  class="webgrid-rubrica"> Passivo Financeiro em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="PASSIVO_FINANC_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVO_FINANC_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> EBITDA (Anualizado) em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="EBITDA_ANUALIZA_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["EBITDA_ANUALIZA_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+        </tr>
+
+    <tr>
+    <td  class="webgrid-rubrica"> Juros e Gastos Similares em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="JUROS_GASTOS_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["JUROS_GASTOS_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Variação da Produção  em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VAR_PROD_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="VAR_PROD_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VAR_PROD_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+              <tr>
+     <tr>
+    <td  class="webgrid-rubrica"> Rendimentos Operacionais  em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="REND_OPER_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="REND_OPER_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["REND_OPER_ANO_N_DEZEMBRO_ACUM"])))  </td>  
+              <tr>
+    <td  class="webgrid-rubrica"> Resultado de Operacionais Liquidos de Impostos em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="RESULTADO_OPER_LIQ_IMP_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["RESULTADO_OPER_LIQ_IMP_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> VAB em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="IND_VAB_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+        <tr>
+    <td  class="webgrid-rubrica"> Gastos com Pessoal em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="GASTOS_PESSOAL_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+       <tr>
+    <td  class="webgrid-rubrica"> Capital Ivestido em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CAP_INVEST_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="CAP_INVEST_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CAP_INVEST_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Activo Não Corrente em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ANC_TOTAL_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="ANC_TOTAL_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ANC_TOTAL_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Passivo Não Corrente em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_TOTAL_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="PNC_TOTAL_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_TOTAL_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Necess. de Fundo de Maneio de Exploração em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXPL_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="NFM_EXPL_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXPL_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Necess. de Fundo de Maneio Extra Exploração em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="NFM_EXTRA_EXPL_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["NFM_EXTRA_EXPL_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+        <tr>
+    <td  class="webgrid-rubrica"> Activos Liquidos em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="ACTIVOS_LIQ_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVOS_LIQ_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+            <tr>
+    <td  class="webgrid-rubrica"> Passivos Liquidos em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="PASSIVOS_LIQ_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PASSIVOS_LIQ_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Clientes Conta-Corrente em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_CLIENT_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="AC_CLIENT_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_CLIENT_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Vendas (Anualizadas) em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="VENDAS_ANUALIZA_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["VENDAS_ANUALIZA_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Fornecedores Conta-Corrente em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FORN_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="PC_FORN_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FORN_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+        <tr>
+    <td  class="webgrid-rubrica"> Compras (Anualizadas) em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="COMPRAS_ANUALIZA_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["COMPRAS_ANUALIZA_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Inventários em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="AC_INVENTARIOS_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["AC_INVENTARIOS_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+      <tr>
+    <td  class="webgrid-rubrica"> Consumos (Anualizados) em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="CONSUMOS_ANUALIZA_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["CONSUMOS_ANUALIZA_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Activo Total  em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="ACTIVO_TOTAL_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["ACTIVO_TOTAL_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+     
+      <tr>
+    <td  class="webgrid-rubrica"> Passivos Financeiros -  Não Correntes em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PNC_FIN_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="PNC_FIN_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PNC_FIN_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+          <tr>
+    <td  class="webgrid-rubrica"> Passivos Financeiros -  Correntes em  N - Acumulados                            </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="PC_FIN_ANO_N_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="PC_FIN_ANO_N_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["PC_FIN_ANO_N_DEZEMBRO_ACUM"])))  </td> 
+        </tr>
+
+     </table>
+
+
+<table id="INDICADORES_AUXILIAR_MENSAL_N-1_2"  class="webgrid-table" border="1">
+    <tr>
+        <td class="webgrid-header"> Rúbrica </td> 
+        <td class="webgrid-header"> Janeiro </td> 
+        <td class="webgrid-header"> Fevereiro </td>
+        <td class="webgrid-header"> Março  </td>
+        <td class="webgrid-header"> Abril  </td>
+        <td class="webgrid-header"> Maio  </td>
+        <td class="webgrid-header"> Junho  </td>
+        <td class="webgrid-header"> Julho  </td>
+        <td class="webgrid-header"> Agosto  </td>
+        <td class="webgrid-header"> Setembro  </td>
+        <td class="webgrid-header"> Outubro  </td>
+        <td class="webgrid-header"> Novembro  </td>
+        <td class="webgrid-header"> Dezembro  </td>
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Vendas e Serviços Prestados  N-1 - Acumulados                            </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_VN_N-1_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_NOVEMBRO_ACUM"])))  </td>
+        <td  style="text-align:right" id="IND_AUX_VN_N-1_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_VN_N-1_DEZEMBRO_ACUM"])))  </td>  
+        </tr>
+     <tr>
+    <td  class="webgrid-rubrica"> Proveitos Operacionais  N-1 - Acumulados                           </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_NOVEMBRO_ACUM"])))  </td>
+    <td  style="text-align:right" id="IND_AUX_REND_OPER_N-1_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_REND_OPER_N-1_DEZEMBRO_ACUM"])))  </td> 
+     </tr>
+         <tr>
+    <td  class="webgrid-rubrica"> Compras  N-1 - Acumulados                           </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_NOVEMBRO_ACUM"])))  </td>
+    <td  style="text-align:right" id="IND_AUX_COMPRAS_N-1_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_COMPRAS_N-1_DEZEMBRO_ACUM"])))  </td> 
+     </tr>
+     <tr>
+    <td  class="webgrid-rubrica"> FSE´S  N-1 - Acumulados                           </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_NOVEMBRO_ACUM"])))  </td>
+    <td  style="text-align:right" id="IND_AUX_FSE_N-1_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_FSE_N-1_DEZEMBRO_ACUM"])))  </td> 
+     </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Juros Gastos -  N-1 - Acumulados                           </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_NOVEMBRO_ACUM"])))  </td>
+    <td  style="text-align:right" id="IND_AUX_JUROS_GASTOS_N-1_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_JUROS_GASTOS_N-1_DEZEMBRO_ACUM"])))  </td> 
+     </tr>
+        <tr>
+    <td  class="webgrid-rubrica"> Capital Próprio -  N-1 - Acumulados                           </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_NOVEMBRO_ACUM"])))  </td>
+    <td  style="text-align:right" id="IND_AUX_CP_TOTAL_N-1_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CP_TOTAL_N-1_DEZEMBRO_ACUM"])))  </td> 
+     </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Capital Investido -  N-1 - Acumulados                           </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_JANEIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_JANEIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_FEVEREIRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_FEVEREIRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_MARCO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_MARCO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_ABRIL_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_ABRIL_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_MAIO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_MAIO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_JUNHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_JUNHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_JULHO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_JULHO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_AGOSTO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_AGOSTO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_SETEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_SETEMBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_OUTUBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_OUTUBRO_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_NOVEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_NOVEMBRO_ACUM"])))  </td>
+    <td  style="text-align:right" id="IND_AUX_CAP_INVEST_N-1_DEZEMBRO_ACUM">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUX_CAP_INVEST_N-1_DEZEMBRO_ACUM"])))  </td> 
+     </tr>
+     </table>
+
+<div id="CONFIGURARXX" style="display:none">
+   
+
+    @using (Html.BeginForm("GRC_ALERTAS_RESUMO", "GRC", FormMethod.Get))
+    {
+       <div id="CONFIGURAR_CAMPO" class="CONFIGURAR_CAMPO">
+        @Html.ActionLink("Configurar","BI_CAMP_CALC", "BI", new { id_camp_calc = "id_camp_calc", Pesquisa_User = "tjalmeida" , versao=@ViewData["VERSAO"] }, null)
+       </div> 
+            
+    }
+</div>
+  @section scripts {
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".webgrid-table td").click(function () {
+                var idconteudoOriginal = $(this).attr('id');
+
+                //alert($("#CONFIGURARXX form").html());
+                if (typeof idconteudoOriginal === "undefined")
+                { }
+                else
+                {
+                    var ReplaceHrefID = $("#CONFIGURARXX form").html().replace('id_camp_calc=id_camp_calc', 'id_camp_calc' + '=' + idconteudoOriginal);
+                    if ($(this).find('.CONFIGURAR_CAMPO').text() == "") {
+                        $(this).prepend(ReplaceHrefID);
+                    }
+                }
+                //alert($(this).find('.CONFIGURAR_CAMPO').text());
+            })
+
+        })
+
+    </script>
+        @*--------------------------------------------------------------------------------------*@
+    
+       <script type="text/javascript">
+           function fnExcelReport(table, name) {
+               var table1 = '#' + table
+               var ccs_style = $("#ccs_style").html();
+               var styletabela = $(table1).attr("class");
+               var indexOf_Ini_styletabela = $("#ccs_style").html().indexOf(styletabela)
+               var indexOf_Fim_styletabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).indexOf("}");
+               var ccs_style_tabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).substring(0, indexOf_Fim_styletabela).replace("{", "").replace(styletabela, "");
+
+
+               var tab_text = "<table style=" + "'" + ccs_style_tabela + "'" + "><tr>";
+               var textRange; var j = 0; var i = 0;
+               tab = document.getElementById(table); // id of table
+
+
+
+               for (j = 0 ; j < tab.rows.length ; j++) {
+                   var tab_rows = tab.rows[j].innerHTML;
+                   for (i = 0 ; i < tab.rows[j].cells.length ; i++) {
+
+                       var texto_linha = tab_rows;
+                       var style_celula_ini = texto_linha.indexOf('class="');
+                       var style_celula_fim = texto_linha.substring(style_celula_ini, 999999999999).replace('class="', '').indexOf('"');
+                       var style_celula = texto_linha.substring(style_celula_ini, 999999999999).replace('class="', '').substring(0, style_celula_fim);
+
+                       var indexOf_Ini_styletabela = $("#ccs_style").html().indexOf(style_celula)
+                       var indexOf_Fim_styletabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).indexOf("}");
+                       var ccs_style_tabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).substring(0, indexOf_Fim_styletabela).replace("{", "").replace(style_celula, "");
+
+                       tab_rows = tab_rows.replace('class="' + style_celula + '"', 'style="' + ccs_style_tabela + '"')
+
+                   }
+
+                   tab_text = tab_text + tab_rows + "</tr>";
+                   //tab_text=tab_text+"</tr>";
+               }
+
+               tab_text = tab_text + "</table>";
+               tab_text = tab_text.split('&nbsp;').join('.');
+               tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+               tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+               tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+               var ua = window.navigator.userAgent;
+               var msie = ua.indexOf("MSIE ");
+
+               if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+               {
+                   txtArea1.document.open("txt/html", "replace");
+                   txtArea1.document.write(tab_text);
+                   txtArea1.document.close();
+                   txtArea1.focus();
+                   sa = txtArea1.document.execCommand("SaveAs", true, "Say Thanks to Sumit.xls");
+               }
+               else                 //other browser not tested on IE 11
+                   sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+
+               return (sa);
+           }
+            </script>
+
+}

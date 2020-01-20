@@ -1,0 +1,293 @@
+﻿@{
+    ViewBag.Title = "BI_CONF_PARAMETROS";
+}
+
+<h2>CONFIGURAÇÃO DE PARAMETROS</h2>
+
+
+
+
+<style type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+    
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-rubrica
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+
+    }
+        .webgrid-total
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+.input {
+     width: 100%;
+        text-align: center;
+        background-color: #EAF2D3;
+        padding: 3px 4px 2px;
+
+     
+    }
+
+    </style>
+
+
+
+<div id="grid00conf">
+      
+
+    @Html.Action("BI_SELECCAO_VERSAO_USER_Result", "BI", new {  Pesquisa_User = "tjalmeida", Dimensao_real = "VERSAO_REAL_DFS", Dimensao_ante = "VERSAO_ANTE_DFS"});
+
+</div>
+
+
+
+
+<div id="grid01conf">
+      
+
+    @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new {  Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO="ANO",  MES_INI_PER="MES_INI_PER",  MES_FIN_PER="MES_FIN_PER",  MES_ACUM="MES_ACUM", TIPO_APUR_CMVMC="TIPO_APUR_CMVMC"})
+
+</div>
+
+<div id="grid02conf">
+      
+
+    @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new {  Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO="ANO",  MES_INI_PER="MES_INI_PER",  MES_FIN_PER="MES_FIN_PER",  MES_ACUM="MES_ACUM", TIPO_APUR_CMVMC="TIPO_APUR_CMVMC"})
+
+</div>
+
+<div id="GRAVARSELEC_VERXX"  style="display:none">
+   
+
+    @using (Html.BeginForm("BI_SELECCAO_VERSAO_USER_ALT", "BI", FormMethod.Get))
+    {
+       <div id="GRAVAR_SELEC_VER" class="GRAVAR_SELEC_VER">
+    @Html.ActionLink("GRAVAR_SELEC_VER","BI_SELECCAO_VERSAO_USER_ALT", "BI", new { 
+    Pesquisa_User = "tjalmeida",  id_camp = "id_camp", versao_selec="versao_selec"}, null)
+           </div> 
+       
+    }
+</div> 
+
+<div id="GRAVAROPER_DIRXX"  style="display:none">
+   
+
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", FormMethod.Get))
+    {
+       <div id="GRAVAR_OPER_DIR" class="GRAVAR_OPER_DIR">
+    @Html.ActionLink("GRAVAR_OPER_DIR","BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { 
+    Pesquisa_User = "tjalmeida",  id_camp = "id_camp", campocalc_resultado="campocalc_resultado"}, null)
+</div> 
+       
+    }
+</div>
+
+
+
+
+
+
+@section scripts {
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#grid th").find('"a[href*=' + "'" + "ID" + "&'" + ']"').parent().addClass('id');
+            $("#grid th").find('"a[href*=' + "'" + "id_seleccao_calc" + "&'" + ']"').parent().addClass('id_seleccao_calc');
+            $("#grid th").find('"a[href*=' + "'" + "desc_seleccao_calc" + "&'" + ']"').parent().addClass('desc_seleccao_calc');
+            $("#grid th").find('"a[href*=' + "'" + "id_camp_calc" + "&'" + ']"').parent().addClass('id_camp_calc');
+
+            $("#grid ").find(".id").hide();
+            $("#grid ").find(".id_seleccao_calc").hide();
+            $("#grid ").find(".id_camp_calc").hide();
+
+            //--------------------------------TRATO os CAMPO de RESULTADO--------------------------
+
+         
+            $(".campocalc_resultado ").click(function () {
+     
+
+                    if ($(this).children().attr('class') != "input") {
+                        var id = $(this).parent().find(".id").html();
+                        var idconteudoOriginal = $(this).parent().parent().parent().parent().parent().attr('id');
+                        //var findidconteudoOriginal = '.' + idconteudoOriginal + '';
+                       
+                                              
+                        var conteudoOriginal = $(this).text();
+                        
+                 
+     
+                    var ReplaceHrefID = $("#GRAVAROPER_DIRXX form").html();
+                   
+    
+                    
+                    $(this).html("<input class='input' value='" + conteudoOriginal + "'/>");
+                    $(this).children().first().focus();
+
+                }
+                    if ($(this).parent().parent().parent().parent().find('.GRAVAR_OPER_DIR').text() == "") {
+                        $(this).parent().parent().parent().parent().prepend(ReplaceHrefID);
+                    }
+                    else { $(this).parent().parent().parent().parent().find('.GRAVAR_OPER_DIR').html(ReplaceHrefID) }
+
+
+                    //NOTA TA: Aqui re-faço a href do botão com todos os campos preenchidos de origem
+                    var ValorInicial_id_camp = id;
+                    var ReplaceHref_id_camp = $(this).parent().parent().parent().parent().find('.GRAVAR_OPER_DIR').html().replace('id_camp=id_camp', 'id_camp' + '=' + ValorInicial_id_camp);
+                    $(this).parent().parent().parent().parent().find('.GRAVAR_OPER_DIR').html(ReplaceHref_id_camp);
+
+
+                    var hrefalterar1 = $(this).parent().parent().parent().parent().find('.GRAVAR_OPER_DIR').html();
+
+                    // NOTA TA: Keypress significa que a instrução é cumprida quando o utilizador faz "enter"
+                    $(this).children().first().keypress(function (e) {
+                        if (e.which == 13) {
+
+
+
+                            if ($(this).val() == "") {
+                                var novoConteudo = conteudoOriginal;
+                            }
+                            else {
+                                var novoConteudo = $(this).val();
+                            }
+
+
+                            
+                           
+                            $(this).parent().text(novoConteudo);
+                            $(this).parent().removeClass("celulaEmEdicao");
+
+                          
+                            var ReplaceHref1 = hrefalterar1.replace('campocalc_resultado=campocalc_resultado', 'campocalc_resultado' + '=' + novoConteudo);
+                       
+                            $('#' + idconteudoOriginal).find('.GRAVAR_OPER_DIR').html(ReplaceHref1);
+
+                        }
+
+                    });
+
+
+            })
+            //--------------------------------TRATO os CAMPO de VERSAO_SELECCCAO--------------------------
+
+
+            $(".versao_selec ").click(function () {
+
+
+                if ($(this).children().attr('class') != "input") {
+                    var id = $(this).parent().find(".id").html();
+                    var idconteudoOriginal = $(this).parent().parent().parent().parent().parent().attr('id');
+                    //var findidconteudoOriginal = '.' + idconteudoOriginal + '';
+
+
+                    var conteudoOriginal = $(this).text();
+
+
+
+                    var ReplaceHrefID = $("#GRAVARSELEC_VERXX form").html();
+
+
+
+                    $(this).html("<input class='input' value='" + conteudoOriginal + "'/>");
+                    $(this).children().first().focus();
+
+                }
+                if ($(this).parent().parent().parent().parent().find('.GRAVAR_SELEC_VER').text() == "") {
+                    $(this).parent().parent().parent().parent().prepend(ReplaceHrefID);
+                }
+                else { $(this).parent().parent().parent().parent().find('.GRAVAR_SELEC_VER').html(ReplaceHrefID) }
+
+
+                //NOTA TA: Aqui re-faço a href do botão com todos os campos preenchidos de origem
+                var ValorInicial_id_camp = id;
+                var ReplaceHref_id_camp = $(this).parent().parent().parent().parent().find('.GRAVAR_SELEC_VER').html().replace('id_camp=id_camp', 'id_camp' + '=' + ValorInicial_id_camp);
+                $(this).parent().parent().parent().parent().find('.GRAVAR_SELEC_VER').html(ReplaceHref_id_camp);
+
+
+                var hrefalterar1 = $(this).parent().parent().parent().parent().find('.GRAVAR_SELEC_VER').html();
+
+                // NOTA TA: Keypress significa que a instrução é cumprida quando o utilizador faz "enter"
+                $(this).children().first().keypress(function (e) {
+                    if (e.which == 13) {
+
+
+
+
+                        if ($(this).val() == "") {
+                            var novoConteudo = conteudoOriginal;
+                        }
+                        else {
+                            var novoConteudo = $(this).val();
+                        }
+
+
+
+
+                        $(this).parent().text(novoConteudo);
+                        $(this).parent().removeClass("celulaEmEdicao");
+
+
+                        var ReplaceHref1 = hrefalterar1.replace('versao_selec=versao_selec', 'versao_selec' + '=' + novoConteudo);
+
+                        $('#' + idconteudoOriginal).find('.GRAVAR_SELEC_VER').html(ReplaceHref1);
+
+                    }
+
+                });
+
+
+            })
+            })
+      
+    </script>
+       
+
+}
+

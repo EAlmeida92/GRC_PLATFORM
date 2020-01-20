@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "BI_CAMP_CALC_OPER_DIR_USER";
+}
+
+
+
+
+<style type="text/css">
+    .webgrid-table-camp-dir
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        
+    }
+    .webgrid-table-camp-dir td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header-camp-dir_user
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+    
+
+    }
+    .webgrid-footer-camp-dir
+    {
+    }
+    .webgrid-camp-dir-row-style
+    {
+        text-align: left;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-rubrica-camp-dir_user
+    {
+         text-align: left;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+
+    }
+        .webgrid-total-camp-dir
+    {
+         text-align: left;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-camp-dir-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+.Webgrid_col_data-camp-dir
+    {
+  text-align: center;
+    }
+
+    </style>
+
+
+
+
+
+
+     <h3 style="display:none">
+        <b> CAMPOS CALCULADOS DIRECTAMENTE USER</b>
+        <b id="num_oper_dir">@Html.Raw((string.Format("{0:0}", @ViewData["num_oper_dir"])))</b> 
+         <b> : </b> 
+     </h3>
+
+<p></p> 
+<table class="webgrid-table-camp-dir" border="1">
+ <tr>
+        <td class="webgrid-header-camp-dir_user" style="display:none"> Sintaxe de associação de campos:</td>
+        <td class="webgrid-rubrica-camp-dir_user" id="sintaxe_oper_dir" style="height:30px">@Html.Raw((string.Format("{0:N}",@ViewData["sintaxe_oper_dir"])))</td> 
+          
+ </tr> 
+     </table>
+ 

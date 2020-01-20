@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "Olá, bem vindo à aplicação Decisões Inteligentes";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+               
+            </hgroup>
+            <p>
+                Poderá utilizar esta plataforma de forma experiêncial: 
+                <a href="http://di4you.pt" title="Decisões Inteligentes">Decisões Inteligentes</a>.
+            </p>
+        </div>
+    </section>
+}
+<h3>Sugerimos:</h3>
+<ol class="round">
+
+    
+    <li class="one">
+        <h5>Aceda à nossa Plataforma que:</h5>
+        Para aceder aos modulos desta plataforma faça o seu: 
+        <a> @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</a>
+
+        @if (Request.IsAuthenticated) {
+    <li class="two">
+        <h5>Módulos</h5>
+        Soluções modulares quem tem acesso:
+        <a>  @Html.ActionLink("GRC - Gestão de Risco de Clientes", "GRC", "GRC")     </a>
+    </li>  
+                <li class="three">
+        <h5>Módulos</h5>
+        Soluções modulares quem tem acesso:
+        <a>  @Html.ActionLink("BI - Business Intelligence", "BI", "BI")     </a>
+    </li>  
+            <li class="four">
+                 <h5>Criar Utilizador</h5>
+                 Crie aqui novos utilizadores para a sua conexão:
+               <a>  @Html.ActionLink("Criar Utilizador", "Newuser", "Account", routeValues: null, htmlAttributes: new { id = "NewuserLink" })</a>
+                   </li>
+     } else { <text> </text>}
+    
+
+    @*    </li>
+        <li class="three">
+´       <h5>Para se registar na nossa Plataforma</h5>
+        Para se registar aceda a: 
+        <a> @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</a>
+    </li>*@
+
+
+</ol>

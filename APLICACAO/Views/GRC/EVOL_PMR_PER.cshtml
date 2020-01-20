@@ -1,0 +1,363 @@
+﻿﻿<h1>Evolução PMR Clientes</h1>
+
+
+<p>
+    Pesquisar por Número, Nome ou NIF  
+
+   <!-- NOTA TA: aqui ficam os campos de pesquisa da grelha de clientes --->
+
+    @using (Html.BeginForm("EVOL_PMR_PER", "GRC", FormMethod.Get)) 
+  {
+        <l>Número                           </l>  @Html.TextBox("Pesquisa_no")     
+        <l>Nome                             </l>  @Html.TextBox("Pesquisa_nome")   
+        <p></p>       
+        <l>Comercial:                       </l>  @Html.DropDownList("Filtro_Comercial", ViewBag.Comercial1 as SelectList, "")
+        <l>Tipo de Pagamento:               </l>  @Html.DropDownList("Filtro_Tipo_Pagamento", ViewBag.Tipo_Pagamento1 as SelectList, "")
+        <p></p>
+        <l>Zona do Cliente:                 </l>  @Html.DropDownList("Filtro_Zona", ViewBag.Zona1 as SelectList, "")
+        <l>Filtro por Evolução do PMR:      </l>  @Html.DropDownList("Filtro_por_Evolucao_do_PMR")
+        <p></p>
+        <l>Colunas da Grelha:               </l>  @Html.DropDownList("Colunas_Opcao")
+        <p></p> 
+        <input type="submit" value="Actualizar Dados" />
+    }
+</p>
+
+
+
+<!-- NOTA TA: aqui fica a definição do Modelo para a Grelha --->
+
+@model IEnumerable<APLICACAO.PROC_GRC_EVOL_PMR_Result>
+
+@{
+    ViewBag.Title = "EVOL_PMR_PER";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- NOTA TA: aqui fica o CSS da Grelha --->
+
+<style type="text/css">
+    .table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+    }
+
+        .webgrid-table td, th {
+            border: solid 1px #FFFFFF;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        padding: 6px 5px;
+        text-align: center;
+        background-color: #e8eef4;
+        border-bottom: 2px solid #A4A4A4;
+        height: 40px;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-alternating-row {
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-selected-row {
+        font-weight: bold;
+        background-color: #E3DFFF;
+    }
+
+    .hideColumn {
+        visibility: hidden;
+    }
+    .nome {
+    text-align: left;
+    }
+
+    /*NOTA TA: criei as class abaixo para identificar cada algumas das colunas da GRID*/
+
+    .saldo {
+    }
+    .sald_Nao_Venc {
+    }
+    .sald_Venc {
+    }
+     /*NOTA TA: class para o a definição dos estilo do rodapé*/
+        .Sub_Total_Texto {
+        text-align: center;
+        background-color: #3c48ea;
+        padding: 3px 7px 2px;
+        color: white;
+        font-size: 16px;
+        width: 100%;
+        
+    }
+     
+     .Sub_Total {
+        text-align: right;
+        background-color: #3c48ea;
+        padding: 3px 7px 2px;
+        color: white;
+        font-size: 16px;
+        width: 100%;
+        
+   
+       
+        
+    }
+
+</style>
+
+
+<!-- NOTA TA: aqui ficam definições principais da Grelha--->
+
+@{
+    var grid = new WebGrid(source: Model, defaultSort: "Saldo", selectionFieldName: "no", canPage: true, rowsPerPage: 150000);
+    grid.SortDirection = SortDirection.Descending; 
+
+}
+
+
+
+<!-- NOTA TA: aqui ficam as Variaveis dos Cabeçalhos da Grellha--->
+@{
+
+    var Per_1 = (Convert.ToString(DateTime.Now.Month)) + "/" + (Convert.ToString(DateTime.Now.Year));
+    var Per_2 = (Convert.ToString(DateTime.Now.AddMonths(-1).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-1).Year));
+    var Per_3 = (Convert.ToString(DateTime.Now.AddMonths(-2).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-2).Year));
+    var Per_4 = (Convert.ToString(DateTime.Now.AddMonths(-3).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-3).Year));
+    var Per_5 = (Convert.ToString(DateTime.Now.AddMonths(-4).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-4).Year));
+    var Per_6 = (Convert.ToString(DateTime.Now.AddMonths(-5).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-5).Year));
+    var Per_7 = (Convert.ToString(DateTime.Now.AddMonths(-6).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-6).Year));
+    var Per_8 = (Convert.ToString(DateTime.Now.AddMonths(-7).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-7).Year));
+    var Per_9 = (Convert.ToString(DateTime.Now.AddMonths(-8).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-8).Year));
+    var Per_10 = (Convert.ToString(DateTime.Now.AddMonths(-9).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-9).Year));       
+    var Per_11 = (Convert.ToString(DateTime.Now.AddMonths(-10).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-10).Year));     
+    var Per_12 = (Convert.ToString(DateTime.Now.AddMonths(-11).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-11).Year));     
+    var Per_13 = (Convert.ToString(DateTime.Now.AddMonths(-12).Month)) + "/" + (Convert.ToString(DateTime.Now.AddMonths(-12).Year));     
+   
+}
+
+
+
+<!-- NOTA TA: aqui fica a condição para a Grelha ser Mensal ou Trimestral --->
+
+@{
+
+    var gridColumns = new List<WebGridColumn>();
+    var escolha = ViewBag.opcaocolunas;
+    //if (itemSelecionado == "mensal")
+    if (escolha == "mensal")
+    {
+        
+        
+        
+        //gridColumns.Add(grid.Column("VER", header: null, format: @<text>@Html.ActionLink("Ver", "VER_CLIENTE", "GRC", new { NUM_CLIENT_SELECT = item.no }, null)</text>));
+        gridColumns.Add(grid.Column("no", "Código", style: "no", format:@<text>@Html.ActionLink((string)(@item.no).ToString(), "VER_CLIENTE", "GRC", new { NUM_CLIENT_SELECT = item.no }, null)</text>));
+        gridColumns.Add(grid.Column("nome", "Nome", style: "nome"));
+         @*APLIQUEI O ESTILO style:"saldo" *@
+        gridColumns.Add(grid.Column("Saldo", "Total Saldo", style: "saldo", format: (item) => string.Format("{0:N}", item.Saldo)));
+        gridColumns.Add(grid.Column("Sald_Nao_Venc", "Não Vencido", style: "sald_Nao_Venc", format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc)));
+        gridColumns.Add(grid.Column("Sald_Venc", "Vencido", style: "sald_Venc", format: (item) => string.Format("{0:N}", item.Sald_Venc)));
+        gridColumns.Add(grid.Column("PMR_Per_1", header: Per_1, format: (item) => string.Format("{0:N0}", item.PMR_Per_1)));
+        gridColumns.Add(grid.Column("PMR_Per_2", header: Per_2, format: (item) => string.Format("{0:N0}", item.PMR_Per_2)));
+        gridColumns.Add(grid.Column("PMR_Per_3", header: Per_3, format: (item) => string.Format("{0:N0}", item.PMR_Per_3)));
+        gridColumns.Add(grid.Column("PMR_Per_4", header: Per_4, format: (item) => string.Format("{0:N0}", item.PMR_Per_4)));
+        gridColumns.Add(grid.Column("PMR_Per_5", header: Per_5, format: (item) => string.Format("{0:N0}", item.PMR_Per_5)));
+        gridColumns.Add(grid.Column("PMR_Per_6", header: Per_6, format: (item) => string.Format("{0:N0}", item.PMR_Per_6)));
+        gridColumns.Add(grid.Column("PMR_Per_7", header: Per_7, format: (item) => string.Format("{0:N0}", item.PMR_Per_7)));
+        gridColumns.Add(grid.Column("PMR_Per_8", header: Per_8, format: (item) => string.Format("{0:N0}", item.PMR_Per_8)));
+        gridColumns.Add(grid.Column("PMR_Per_9", header: Per_9, format: (item) => string.Format("{0:N0}", item.PMR_Per_9)));
+        gridColumns.Add(grid.Column("PMR_Per_10", header: Per_10, format: (item) => string.Format("{0:N0}", item.PMR_Per_10)));
+        gridColumns.Add(grid.Column("PMR_Per_11", header: Per_11, format: (item) => string.Format("{0:N0}", item.PMR_Per_11)));
+        gridColumns.Add(grid.Column("PMR_Per_12", header: Per_12, format: (item) => string.Format("{0:N0}", item.PMR_Per_12)));
+        gridColumns.Add(grid.Column("PMR_Per_13", header: Per_13, format: (item) => string.Format("{0:N0}", item.PMR_Per_13)));
+        gridColumns.Add(grid.Column("Comercial", "Comercial"));
+
+    }
+    else
+    {
+        //gridColumns.Add(grid.Column("VER", header: null, format: @<text>@Html.ActionLink("Ver", "VER_CLIENTE", "GRC", new { NUM_CLIENT_SELECT = item.no }, null)</text>));
+        gridColumns.Add(grid.Column("no", "Código", format:@<text>@Html.ActionLink((string)(@item.no).ToString(), "VER_CLIENTE", "GRC", new { NUM_CLIENT_SELECT = item.no }, null)</text>));
+        gridColumns.Add(grid.Column("nome", "Nome", style: "nome"));
+       @*APLIQUEI O ESTILO style:"saldo" *@
+        gridColumns.Add(grid.Column("Saldo", "Total Saldo", style: "saldo", format: (item) => string.Format("{0:N}", item.Saldo)));
+        gridColumns.Add(grid.Column("Sald_Nao_Venc", "Não Vencido", style: "sald_Nao_Venc", format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc)));
+        gridColumns.Add(grid.Column("Sald_Venc", "Vencido", style: "sald_Venc", format: (item) => string.Format("{0:N}", item.Sald_Venc)));
+        gridColumns.Add(grid.Column("PMR_Per_1", header: Per_1, format: (item) => string.Format("{0:N0}", item.PMR_Per_1)));
+        gridColumns.Add(grid.Column("PMR_Per_4", header: Per_4, format: (item) => string.Format("{0:N0}", item.PMR_Per_4)));
+        gridColumns.Add(grid.Column("PMR_Per_7", header: Per_7, format: (item) => string.Format("{0:N0}", item.PMR_Per_7)));
+        gridColumns.Add(grid.Column("PMR_Per_10", header: Per_10, format: (item) => string.Format("{0:N0}", item.PMR_Per_10)));
+        gridColumns.Add(grid.Column("PMR_Per_13", header: Per_13, format: (item) => string.Format("{0:N0}", item.PMR_Per_13)));
+        gridColumns.Add(grid.Column("Comercial", "Comercial"));
+    }
+        
+}
+
+
+
+<!-- NOTA TA: aqui ficam as Restantes Deifinições da Grelha--->
+
+
+ <!--------- DEI UM ID A GRID--------->
+<div id="grid">
+
+    @grid.GetHtml(
+         tableStyle: "table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+               mode: WebGridPagerModes.All, columns: grid.Columns(gridColumns.ToArray()));
+</div>
+
+@section scripts {
+
+
+@*    NOTA TA: AQUI CRIO AS LINHAS DO SUBTOTAL DA GRELHA: EXEMPLO:ELE PROCURA O ELEMENTO COM ID=GRID E OS ELEMENTOS COM O ESTILO .SALDO, PERCORRE OS ELEMENTOS E SOMA.*@
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var totalsaldo = 0;
+            var totalsald_Nao_Venc = 0;
+            var totalsald_Venc = 0;
+
+            $('#grid .saldo').each(function () {
+
+                totalsaldo = totalsaldo + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.'));
+
+            });
+
+            $('#grid .sald_Nao_Venc').each(function () {
+                totalsald_Nao_Venc = totalsald_Nao_Venc + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.'));
+
+            });
+            $('#grid .sald_Venc').each(function () {
+                totalsald_Venc = totalsald_Venc + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.'));
+
+            });
+
+            $('tbody').prepend('<tr><td colspan="2" class=Sub_Total_Texto ><b>Total:</b></td><td class=Sub_Total ><b>'
+                + Number(totalsaldo.toFixed(2)).toLocaleString('de-DE') + '<b><td class=Sub_Total><b>'
+                + Number(totalsald_Nao_Venc.toFixed(2)).toLocaleString('de-DE') + '<b><td class=Sub_Total><b>'
+                + Number(totalsald_Venc.toFixed(2)).toLocaleString('de-DE') + '<b><td colspan="14" class=Sub_Total><b>' + '</b></td></tr>');
+
+        });
+
+    </script>
+
+
+
+}
+
+@*
+ @grid.GetHtml(
+         tableStyle: "webgrid-table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+               mode: WebGridPagerModes.All,
+         columns: grid.Columns(
+         grid.Column("VER", header: null, format: @<text>@Html.ActionLink("Ver", "VER_CLIENTE", "GRC", new { NUM_CLIENT_SELECT = item.no }, null)</text>),
+         grid.Column(columnName: "no", header: "Nº"),
+         grid.Column(columnName: "nome", header: "Nome"),
+         grid.Column(columnName: "Saldo", header: "Saldo", format: (item) => string.Format("{0:N}", item.Saldo)),
+         grid.Column(columnName: "PMR_Per_1", header: Per_1, format: (item) => string.Format("{0:N}", item.PMR_Per_1), style: "PMR_Per_1"),
+         grid.Column(columnName: "PMR_Per_2", header: Per_2, format: (item) => string.Format("{0:N}", item.PMR_Per_2)),
+         grid.Column(columnName: "PMR_Per_3", header: Per_3, format: (item) => string.Format("{0:N}", item.PMR_Per_3)),
+         grid.Column(columnName: "PMR_Per_4", header: Per_4, format: (item) => string.Format("{0:N}", item.PMR_Per_4)),
+         grid.Column(columnName: "PMR_Per_5", header: Per_5, format: (item) => string.Format("{0:N}", item.PMR_Per_5)),
+         grid.Column(columnName: "PMR_Per_6", header: Per_6, format: (item) => string.Format("{0:N}", item.PMR_Per_6)),
+         grid.Column(columnName: "PMR_Per_7", header: Per_7, format: (item) => string.Format("{0:N}", item.PMR_Per_7)),
+         grid.Column(columnName: "PMR_Per_8", header: Per_8, format: (item) => string.Format("{0:N}", item.PMR_Per_8)),
+         grid.Column(columnName: "PMR_Per_9", header: Per_9, format: (item) => string.Format("{0:N}", item.PMR_Per_9)),
+         grid.Column(columnName: "PMR_Per_10", header: Per_10, format: (item) => string.Format("{0:N}", item.PMR_Per_10)),
+         grid.Column(columnName: "PMR_Per_11", header: Per_11, format: (item) => string.Format("{0:N}", item.PMR_Per_11)),
+         grid.Column(columnName: "PMR_Per_12", header: Per_12, format: (item) => string.Format("{0:N}", item.PMR_Per_12)),
+         grid.Column(columnName: "PMR_Per_13", header: Per_13, format: (item) => string.Format("{0:N}", item.PMR_Per_13)),
+          grid.Column(columnName: "Comercial", header: "Comercial")
+
+            //grid.Column( "SELECCIONAR",header:"", style: "text-align-center", format:(item) => item.GetSelectLink("Select"))
+     )
+
+  )
+
+
+
+@using GridMvc.Html
+@{
+    ViewBag.Title = "GridMVCExample";
+}
+
+<style type="text/css">
+    .e-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white 
+    }
+    .e-rowcell
+    {
+       text-align: left;
+        padding: 3px 7px 2px;
+    }
+    .e-alt_row
+    {
+         text-align: left;
+        padding: 3px 7px 2px;
+    }
+    .e-gridfooter
+    {
+        text-align: left
+    }  
+</style>
+
+<html>  
+<head>  
+    <meta name="viewport" content="width=device-width" />  
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />  
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" />  
+    <script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script> 
+  
+    <title>EXEMPLODEGRELHA</title>  
+       <link rel="stylesheet" type="text/css" href="style.css"> 
+
+</head>  
+<body>  
+    <h1>EXEMPLODEGRELHA</h1>  
+    <hr />  
+   <div class="e-table">
+    <div class="e-alt_row">
+       <div class="e-rowcell">
+           <div class="e-gridfooter"> 	
+    
+@Html.Grid(Model).Sortable().Filterable(true).WithPaging(3).Columns(Columns =>  {
+    Columns.Add(c => c.no).Titled("Num").Sortable(true).Filterable(true);
+    Columns.Add(c => c.nome).Titled("Nome").Sortable(true).Filterable(true);
+    }).WithPaging(15).WithGridItemsCount("Num").Filterable(true).WithMultipleFilters()
+
+   </div>   </div>   </div>    </div>
+ </body>    
+</html> >  *@
+
+
+
+<h2>EVOL_PMR_PER</h2>

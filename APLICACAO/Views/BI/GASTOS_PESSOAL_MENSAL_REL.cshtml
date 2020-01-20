@@ -1,0 +1,268 @@
+﻿﻿
+<style id="ccs_style" type="text/css">
+    .page-breaker {
+        display: block;
+        clear: both;
+        page-break-after: always;
+    }
+
+    .oculta {
+        display: none;
+    }
+
+    .graficos_textos {
+        height: 725px;
+        width: 1250px;
+    }
+
+    .webgrid-table_ {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        text-align: right;
+    }
+
+    .webgrid-header-acum {
+        padding: 6px 5px;
+        text-align: center;
+        background-color: #e8eef4;
+        border-bottom: 2px solid #A4A4A4;
+        height: 40px;
+        display: normal;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en" style="background-color:white; min-width:1000px">
+<body>
+    @{
+        Layout = null;
+    }
+    @{
+        var ANO_VERSAO_REAL = @ViewData["ANO_VERSAO_REAL"];
+        var ANO_VERSAO_ANTE = @ViewData["ANO_VERSAO_ANTE"];
+        var MES_ACUM_REAL = @ViewData["MES_ACUM_REAL"];
+        var MES_ACUM_ANTE = @ViewData["MES_ACUM_ANTE"];
+        var MES_INI_PER_REAL = @ViewData["MES_INI_PER_REAL"];
+        var MES_INI_PER_ANTE = @ViewData["MES_INI_PER_ANTE"];
+        var MES_FIN_PER_REAL = @ViewData["MES_FIN_PER_REAL"];
+        var MES_FIN_PER_ANTE = @ViewData["MES_FIN_PER_ANTE"];
+    }
+    <table id="CAPA_GASTOS_PESSOAL_MENSAL_REL" style="width:100%;height:750px;text-align:center">
+        <tr>
+            <td style="width:15%">
+                <p class="site-title">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <text>
+
+
+                            @{ string IdentifyUser = User.Identity.Name;
+                                string caracter = "#";
+                                int Identifycaracter = IdentifyUser.IndexOf(caracter);
+                                var IdentifyLength = IdentifyUser.Length - Identifycaracter;
+                                var User1 = IdentifyUser.Substring(0, Identifycaracter);
+                                var Conexao = IdentifyUser.Substring(Identifycaracter + 1, IdentifyLength - 1);
+                                var logo_conexao = "/images/logo_" + @Conexao + ".png";
+
+                            }
+                            <img src=@logo_conexao style="width:200px" />
+
+                        </text>}
+
+            </td>
+
+            <td style="width:70%"></td>
+            <td style="width:15%"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2" style="text-align:right">
+
+                <h1> RELATÓRIO DE GASTOS COM PESSOAL </h1>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="text-align:right"> <h2 style="text-align:right; color:blue">@Html.Raw(ViewData["MES_ACUM_REAL_EXTENSO"]) de @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_REAL))) </h2></td>
+
+        </tr>
+        <tr>
+            <td>di4you.pt</td>
+            <td></td>
+            <td style="text-align:right">
+                <div id="date"></div>
+            </td>
+        </tr>
+    </table>
+    <div id="PAGE_BREAK_GASTOS_PESSOAL_MENSAL_REL" class="page-breaker"></div>
+
+
+    @Html.Action("GASTOS_PESSOAL_MENSAL", "BI", new { Pesquisa_User = "tjalmeida", desativa_datatable = 1 })
+
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+
+    //NOTA  TA : Altero estas duas classes para mostrar a coluna de aumulados que está oculta
+
+    var x = document.getElementsByClassName("webgrid-header-acum");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "table-cell";
+
+    }
+    var x = document.getElementsByClassName("webgrid-total-acum");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "table-cell";
+
+    }
+
+    var x = document.getElementsByClassName("webgrid-header-acum");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.backgroundColor = "#3366cc";
+        x[i].style.color = "white";
+
+    }
+
+    var x = document.getElementsByClassName("webgrid-header-total");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+
+    }
+    var x = document.getElementsByClassName("webgrid-total");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+
+    }
+    var x = document.getElementsByClassName("webgrid-header");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.minWidth = "60px";
+
+    }
+
+
+    $.each($("#GASTOS_PESSOAL_MENSAL tr "), function (i) {
+        if (i === 0) { } else {
+            var tds = $(this).find("td");
+
+            if (@MES_ACUM_REAL < 1) {$(tds[1]).html("0,00");}
+            if (@MES_ACUM_REAL < 2) {$(tds[2]).html("0,00");}
+            if (@MES_ACUM_REAL < 3) {$(tds[3]).html("0,00");}
+            if (@MES_ACUM_REAL < 4) {$(tds[4]).html("0,00");}
+            if (@MES_ACUM_REAL < 5) {$(tds[5]).html("0,00");}
+            if (@MES_ACUM_REAL < 6) {$(tds[6]).html("0,00");}
+            if (@MES_ACUM_REAL < 7) {$(tds[7]).html("0,00");}
+            if (@MES_ACUM_REAL < 8) {$(tds[8]).html("0,00");}
+            if (@MES_ACUM_REAL < 9) {$(tds[9]).html("0,00");}
+            if (@MES_ACUM_REAL < 10) {$(tds[10]).html("0,00");}
+            if (@MES_ACUM_REAL < 11) {$(tds[11]).html("0,00");}
+            if (@MES_ACUM_REAL < 12) {$(tds[12]).html("0,00");}
+
+
+        }
+    })
+
+$(document).ready(function () {
+        $("header").addClass('oculta');
+        $("footer").addClass('oculta');
+        $(".dt-buttons").addClass('oculta');
+        $("label").addClass('oculta');
+        $("input").addClass('oculta');
+        $(".dataTables_info").addClass('oculta');
+        $("h2").addClass('h2');
+        $("p").addClass('p');
+
+
+
+
+
+        document.body.style.borderTop = "0px";
+        document.getElementById("GASTOS_PESSOAL_MENSAL").classList.remove('webgrid-table');
+        document.getElementById("GASTOS_PESSOAL_MENSAL").classList.add('webgrid-table_');
+		  document.getElementById('body').style.paddingBottom = "0px";
+
+
+
+
+		  var x = document.getElementsByClassName("webgrid-header");
+		  var i;
+		  for (i = 0; i < x.length; i++) {
+		      x[i].style.backgroundColor = "#3366cc";
+		      x[i].style.color = "white";
+
+		  }
+
+
+
+
+        var x = document.getElementsByClassName("main-content");
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x[i].style.backgroundColor = "white";
+            x[i].style.paddingTop = "0px";
+        }
+
+
+        var x = document.getElementsByClassName("h2");
+        var i;
+        for (i = 0; i < x.length; i++) {
+
+            x[i].style.marginBlockStart = "0px";
+            x[i].style.marginBlockEnd = "0px";
+
+        }
+
+        var x = document.getElementsByClassName("p");
+        var i;
+        for (i = 0; i < x.length; i++) {
+
+            x[i].style.marginBlockStart = "0px";
+            x[i].style.marginBlockEnd = "0px";
+        }
+
+
+
+        document.getElementById('body').style.backgroundColor = "#FFFFFF";
+        document.getElementById('body').style.paddingTop = "0px";
+        document.getElementById('GASTOS_PESSOAL_MENSAL').style.width = "100%";
+        document.getElementById('GASTOS_PESSOAL_MENSAL').style.height = "350px";
+        document.getElementById('GASTOS_PESSOAL_MENSAL').style.marginTop = "0px";
+
+
+
+
+
+
+
+
+
+
+
+
+    })
+
+
+
+    n = new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = "DATA : " + d + "/" + m + "/" + y;
+
+
+</script>

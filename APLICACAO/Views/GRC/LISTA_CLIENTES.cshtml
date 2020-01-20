@@ -1,0 +1,105 @@
+﻿
+<h1>Lista de Clientes</h1>
+
+<p>
+    Pesquisar por Número, Nome ou NIF  
+
+   <!-- NOTA TA: aqui ficam os campos de pesquisa da grelha de clientes --->
+
+    @using (Html.BeginForm("LISTA_CLIENTES","GRC", FormMethod.Get))
+    {
+     <l>Número    </l>  @Html.TextBox("Pesquisa_numero_LISTA_CLIENTES")
+
+     <l>Nome      </l>    @Html.TextBox("Pesquisa_nome_LISTA_CLIENTES")
+     <p></p>
+     <l>NIF      </l>     @Html.TextBox("Pesquisa_nif_LISTA_CLIENTES")
+
+       
+      
+       <p></p> <input type="submit" value="Pesquisar" />
+    }
+</p>
+
+
+
+<!-- NOTA TA: aqui fica a minha grelha de clientes --->
+
+@model List<APLICACAO.View_GRC_TAB_CL>
+
+@{
+    ViewBag.Title = "Lista de Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        padding: 3px 7px 2px;
+    }
+    .webgrid-alternating-row
+    {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+
+
+</style>
+@{
+ var grid = new WebGrid(source: Model,defaultSort: "nome",  selectionFieldName: "no",canPage: true,rowsPerPage: 10);
+}
+
+ @grid.GetHtml(
+         tableStyle: "webgrid-table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+        mode: WebGridPagerModes.All,
+         columns: grid.Columns(
+         grid.Column(columnName:"no",header:"Nº",format:@<text>@Html.ActionLink((string)(@item.no).ToString(), "VER_CLIENTE", "GRC",new { NUM_CLIENT_SELECT = item.no},null)</text>),
+         grid.Column(columnName:"nome",header:"NOME"),
+         grid.Column(columnName:"ncont",header:"NIF")
+         //grid.Column("VER", header: null, format:@<text>@Html.ActionLink((string)(@item.no).ToString(), "VER_CLIENTE", "GRC",new { NUM_CLIENT_SELECT = item.no},null)</text>)
+            //grid.Column( "SELECCIONAR",header:"", style: "text-align-center", format:(item) => item.GetSelectLink("Select"))
+     )
+     
+  )
+
+ </div>
+
+
+
+

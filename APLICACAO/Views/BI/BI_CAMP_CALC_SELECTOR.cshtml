@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "BI_CAMP_CALC_SELECTOR";
+}
+
+
+
+
+<style type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+    
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-rubrica
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+
+    }
+        .webgrid-total
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+
+    </style>
+
+
+
+
+
+
+     <h3>
+        <b> Selector</b>
+        <b id="num_selector_campo">@Html.Raw((string.Format("{0:N}",@ViewData["num_selector_campo"])))</b> 
+         <b> : </b> 
+     </h3>
+
+<p></p> 
+<table class="webgrid-table" border="1">
+ <tr>
+        <td class="webgrid-header" > Seleciona o operador e respectivos campos:</td>
+        
+        <td class="webgrid-rubrica" id="sinal_operacao">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_operacao"])))</td> 
+        <td class="webgrid-rubrica" id="tipo_operacao">@Html.Raw((string.Format("{0:N}",@ViewData["tipo_operacao"])))</td> 
+        <td> ( </td>
+        <td class="webgrid-rubrica" id="sinal_campo_oper_01">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_01"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_01">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_01"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_02">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_02"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_02">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_02"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_03">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_03"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_03">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_03"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_04">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_04"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_04">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_04"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_05">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_05"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_05">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_05"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_06">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_06"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_06">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_06"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_07">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_07"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_07">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_07"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_08">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_08"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_08">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_08"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_09">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_09"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_09">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_09"])))</td> 
+        <td class="webgrid-rubrica" id="sinal_campo_oper_10">@Html.Raw((string.Format("{0:N}",@ViewData["sinal_campo_oper_10"])))</td> 
+        <td class="webgrid-rubrica" id="campo_oper_10">@Html.Raw((string.Format("{0:N}",@ViewData["campo_oper_10"])))</td> 
+           <td> ) </td>    
+ </tr> 
+     </table>
+ <p> </p> 
+<table class="webgrid-table" border="1">
+          <tr> 
+      <td class="webgrid-header" > Com os Filtros nos Campos:</td>
+         
+           <td class="webgrid-header" > </td>
+           <td class="webgrid-rubrica" id="parent_abre_01">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_01"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_01">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_01"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_01">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_01"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_01">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_01"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_01">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_01"])))</td>
+       </tr>
+       <tr>
+           <td class="webgrid-header" > </td>    
+           <td class="webgrid-rubrica" id="e_ou_02">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_02"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_02">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_02"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_02">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_02"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_02">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_02"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_02">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_02"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_02">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_02"])))</td>  
+       </tr>
+       <tr>
+           <td class="webgrid-header" > </td>  
+           <td class="webgrid-rubrica" id="e_ou_03">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_03"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_03">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_03"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_03">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_03"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_03">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_03"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_03">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_03"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_03">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_03"])))</td>  
+       </tr>
+       <tr>
+           <td class="webgrid-header" > </td>  
+           <td class="webgrid-rubrica" id="e_ou_04">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_04"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_04">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_04"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_04">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_04"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_04">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_04"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_04">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_04"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_04">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_04"])))</td>  
+       </tr>
+       <tr>
+           <td class="webgrid-header" > </td>  
+           <td class="webgrid-rubrica" id="e_ou_05">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_05"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_05">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_05"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_05">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_05"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_05">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_05"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_05">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_05"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_05">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_05"])))</td>  
+       </tr>
+       <tr>
+           <td class="webgrid-header" > </td>  
+           <td class="webgrid-rubrica" id="e_ou_06">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_06"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_06">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_06"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_06">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_06"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_06">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_06"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_06">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_06"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_06">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_06"])))</td>  
+       </tr>
+       <tr>
+           <td class="webgrid-header" > </td>  
+           <td class="webgrid-rubrica" id="e_ou_07">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_07"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_07">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_07"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_07">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_07"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_07">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_07"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_07">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_07"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_07">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_07"])))</td>  
+       </tr>
+       <tr>
+           <td class="webgrid-header" > </td>  
+           <td class="webgrid-rubrica" id="e_ou_08">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_08"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_08">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_08"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_08">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_08"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_08">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_08"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_08">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_08"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_08">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_08"])))</td>  
+       </tr>
+       <tr>
+           <td class="webgrid-header" > </td>  
+           <td class="webgrid-rubrica" id="e_ou_09">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_09"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_09">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_09"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_09">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_09"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_09">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_09"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_09">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_09"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_09">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_09"])))</td>  
+            </tr>
+           <tr>
+           <td class="webgrid-header" > </td>  
+           <td class="webgrid-rubrica" id="e_ou_10">@Html.Raw((string.Format("{0:N}",@ViewData["e_ou_10"])))</td> 
+           <td class="webgrid-rubrica" id="parent_abre_10">@Html.Raw((string.Format("{0:N}",@ViewData["parent_abre_10"])))</td> 
+           <td class="webgrid-rubrica" id="id_parametro_10">@Html.Raw((string.Format("{0:N}",@ViewData["id_parametro_10"])))</td> 
+           <td class="webgrid-rubrica" id="operador_tipo_10">@Html.Raw((string.Format("{0:N}",@ViewData["operador_tipo_10"])))</td> 
+           <td class="webgrid-rubrica" id="operador_valor_10">@Html.Raw((string.Format("{0:N}",@ViewData["operador_valor_10"])))</td> 
+           <td class="webgrid-rubrica" id="parent_fecha_10">@Html.Raw((string.Format("{0:N}",@ViewData["parent_fecha_10"])))</td>  
+            </tr>
+    </table>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="min-width:730px"> @*NOTA TA: AQUI DEFINI O MIN_WIDTH COM 730 PX*@
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - di4you.pt</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <text>
+
+
+                            @{ string IdentifyUser = User.Identity.Name;
+                                string caracter = "#";
+                                int Identifycaracter = IdentifyUser.IndexOf(caracter);
+                                var IdentifyLength = IdentifyUser.Length - Identifycaracter;
+                                var User1 = IdentifyUser.Substring(0, Identifycaracter);
+                                var Conexao = IdentifyUser.Substring(Identifycaracter + 1, IdentifyLength - 1);
+                                var logo_conexao = "/images/logo_" + @Conexao + ".png";
+
+                            }
+                   
+                            <img src=@logo_conexao style="width:125px;height:70px" />
+
+                        </text>} 
+                    else
+                    {
+                    <text>
+
+
+                        @{ 
+                            var logo_conexao = "/images/logo_tjalmeida.png";
+
+                        }
+
+                        <img src=@logo_conexao style="width:125px;height:70px" />
+
+                    </text>}
+                    @*<p class="site-title">@Html.ActionLink("Logotipo", "Index", "Home")</p>*@
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    <nav>
+                        <ul id="menu">
+                            <li>@Html.ActionLink("Início", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Sobre", "About", "Home")</li>
+                            @if (Request.IsAuthenticated) { <li>@Html.ActionLink("GRC", "GRC", "GRC")</li>  } else { <text> </text>}
+                            @if (Request.IsAuthenticated) { <li>@Html.ActionLink("BI", "BI", "BI")</li>  } else { <text> </text>}
+                            <li>@Html.ActionLink("Contactos", "Contact", "Home")</li>                                              
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p>&copy; @DateTime.Now.Year - di4you.pt</p>
+                </div>
+            </div>
+        </footer>
+
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

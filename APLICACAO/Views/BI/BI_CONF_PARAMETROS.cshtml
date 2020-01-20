@@ -1,0 +1,1008 @@
+﻿
+
+<style id="ccs_style" type="text/css">
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        text-align: right;
+        
+        
+    }
+
+        .webgrid-table td, th {
+            border: solid 1px #FFFFFF;
+            padding: 3px 7px 2px;
+            text-align: right;
+        }
+
+    .webgrid-header {
+        padding: 6px 5px;
+        text-align: center;
+        background-color: #e8eef4;
+        border-bottom: 2px solid #A4A4A4;
+        height: 95px;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-rubrica {
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-total {
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-selected-row {
+        text-align: right;
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+
+    .Webgrid_col_data {
+        text-align: center;
+    }
+
+    .webgrid-total-TOTAL {
+        text-align: center;
+        background-color: #02020a;
+        color: white;
+        padding: 3px 7px 2px;
+    }
+
+    .input {
+        width: 50px;
+        height: 25px;
+        text-align: justify;
+        background-color: #EAF2D3;
+        padding: 3px 4px 2px;
+        text-overflow: clip;
+    }
+
+    .GRAVAR_PAR {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        color: #eaf2d3;
+        background-color: #d2d4f1;
+    }
+
+    .campocalc_resultado {
+        background-color: #E3DFFF;
+        text-align: center;
+    }
+
+    .oculta_na_impressao {
+        display: none;
+        height: 95px;
+    }
+        .nao_oculta_na_impressao {
+    
+        height: 95px;
+    }
+    .titulos_mapas {
+        background-color: #7F7F7F;
+        text-align: center;
+        color: #FFFFFF;
+        vertical-align: middle;
+        font-size: 22px;
+        font-weight: bold;
+    }
+     .nao_mostrar {visibility:hidden;}
+     .mostrar {visibility:visible;}
+         .versao_selec {
+        background-color: #E3DFFF;
+        text-align: center;
+    }
+         
+/*NOTA table::after CSS param TOOLTIPS*/
+
+.tooltip {
+  position: relative;
+  /*display: inline-block;*/
+  /*border-bottom: 1px dotted black;*/
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  /*width: 125px;*/
+  width: 240px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  /*margin-left: -60px;*/
+  margin-left: -10px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  /*left: 50%;*/
+  left: 5%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*NOTA table::AQUI DEFINO  O  STYLE DOS BOTÕES*/
+
+.btn:focus, .btn::-moz-focus-inner{
+  outline:none;
+  border:none;
+}
+.btn{
+  font-family: arial;
+  font-size:14px;
+  text-transform: uppercase;
+  font-weight:700;
+  border:none;
+  padding:10px;
+  cursor: pointer;
+  display:inline-block;
+  text-decoration: none;
+  width: auto;
+}
+.btn-green{
+  background:green;
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 #006000 /*rgba(0, 96, 0, 0.6)*/;
+    width: auto;
+}
+.btn-green:hover{
+  background:#006000;
+  box-shadow:0 5px 0 #003f00;
+}
+.btn-blue{
+  background:rgba(0,0,139, 0.6);
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 rgba(0,0,59, 0.6);
+    width: auto;
+}
+.btn-blue:hover{
+  background:#2153a2;
+  box-shadow:0 5px 0 #00003B;
+}
+.btn-purple{
+  background:purple; opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #670167 /*rgba(103, 1, 103, 0.6)*/;
+    width: auto;
+}
+.btn-purple:hover{
+  background:#670167;
+  box-shadow:0 5px 0 #470047;
+}
+.btn-red{
+  background:red; opacity:0.7;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #d20000 /*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-red:hover{
+  background:#d20000;
+  box-shadow:0 5px 0 #b00000;
+}
+.btn-orange{
+  background:rgb(204 , 112 , 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(204 , 112 , 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-orange:hover{
+  background:rgb(204 , 112 , 0);
+  box-shadow:0 5px 0 rgb(204 , 112 , 0);
+}
+.btn-brown{
+  background:rgb(102, 0, 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(102, 0, 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-brown:hover{
+  background:rgb(102, 0, 0);
+  box-shadow:0 5px 0 rgb(102, 0, 0);
+}
+.btn-green:active,.btn-blue:active, .btn-purple:active, .btn-red:active, .btn-orange:active, .btn-brown:active{
+  position:relative;
+  top:5px;
+  box-shadow:inherit;
+}
+</style>
+
+<h2 style="width: 60%; margin-left:20%">CONFIGURAÇÃO DE PARAMETROS:</h2>
+
+@{
+
+    var VERSAO_REAL_FECHADA = ViewData["versao_real_fechada"];
+    var VERSAO_ANTE_FECHADA = ViewData["versao_ante_fechada"];
+
+
+}
+
+
+<table id="PARAMETROS" class="webgrid-table" border="1" style="width: 60%; margin-left:10%">
+    <tr> <td class="titulos_mapas" colspan="3" style="text-align:center"> Versão Actual </td> </tr>
+    <tr>
+        <td></td>
+        <td colspan="2">
+            <table>
+                <tr>
+                    <td>
+                        @using (Html.BeginForm("PROC_BI_VERSOES_CALCULA_VERSAO_UNICA", "BI", new { versao = @ViewData["versao_real"] }, FormMethod.Post, null))
+                        {
+
+                            <button type="submit" class="btn-brown" style="min-width:110px">   <text> Calcular Versão </text></button>
+                        }
+                    </td>
+                                                              <td><div class="tooltip">
+                    <span class="tooltiptext">Fechar/Reabrir Versão.  </span>
+                    @using (Html.BeginForm("PROC_BI_VERSOES_ALTERA", "BI", new { Pesquisa_User = "tjalmeida", id_versao = @ViewData["versao_real"], versao_desc = "", fechada = "alt" }, FormMethod.Post, null))
+                    {
+                        <button type="submit" class="btn-brown" style="min-width:110px">  @{if (VERSAO_REAL_FECHADA.Equals(true)) { <text> Reabrir Versão </text>; } else { <text> Fechar Versão </text>; } }</button>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("PROC_BI_VERSOES_COPIA", "BI", new { Pesquisa_User = "tjalmeida", versao_original = @ViewData["versao_real"] }, FormMethod.Post, null))
+                        {
+
+                            <button type="submit" class="btn-brown" style="min-width:110px">   <text> Copiar  Versão </text></button>
+                        }
+                    </td>
+
+                        <td>
+                    @using (Html.BeginForm("PROC_BI_VERSOES_APAGA", "BI", new { Pesquisa_User = "", versao_original = @ViewData["versao_real"] }, FormMethod.Post, null))
+                    {
+
+                        <button type="submit" class="btn-brown" style="min-width:110px">   <text> Apagar Versão </text></button>
+                    }
+                        </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr  >
+        <td style="text-align:right; vertical-align:bottom"> <p style="font-size: 14px; vertical-align:bottom">Versão selecionada:</td>
+        <td colspan="2" style="text-align:left">
+        <table>
+        <tr>
+         <td >
+            @using (Html.BeginForm("BI_SELECCAO_VERSAO_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", id_camp = @ViewData["id_real"], FormMethod.Get }))
+
+            { <div class="tooltip">
+                @Html.DropDownList("versao_selec", new SelectList(ViewBag.LISTA_VERSAO, "id_versao", "desc_versao", @ViewData["versao_real"]), new { @class = "form -control", @style = "width:230px; height:30px", onchange = "this.form.submit();" })
+                <span class="tooltiptext">Clique na lista para seleccionar outra versão. </span>
+            </div>
+            }
+         </td>
+         <td id="altera_nome_versao_real"  style="text-align:left">
+            <button type="submit" class="btn-brown" style="min-width:110px"> Alterar Nome</button>
+         </td>
+         <td id="guarda_altera_nome_versao_real" style="display:none; text-align:left">
+            @using (Html.BeginForm("PROC_BI_VERSOES_ALTERA", "BI", new { Pesquisa_User = "tjalmeida", id_versao = @ViewData["versao_real"], fechada = "" }, FormMethod.Post, null))
+            { 
+            <table>
+            <tr>
+            <td style="padding-bottom:10px">
+               @Html.TextBox("versao_desc", null, new {@class = "novo_nome_versao_real" })
+            </td>
+            <td style="padding-bottom:15px">
+            <button type="submit" class="btn-brown" style="min-width:110px"> Guardar</button>
+            </td>
+            </tr>
+            </table>
+            }
+         </td>
+       </tr>
+       </table>
+       </td>
+
+    </tr>
+
+    <tr class="nao_oculta_na_impressao">
+        <td style="text-align:right">Ano da Versão:</td>
+
+        <td style="text-align:left">
+            
+            @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], id_camp = ViewData["ID_ANO_VERSAO_REAL"], FormMethod.Get }))
+
+            { <div class="tooltip" style = "width:100px">
+                @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_ANOS, "id_ano", "ano", ViewData["ANO_VERSAO_REAL"]), new { @class = "form -control", @style = "width:100px; height:30px", onchange = "this.form.submit();" })
+                  <span class="tooltiptext">Clique na lista para selecionar outro ano. <b>(Alerta: Processo de cálculo moroso)</b></span>
+            </div>
+            }
+        </td>
+
+        <td style="text-align:left">
+             </td>
+              <tr class="nao_oculta_na_impressao">
+        <td style="text-align:right; width: 33.3%"> Análise do Periodo Corrente do mês: </td>
+                  <td>
+                      <table>
+                          <tr>
+                              <td style="text-align:left; width: 33.3%">
+
+                                  @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], id_camp = ViewData["ID_MES_INI_PER_REAL"], FormMethod.Get }))
+
+            { <div class="tooltip" style="width:40px">
+                                  @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_REAL, "id_mes", "mes", ViewData["MES_INI_PER_REAL"]), new { @class = "form -control", @style = "width:40px; height:30px", onchange = "this.form.submit();" })
+                                  <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Periodo Corrente.</span>
+                              </div>
+                                  }
+                              </td>
+                              <td>ao mês</td>
+                              <td style="text-align:left;width: 33.3%">
+
+                                  @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], id_camp = ViewData["ID_MES_FIN_PER_REAL"], FormMethod.Get }))
+
+            { <div class="tooltip" style="width:40px">
+                                                  @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_REAL, "id_mes", "mes", ViewData["MES_FIN_PER_REAL"]), new { @class = "form -control", @style = "width:40px; height:30px", onchange = "this.form.submit();" })
+                                                  <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Periodo Corrente.</span>
+                                              </div>
+                                  }
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+        </tr>
+    <tr class="nao_oculta_na_impressao">
+        <td style="text-align:right;"> Análise do Acumulado até ao mês: </td>
+        <td style="text-align:left; width: 33.3%">
+
+            @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], id_camp = ViewData["ID_MES_ACUM_REAL"], FormMethod.Get }))
+
+            { <div class="tooltip" style="width:40px">
+                @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_REAL, "id_mes", "mes", ViewData["MES_ACUM_REAL"]), new { @class = "form -control", @style = "width:40px; height:30px", onchange = "this.form.submit();" })
+                <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Acumulado.</span>
+            </div>
+            }
+
+        </td>
+     </tr>
+    <tr class="nao_oculta_na_impressao">
+        <td style="text-align:right;"> Tipo de Apuramento do CMVMC: </td>
+       <td>@using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], id_camp = ViewData["ID_TIPO_APUR_CMVMC_REAL"], FormMethod.Get }))
+
+       { <div class="tooltip" style="width:250px">
+            @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_TIPO_APURAMENTO_CMVMC, "Value", "Text", ViewData["TIPO_APUR_CMVMC_REAL"]), new { @class = "form -control", @style = "width:250px; height:30px", onchange = "this.form.submit();" })
+            <span class="tooltiptext">Clique na lista para selecionar outro outro tipo de Aupramento de CMVMC.</span>
+        </div>
+       }
+</td>
+
+           </tr>
+
+
+
+
+    <tr> <td class="titulos_mapas" colspan="3" style="text-align:center"> Versão Homólogo </td> </tr>
+     <tr>
+        <td></td>
+        <td colspan="2">
+            <table>
+                <tr>
+                    <td>
+                        @using (Html.BeginForm("PROC_BI_VERSOES_CALCULA_VERSAO_UNICA", "BI", new { versao = @ViewData["versao_ante"] }, FormMethod.Post, null))
+                        {
+
+                            <button type="submit" class="btn-brown" style="min-width:110px">   <text> Calcular Versão </text></button>
+                        }
+                    </td>
+                                                              <td><div class="tooltip">
+                    <span class="tooltiptext">Fechar/Reabrir Versão.  </span>
+                    @using (Html.BeginForm("PROC_BI_VERSOES_ALTERA", "BI", new { Pesquisa_User = "tjalmeida", id_versao = @ViewData["versao_ante"], versao_desc = "", fechada = "alt" }, FormMethod.Post, null))
+                    {
+                        <button type="submit" class="btn-brown" style="min-width:110px">  @{if (VERSAO_ANTE_FECHADA.Equals(true)) { <text> Reabrir Versão </text>; } else { <text> Fechar Versão </text>; } }</button>
+                            }
+                        </div>
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("PROC_BI_VERSOES_COPIA", "BI", new { Pesquisa_User = "tjalmeida", versao_original = @ViewData["versao_ante"] }, FormMethod.Post, null))
+                        {
+
+                            <button type="submit" class="btn-brown" style="min-width:110px">   <text> Copiar  Versão </text></button>
+                        }
+                    </td>
+
+                        <td>
+                    @using (Html.BeginForm("PROC_BI_VERSOES_APAGA", "BI", new { Pesquisa_User = "", versao_original = @ViewData["versao_ante"] }, FormMethod.Post, null))
+                    {
+
+                        <button type="submit" class="btn-brown" style="min-width:110px">   <text> Apagar Versão </text></button>
+                    }
+                        </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="text-align:right; vertical-align:bottom"> <p style="font-size: 14px; vertical-align:bottom">Versão selecionada:</td>
+        <td colspan="2" style="text-align:left">
+        <table>
+        <tr>
+         <td >
+            @using (Html.BeginForm("BI_SELECCAO_VERSAO_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", id_camp = @ViewData["id_ante"], FormMethod.Get }))
+
+            { <div class="tooltip">
+                @Html.DropDownList("versao_selec", new SelectList(ViewBag.LISTA_VERSAO, "id_versao", "desc_versao", @ViewData["versao_ante"]), new { @class = "form -control", @style = "width:230px; height:30px", onchange = "this.form.submit();" })
+                  <span class="tooltiptext">Clique na lista para seleccionar outra versão. </span>
+             </div>
+            }
+         </td>
+         <td id="altera_nome_versao_ante"  style="text-align:left">
+            <button type="submit" class="btn-brown" style="min-width:110px"> Alterar Nome</button>
+         </td>
+         <td id="guarda_altera_nome_versao_ante" style="display:none; text-align:left">
+            @using (Html.BeginForm("PROC_BI_VERSOES_ALTERA", "BI", new { Pesquisa_User = "tjalmeida", id_versao = @ViewData["versao_ante"], fechada = "" }, FormMethod.Post, null))
+            { 
+            <table>
+            <tr>
+            <td style="padding-bottom:10px">
+               @Html.TextBox("versao_desc", null, new {@class = "novo_nome_versao_ante" })
+            </td>
+            <td style="padding-bottom:15px">
+            <button type="submit" class="btn-brown" style="min-width:110px"> Guardar</button>
+            </td>
+            </tr>
+            </table>
+            }
+         </td>
+       </tr>
+       </table>
+       </td>
+    </tr>
+    <tr class="nao_oculta_na_impressao">
+        <td style="text-align:right">Ano da Versão:</td>
+        <td style="text-align:left">
+            @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], id_camp = ViewData["ID_ANO_VERSAO_ANTE"], FormMethod.Get }))
+
+            { <div class="tooltip" style = "width:100px">
+                @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_ANOS, "id_ano", "ano", ViewData["ANO_VERSAO_ANTE"]), new { @class = "form -control", @style = "width:100px; height:30px", onchange = "this.form.submit();" })
+                  <span class="tooltiptext">Clique na lista para selecionar outro ano. <b>(Alerta: Processo de cálculo moroso)</b></span>
+            </div>
+                }
+</td>
+    </tr>
+    <tr class="nao_oculta_na_impressao">
+ <td style="text-align:right; width: 33.3%"> Análise do Periodo Corrente do mês: </td>
+                  <td>
+                      <table>
+                          <tr>
+                              <td style="text-align:left; width: 33.3%">
+
+                                  @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], id_camp = ViewData["ID_MES_INI_PER_ANTE"], FormMethod.Get }))
+
+            { <div class="tooltip" style="width:40px">
+                                  @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_ANTE, "id_mes", "mes", ViewData["MES_INI_PER_ANTE"]), new { @class = "form -control", @style = "width:40px; height:30px", onchange = "this.form.submit();" })
+                                  <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Periodo Corrente.</span>
+                              </div>
+                                  }
+                              </td>
+                              <td>ao mês</td>
+                              <td style="text-align:left;width: 33.3%">
+
+                                  @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], id_camp = ViewData["ID_MES_FIN_PER_ANTE"], FormMethod.Get }))
+
+            { <div class="tooltip" style="width:40px">
+                                                  @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_ANTE, "id_mes", "mes", ViewData["MES_FIN_PER_ANTE"]), new { @class = "form -control", @style = "width:40px; height:30px", onchange = "this.form.submit();" })
+                                                  <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Periodo Corrente.</span>
+                                              </div>
+                                  }
+                              </td>
+                          </tr>
+                      </table>
+                  </td>
+        </tr>
+    <tr class="nao_oculta_na_impressao">
+        <td style="text-align:right;"> Análise do Acumulado até ao mês: </td>
+        <td style="text-align:left; width: 33.3%">
+
+            @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], id_camp = ViewData["ID_MES_ACUM_ANTE"], FormMethod.Get }))
+
+            { <div class="tooltip" style="width:40px">
+                @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_ANTE, "id_mes", "mes", ViewData["MES_ACUM_ANTE"]), new { @class = "form -control", @style = "width:40px; height:30px", onchange = "this.form.submit();" })
+                <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Acumulado.</span>
+            </div>
+            }
+        </td>
+
+
+     </tr>
+    <tr class="nao_oculta_na_impressao">
+        <td style="text-align:right;"> Tipo de Apuramento do CMVMC: </td>
+        <td>
+            @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], id_camp = ViewData["ID_TIPO_APUR_CMVMC_ANTE"], FormMethod.Get }))
+
+        { <div class="tooltip" style="width:250px">
+            @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_TIPO_APURAMENTO_CMVMC, "Value", "Text", ViewData["TIPO_APUR_CMVMC_ANTE"]), new { @class = "form -control", @style = "width:250px; height:30px", onchange = "this.form.submit();" })
+            <span class="tooltiptext">Clique na lista para selecionar outro outro tipo de Aupramento de CMVMCo.</span>
+        </div>
+        }
+    </td>
+
+</tr>
+</table>
+
+
+@*<div id="GRAVAR_PAR_OPER_DIRXX" style="display:none">
+
+
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", FormMethod.Get))
+    {
+        <div id="GRAVAR_PAR" class="GRAVAR_PAR">
+            @Html.ActionLink("GRAVAR_PAR", "BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new
+{
+    Pesquisa_User = "tjalmeida",
+    id_camp = "id_camp",
+    campocalc_resultado = "campocalc_resultado"
+}, null)
+        </div>
+
+    }
+</div>
+
+
+<div id="GRAVARSELEC_VERXX" class:"style_botao_gravar" style="display:none">
+
+
+    @using (Html.BeginForm("BI_SELECCAO_VERSAO_USER_ALT", "BI", FormMethod.Get))
+    {
+        <div id="GRAVAR" class="GRAVAR">
+            @Html.ActionLink("GRAVAR", "BI_SELECCAO_VERSAO_USER_ALT", "BI", new
+       {
+           Pesquisa_User = "tjalmeida",
+           id_camp = "id_camp",
+           versao_selec = "versao_selec"
+       }, null)
+        </div>
+
+    }
+</div>*@
+        
+
+        @*<div id="grid00conf" class="nao_mostrar tooltip"> <span class="tooltiptext">Clique para definir outra versão, pressionando a tecla Enter para Gravar. </span>   @Html.Action("BI_SELECCAO_VERSAO_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", Dimensao_real = "VERSAO_REAL_DFS" })</div>
+        <div id="grid01conf" class="nao_mostrar tooltip"> <span class="tooltiptext">Clique para definir outra versão, pressionando a tecla Enter para Gravar. </span>   @Html.Action("BI_SELECCAO_VERSAO_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", Dimensao_ante = "VERSAO_ANTE_DFS" })</div>*@
+         
+
+
+        @*<div id="grid_mes_ini_ano_n" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO = "", MES_INI_PER = "MES_INI_PER", MES_FIN_PER = "", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>
+        <div id="grid_mes_fin_ano_n" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "MES_FIN_PER", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>*@
+        @*<div id="grid_mes_acum_ano_n" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "", MES_ACUM = "MES_ACUM", TIPO_APUR_CMVMC = "" }) </div>*@
+        @*<div id="grid_tipo_apur_cmvmc_ano_n" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro tipo de Aupramento de CMVMC, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "", MES_ACUM = "", TIPO_APUR_CMVMC = "TIPO_APUR_CMVMC" }) </div>*@
+        @*<div id="grid_ano_versao_ano_n" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro ano, pressionando a tecla Enter para Gravar. <b>(Alerta: Processo de cálculo moroso)</b></span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO = "ANO", MES_INI_PER = "", MES_FIN_PER = "", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>*@
+
+        @*<div id="grid_mes_ini_ano_n-1" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO = "", MES_INI_PER = "MES_INI_PER", MES_FIN_PER = "", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>
+        <div id="grid_mes_fin_ano_n-1" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "MES_FIN_PER", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>
+        <div id="grid_mes_acum_ano_n-1" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "", MES_ACUM = "MES_ACUM", TIPO_APUR_CMVMC = "" }) </div>*@
+        @*<div id="grid_tipo_apur_cmvmc_ano_n-1" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro tipo de Aupramento de CMVMC, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "", MES_ACUM = "", TIPO_APUR_CMVMC = "TIPO_APUR_CMVMC" }) </div>*@
+        @*<div id="grid_ano_versao_ano_n-1" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro ano, pressionando a tecla Enter para Gravar. <b>(Alerta: Processo de cálculo moroso) </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO = "ANO", MES_INI_PER = "", MES_FIN_PER = "", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>*@
+
+
+
+
+        @section scripts {
+
+            <script type="text/javascript">
+
+
+                $(document).ready(function () {
+           
+                    $("#altera_nome_versao_real").click(function () {
+            
+                        $("#altera_nome_versao_real").hide();
+                        $("#guarda_altera_nome_versao_real").show();
+                        $('.novo_nome_versao_real').focus();
+                    })
+                    $("#altera_nome_versao_ante").click(function () {
+
+                        $("#altera_nome_versao_ante").hide();
+                        $("#guarda_altera_nome_versao_ante").show();
+                        $('.novo_nome_versao_ante').focus();
+                    })
+
+                    @*---------------------------------MONSTAR/OCULTAR LINHAS DE CONFIGURAÇÃO DE INTERVALOS DE MESES DA TABELA----------------------------------------------------------*@
+                    @*var grid00conf = document.getElementById("grid00conf");
+                    var grid01conf = document.getElementById("grid01conf");
+
+
+
+                    $("#PARAMETROS").find("#grid00conf_td").html(grid00conf);
+                    $("#PARAMETROS").find("#grid01conf_td").html(grid01conf);
+
+
+
+
+
+
+
+                    var grid_mes_ini_ano_n = document.getElementById("grid_mes_ini_ano_n");
+                    var grid_mes_fin_ano_n = document.getElementById("grid_mes_fin_ano_n");
+                    var grid_mes_acum_ano_n = document.getElementById("grid_mes_acum_ano_n");
+                    var grid_tipo_apur_cmvmc_ano_n = document.getElementById("grid_tipo_apur_cmvmc_ano_n");
+                    var grid_ano_versao_ano_n = document.getElementById("grid_ano_versao_ano_n");
+
+
+                    var grid_mes_ini_ano_n_1 = document.getElementById("grid_mes_ini_ano_n-1");
+                    var grid_mes_fin_ano_n_1 = document.getElementById("grid_mes_fin_ano_n-1");
+                    var grid_mes_acum_ano_n_1 = document.getElementById("grid_mes_acum_ano_n-1");
+                    var grid_tipo_apur_cmvmc_ano_n_1 = document.getElementById("grid_tipo_apur_cmvmc_ano_n-1");
+                    var grid_ano_versao_ano_n_1 = document.getElementById("grid_ano_versao_ano_n-1");
+
+
+
+
+                    $("#PARAMETROS").find("#grid_mes_ini_ano_n_td").html(grid_mes_ini_ano_n);
+                    $("#PARAMETROS").find("#grid_mes_fin_ano_n_td").html(grid_mes_fin_ano_n);
+                    $("#PARAMETROS").find("#grid_mes_acum_ano_n_td").html(grid_mes_acum_ano_n);
+                    $("#PARAMETROS").find("#grid_tipo_apur_cmvmc_ano_n_td").html(grid_tipo_apur_cmvmc_ano_n);
+                    $("#PARAMETROS").find("#grid_ano_versao_ano_n_td").html(grid_ano_versao_ano_n);
+
+
+                    $("#PARAMETROS").find("#grid_mes_ini_ano_n-1_td").html(grid_mes_ini_ano_n_1);
+                    $("#PARAMETROS").find("#grid_mes_fin_ano_n-1_td").html(grid_mes_fin_ano_n_1);
+                    $("#PARAMETROS").find("#grid_mes_acum_ano_n-1_td").html(grid_mes_acum_ano_n_1);
+                    $("#PARAMETROS").find("#grid_tipo_apur_cmvmc_ano_n-1_td").html(grid_tipo_apur_cmvmc_ano_n_1);
+                    $("#PARAMETROS").find("#grid_ano_versao_ano_n-1_td").html(grid_ano_versao_ano_n_1);
+
+                    @*------------------------------OCULTO CABEÇALHOS DE GRELHA-------------------------------------------------------------*@
+
+                    //$("#grid th").find('"a[href*=' + "'" + "ID" + "&'" + ']"').parent().addClass('id');
+                    //$("#grid th").find('"a[href*=' + "'" + "id_camp_calc" + "&'" + ']"').parent().addClass('id_camp_calc');
+                    //$("#grid th").find('"a[href*=' + "'" + "desc_camp_calc" + "&'" + ']"').parent().addClass('desc_camp_calc');
+                    //$("#grid th").find('"a[href*=' + "'" + "campocalc_resultado" + "&'" + ']"').parent().addClass('campocalc_resultado');
+
+                    @*$("#grid ").find(".id").hide();
+                    $("#grid ").find(".id_camp_calc").hide();
+                    $("#grid ").find(".desc_camp_calc").hide();*@
+                    //var alt_Valor_da_Variavel = $("#grid_mes_ini_ano_n_td").html().replace('Valor da Variavel', 'do mês:');
+                    //$("#grid_mes_ini_ano_n_td").html(alt_Valor_da_Variavel)
+                    //var alt_Valor_da_Variavel = $("#grid_mes_fin_ano_n_td").html().replace('Valor da Variavel', 'ao mês:');
+                    //$("#grid_mes_fin_ano_n_td").html(alt_Valor_da_Variavel)
+                    //var alt_Valor_da_Variavel = $("#grid_mes_acum_ano_n_td").html().replace('Valor da Variavel', 'até ao mês:');
+                    //$("#grid_mes_acum_ano_n_td").html(alt_Valor_da_Variavel)
+                    //var alt_Valor_da_Variavel = $("#grid_tipo_apur_cmvmc_ano_n_td").html().replace('Valor da Variavel', 'Selecione a opção 1, 2 ou 3:');
+                    //$("#grid_tipo_apur_cmvmc_ano_n_td").html(alt_Valor_da_Variavel)
+                    ////var alt_Valor_da_Variavel = $("#grid_ano_versao_ano_n_td").html().replace('Valor da Variavel', 'do Ano:');
+                    //$("#grid_ano_versao_ano_n_td").html(alt_Valor_da_Variavel)
+
+                    //var alt_Valor_da_Variavel = $("#grid_mes_ini_ano_n-1_td").html().replace('Valor da Variavel', 'do mês:');
+                    //$("#grid_mes_ini_ano_n-1_td").html(alt_Valor_da_Variavel)
+                    //var alt_Valor_da_Variavel = $("#grid_mes_fin_ano_n-1_td").html().replace('Valor da Variavel', 'ao mês:');
+                    //$("#grid_mes_fin_ano_n-1_td").html(alt_Valor_da_Variavel)
+                    //var alt_Valor_da_Variavel = $("#grid_mes_acum_ano_n-1_td").html().replace('Valor da Variavel', 'até ao mês:');
+                    //$("#grid_mes_acum_ano_n-1_td").html(alt_Valor_da_Variavel)
+                    //var alt_Valor_da_Variavel = $("#grid_tipo_apur_cmvmc_ano_n-1_td").html().replace('Valor da Variavel', 'Selecione a opção 1, 2 ou 3:');
+                    //$("#grid_tipo_apur_cmvmc_ano_n-1_td").html(alt_Valor_da_Variavel)
+                    ////var alt_Valor_da_Variavel = $("#grid_ano_versao_ano_n-1_td").html().replace('Valor da Variavel', 'do Ano:');
+                    //$("#grid_ano_versao_ano_n-1_td").html(alt_Valor_da_Variavel)
+
+                    //--------------------------------TRATO os CAMPOS de SELECCAO DO MÊS--------------------------
+
+
+                    //$(".campocalc_resultado ").click(function () {
+
+
+                    //    if ($(this).children().attr('class') != "input") {
+                    //        var id = $(this).parent().find(".id").html();
+                    //        var idconteudoOriginal = $(this).parent().parent().parent().parent().parent().attr('id');
+                    //        //var findidconteudoOriginal = '.' + idconteudoOriginal + '';
+
+
+                    //        var conteudoOriginal = $(this).text();
+
+
+
+                    //        var ReplaceHrefID = $("#GRAVAR_PAR_OPER_DIRXX form").html();
+
+
+
+                    //        $(this).html("<input class='input' value='" + conteudoOriginal + "'/>");
+                    //        $(this).children().first().focus();
+
+                    //    }
+
+                    //    // NOTA TA: Keypress significa que a instrução é cumprida quando o utilizador faz "enter"
+                    //    $(this).children().first().keypress(function (e) {
+                    //        if (e.which == 13) {
+
+                    //            if ($(this).parent().parent().parent().parent().find('.GRAVAR_PAR').text() == "") {
+                    //                $(this).parent().parent().parent().parent().prepend(ReplaceHrefID);
+                    //            }
+                    //            else { $(this).parent().parent().parent().parent().find('.GRAVAR_PAR').html(ReplaceHrefID) }
+
+
+                    //            //NOTA TA: Aqui re-faço a href do botão com todos os campos preenchidos de origem
+                    //            var ValorInicial_id_camp = id;
+                    //            var ReplaceHref_id_camp = $(this).parent().parent().parent().parent().find('.GRAVAR_PAR').html().replace('id_camp=id_camp', 'id_camp' + '=' + ValorInicial_id_camp);
+                    //            $(this).parent().parent().parent().parent().find('.GRAVAR_PAR').html(ReplaceHref_id_camp);
+
+
+                    //            var hrefalterar1 = $(this).parent().parent().parent().parent().find('.GRAVAR_PAR').html();
+
+
+                    //            var valor = $(this).val()
+                    //            if ($(this).val() == "" || $(this).val() <= 0 || $(this).val() >= 13 || valor != parseInt(valor, 10)) {
+                    //                var novoConteudo = conteudoOriginal;
+                    //                alert("Por favor, Insira um Valor de 1 a 12.")
+                    //            }
+                    //            else {
+                    //                var novoConteudo = $(this).val();
+                    //            }
+
+
+
+
+                    //            $(this).parent().text(novoConteudo);
+                    //            $(this).parent().removeClass("celulaEmEdicao");
+
+
+                    //            var ReplaceHref1 = hrefalterar1.replace('campocalc_resultado=campocalc_resultado', 'campocalc_resultado' + '=' + novoConteudo);
+
+                    //            $('#' + idconteudoOriginal).find('.GRAVAR_PAR').html(ReplaceHref1);
+
+
+
+                    //            //-------------------INICIO: ACRESCENTEI para evitar passo debotão GRAVAR_PAR----
+                    //            var href_alt = document.querySelector('#' + idconteudoOriginal + ' .GRAVAR_PAR a').href
+                    //            var href_alt_ = href_alt.replace('"', '').replace('amp;', '').replace('amp;', '')
+
+                    //            var x = document.getElementsByClassName("GRAVAR_PAR");
+                    //            var i;
+                    //            for (i = 0; i < x.length; i++) {
+                    //                x[i].style.display = "none";
+
+                    //            }
+
+                    //            //alert(ReplaceHref1);
+
+                    //            window.location.href = href_alt_
+
+                    //            //-------------------FIM: ACRESCENTEI para evitar passo debotão GRAVAR_PAR----
+
+                    //        }
+
+                    //    });
+
+
+                    //})
+
+                    //---------------------------------------------------------------------------------------------------------------
+
+                    //$("#grid00conf").addClass('mostrar');
+                    //$("#grid01conf").addClass('mostrar');
+
+
+
+                    //$("#grid th").find('"a[href*=' + "'" + "ID" + "&'" + ']"').parent().addClass('id');
+                    //$("#grid th").find('"a[href*=' + "'" + "id_seleccao_calc" + "&'" + ']"').parent().addClass('id_seleccao_calc');
+                    //$("#grid th").find('"a[href*=' + "'" + "desc_seleccao_calc" + "&'" + ']"').parent().addClass('desc_seleccao_calc');
+                    //$("#grid th").find('"a[href*=' + "'" + "versao_selec" + "&'" + ']"').parent().addClass('versao_');
+
+
+                    //$("#grid ").find(".id").hide();
+                    //$("#grid ").find(".id_seleccao_calc").hide();
+                    //$("#grid ").find(".desc_seleccao_calc").hide();
+                    //$("#grid ").find(".versao_").hide();
+
+                    //$(".webgrid-table-edit-gridconf").find("thead").hide();
+
+
+
+
+                    //--------------------------------TRATO os CAMPO de VERSAO_SELECCCAO    grid00conf--------------------------
+
+
+                    //$("#grid00conf").find(".versao_selec ").click(function () {
+
+
+                    //    if ($(this).children().attr('class') != "input") {
+                    //        var id = $(this).parent().find(".id").html();
+                    //        var idconteudoOriginal = $(this).parent().parent().parent().parent().parent().attr('id');
+                    //        //var findidconteudoOriginal = '.' + idconteudoOriginal + '';
+
+
+                    //        var conteudoOriginal = $(this).text();
+
+
+
+                    //        var ReplaceHrefID = $("#GRAVARSELEC_VERXX form").html();
+
+
+
+                    //        $(this).html("<input class='input' value='" + conteudoOriginal + "'/>");
+                    //        $(this).children().first().focus();
+
+                    //    }
+
+
+
+                    //    // NOTA TA: Keypress significa que a instrução é cumprida quando o utilizador faz "enter"
+                    //    $(this).children().first().keypress(function (e) {
+                    //        if (e.which == 13) {
+
+                    //            if ($(this).parent().parent().parent().parent().find('.GRAVAR').text() == "") {
+                    //                $(this).parent().parent().parent().parent().prepend(ReplaceHrefID);
+                    //            }
+                    //            else { $(this).parent().parent().parent().parent().find('.GRAVAR').html(ReplaceHrefID) }
+
+                    //            //NOTA TA: Aqui re-faço a href do botão com todos os campos preenchidos de origem
+                    //            var ValorInicial_id_camp = id;
+                    //            var ReplaceHref_id_camp = $(this).parent().parent().parent().parent().find('.GRAVAR').html().replace('id_camp=id_camp', 'id_camp' + '=' + ValorInicial_id_camp);
+                    //            $(this).parent().parent().parent().parent().find('.GRAVAR').html(ReplaceHref_id_camp);
+
+
+
+                    //            var hrefalterar1 = $(this).parent().parent().parent().parent().find('.GRAVAR').html();
+
+                    //            var valor = $(this).val()
+                    //            if ($(this).val() == "" || $(this).val() <= 0 || $(this).val() >= 5 || valor != parseInt(valor, 10)) {
+                    //                var novoConteudo = conteudoOriginal;
+                    //                alert("Por favor, insira um Valor de 1 a 4 para seleccionar a versão.")
+                    //            }
+                    //            else {
+                    //                var novoConteudo = $(this).val();
+                    //            }
+
+
+                    //            $(this).parent().text(novoConteudo);
+                    //            $(this).parent().removeClass("celulaEmEdicao");
+
+
+                    //            var ReplaceHref1 = hrefalterar1.replace('versao_selec=versao_selec', 'versao_selec' + '=' + novoConteudo);
+
+                    //            $('#' + idconteudoOriginal).find('.GRAVAR').html(ReplaceHref1);
+
+
+                    //            //-------------------INICIO: ACRESCENTEI para evitar passo debotão GRAVAR----
+                    //            var href_alt = document.querySelector('#grid00conf .GRAVAR a').href
+                    //            var href_alt_ = href_alt.replace('"', '').replace('amp;', '').replace('amp;', '')
+
+                    //            var x = document.getElementsByClassName("GRAVAR");
+                    //            var i;
+                    //            for (i = 0; i < x.length; i++) {
+                    //                x[i].style.display = "none";
+
+                    //            }
+
+                    //            //alert(ReplaceHref1);
+
+                    //            window.location.href = href_alt_
+
+                    //            //-------------------FIM: ACRESCENTEI para evitar passo debotão GRAVAR----
+
+                    //        }
+
+                    //    });
+
+
+                    //})
+
+
+                    //--------------------------------TRATO os CAMPO de VERSAO_SELECCCAO    grid01conf--------------------------
+
+
+                    //$("#grid01conf").find(".versao_selec ").click(function () {
+
+
+                    //    if ($(this).children().attr('class') != "input") {
+                    //        var id = $(this).parent().find(".id").html();
+                    //        var idconteudoOriginal = $(this).parent().parent().parent().parent().parent().attr('id');
+                    //        //var findidconteudoOriginal = '.' + idconteudoOriginal + '';
+
+
+                    //        var conteudoOriginal = $(this).text();
+
+
+
+                    //        var ReplaceHrefID = $("#GRAVARSELEC_VERXX form").html();
+
+
+
+                    //        $(this).html("<input class='input' value='" + conteudoOriginal + "'/>");
+                    //        $(this).children().first().focus();
+
+                    //    }
+
+
+
+                    //    // NOTA TA: Keypress significa que a instrução é cumprida quando o utilizador faz "enter"
+                    //    $(this).children().first().keypress(function (e) {
+                    //        if (e.which == 13) {
+
+                    //            if ($(this).parent().parent().parent().parent().find('.GRAVAR').text() == "") {
+                    //                $(this).parent().parent().parent().parent().prepend(ReplaceHrefID);
+                    //            }
+                    //            else { $(this).parent().parent().parent().parent().find('.GRAVAR').html(ReplaceHrefID) }
+
+                    //            //NOTA TA: Aqui re-faço a href do botão com todos os campos preenchidos de origem
+                    //            var ValorInicial_id_camp = id;
+                    //            var ReplaceHref_id_camp = $(this).parent().parent().parent().parent().find('.GRAVAR').html().replace('id_camp=id_camp', 'id_camp' + '=' + ValorInicial_id_camp);
+                    //            $(this).parent().parent().parent().parent().find('.GRAVAR').html(ReplaceHref_id_camp);
+
+
+
+                    //            var hrefalterar1 = $(this).parent().parent().parent().parent().find('.GRAVAR').html();
+
+                    //            var valor = $(this).val()
+                    //            if ($(this).val() == "" || $(this).val() <= 0 || $(this).val() >= 5 || valor != parseInt(valor, 10)) {
+                    //                var novoConteudo = conteudoOriginal;
+                    //                alert("Por favor, insira um Valor de 1 a 4 para seleccionar a versão.")
+                    //            }
+                    //            else {
+                    //                var novoConteudo = $(this).val();
+                    //            }
+
+
+                    //            $(this).parent().text(novoConteudo);
+                    //            $(this).parent().removeClass("celulaEmEdicao");
+
+
+                    //            var ReplaceHref1 = hrefalterar1.replace('versao_selec=versao_selec', 'versao_selec' + '=' + novoConteudo);
+
+                    //            $('#' + idconteudoOriginal).find('.GRAVAR').html(ReplaceHref1);
+
+
+                    //            //-------------------INICIO: ACRESCENTEI para evitar passo debotão GRAVAR----
+                    //            var href_alt = document.querySelector('#grid01conf .GRAVAR a').href
+                    //            var href_alt_ = href_alt.replace('"', '').replace('amp;', '').replace('amp;', '')
+
+                    //            var x = document.getElementsByClassName("GRAVAR");
+                    //            var i;
+                    //            for (i = 0; i < x.length; i++) {
+                    //                x[i].style.display = "none";
+
+                    //            }
+
+                    //            //alert(ReplaceHref1);
+
+                    //            window.location.href = href_alt_
+
+                    //            //-------------------FIM: ACRESCENTEI para evitar passo debotão GRAVAR----
+
+                    //        }
+
+                    //    });
+
+
+                    //})
+
+
+                })
+            </script>
+
+        }

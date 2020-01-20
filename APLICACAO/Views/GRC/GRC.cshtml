@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "GRC ";
+    ViewBag.Title1 = " - Gestão de Risco de Clientes. Bem Vindo!";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+    <h2>@ViewBag.Title1</h2>
+</hgroup>
+
+ 
+
+
+<p> 
+         @using (Html.BeginForm("LISTA_CLIENTES","GRC", FormMethod.Get))
+    {
+    <p></p> <input type="submit" value="VER LISTA DE CLIENTES" />
+    }
+ </p>   
+ <p> 
+         @using (Html.BeginForm("EVOL_PMR_PER", "GRC", FormMethod.Get))
+    {
+    <p></p> <input type="submit" value="EVOLUÇÃO DO PMR" />
+    }
+ </p> 
+ <p> 
+         @using (Html.BeginForm("IDADE_SALDOS", "GRC", FormMethod.Get))
+    {
+    <p></p> <input type="submit" value="IDADES DE SALDOS" />
+    }
+ </p> 
+ <p> 
+         @using (Html.BeginForm("GRC_ALERTAS_RESUMO", "GRC", FormMethod.Get))
+    {
+    <p></p> <input type="submit" value="RESUMO DE ALERTAS OPERACIONAIS" />
+    }
+ </p> 
+
+<table border="1">
+   <tr>
+     <td>
+         @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO01", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO01" >
+    }
+          </td>
+     <td>
+              @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO02", Pesquisa_User = "tjalmeida" }))
+    {
+         
+              <input type="submit" value="AO02" >
+    }
+ </td>
+     <td>
+
+                   @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO03", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO03" />
+    }
+      </td>
+     <td>
+                       @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO04", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO04" />
+    }
+       </td>
+     <td>
+                      @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO05", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO05" />
+    }
+               </td>
+          </tr>
+    <tr>
+     <td>
+                       @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO06", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO06" />
+    }
+      </td>
+     <td>
+                       @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO07", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO07" />
+    }
+        </td>
+     <td>
+                     @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO08", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO08" />
+    }
+      </td>
+     <td>
+                       @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO09", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO09" />
+    }
+        </td>
+     <td>
+                     @using (Html.BeginForm("GRC_ALERTAS_INDIVIDUAL", "GRC", new { Alertas = "AO10", Pesquisa_User = "tjalmeida" }))
+    {
+    <input type="submit" value="AO10" />
+    }
+         </td>
+   </tr>
+  </table>
+<p> 
+         @using (Html.BeginForm("PROC_GRC_ACT_TBL_GRC_IND", "GRC", FormMethod.Get))
+    {
+    <p></p> <input type="submit" value="ACTUALIZA DADOS GRC" />
+    }
+ </p> 
+
+@*     
+
+  < VER LISTA DE @Html.ActionLink("CLIENTES", "LISTA_CLIENTES", "GRC")>
+</p>
+ <______________>< VER LISTA DE @Html.ActionLink("PROC_GRC_VER_CLIENTE_Grid3_Result", "PROC_GRC_VER_CLIENTE_Grid3_Result", "GRC")>
+</p>
+ < VER LISTA DE @Html.ActionLink("EVOL_PMR_PER", "EVOL_PMR_PER", "GRC")>
+</p>
+ < VER LISTA DE @Html.ActionLink("IDADE_SALDOS", "IDADE_SALDOS", "GRC")>
+</p>
+ <______________>< VER LISTA DE @Html.ActionLink("GRC_CONF_IDADE_SALDOS_Result", "GRC_CONF_IDADE_SALDOS_Result", "GRC")>
+</p>
+ < VER LISTA DE @Html.ActionLink("GRC_ALERTAS_RESUMO", "GRC_ALERTAS_RESUMO", "GRC")>
+</p>
+ <______________>< VER LISTA DE @Html.ActionLink("GRC_ALERTA_AO01_PARTIAL_Result", "GRC_ALERTA_AO01_PARTIAL_Result", "GRC")>
+</p>
+ <______________><  VER LISTA DE @Html.ActionLink("GRC_ALERTA_AO02_PARTIAL_Result", "GRC_ALERTA_AO02_PARTIAL_Result", "GRC")>
+     </p>
+ <______________><  VER LISTA DE @Html.ActionLink("GRC_ALERTA_AO03_PARTIAL_Result", "GRC_ALERTA_AO03_PARTIAL_Result", "GRC")>
+     </p>
+ <______________><  VER LISTA DE @Html.ActionLink("GRC_ALERTA_AOXX_PARTIAL_Result", "GRC_ALERTA_AOXX_PARTIAL_Result", "GRC")>
+
+          </p>
+ <______________><  VER LISTA DE @Html.ActionLink("GRC_CONF_USER_Result", "GRC_CONF_USER_Result", "GRC")>
+          </p>
+ <______________><  VER LISTA DE @Html.ActionLink("teste", "teste", "GRC")>
+               *@
+ 
+
+    @section scripts {
+
+
+
+
+
+
+}
+

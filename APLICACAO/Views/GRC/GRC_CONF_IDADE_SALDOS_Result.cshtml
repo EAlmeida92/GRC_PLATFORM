@@ -1,0 +1,130 @@
+﻿@model IEnumerable<APLICACAO.PROC_GRC_CONF_IDADE_SALDOS_ALT_Result>
+
+@*<p>
+    Pesquisar por Número, Nome ou NIF  
+
+   <!-- NOTA TA: aqui ficam os campos de pesquisa da grelha de clientes --->
+
+    @using (Html.BeginForm("IDADE_SALDOS", "GRC", FormMethod.Get))
+    {
+                 <l>Interv_01_dias:                             </l>  @Html.TextBox("Interv_01_diasz", ViewData["Interv_01_dias"])  
+           
+                                                               @Html.TextBox("TESTETA1",@Html.Value("#TESTETA"))
+             
+          <input type="submit" value="Actualizar Dados" />
+    }
+</p>*@
+    
+
+
+
+
+
+<style type="text/css">
+    .webgrid-table-edit
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+     
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-alternating-row
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+
+</style>
+
+@{
+    var grid = new WebGrid(source: Model, defaultSort: "Data", canPage: true, rowsPerPage: 13, selectionFieldName: "selectedRow");
+    grid.SortDirection = SortDirection.Descending; 
+}
+
+
+@{
+
+  
+    var result = grid.Rows[0]["Interv_01"];
+
+  
+       
+
+    var gridColumns = new List<WebGridColumn>();
+    {
+
+        gridColumns.Add(grid.Column("Acção", style: "Acção", header: null, format: @<text>@Html.ActionLink("Gravar", "GRC_CONF_IDADE_SALDOS_Result_ALT", "GRC", new { Pesquisa_id = item.Id, Pesquisa_User = item.user, Interv_01_dias =item.Interv_01,  Interv_02_dias =item.Interv_02,  Interv_03_dias =item.Interv_03,  Interv_04_dias =item.Interv_04,  Interv_05_dias =item.Interv_05,  Interv_06_dias =item.Interv_06,  Interv_07_dias =item.Interv_07,  Interv_08_dias =item.Interv_08,  Interv_09_dias =item.Interv_09,  Interv_10_dias =item.Interv_10,  Interv_11_dias =item.Interv_11,  Interv_12_dias =item.Interv_12}, null)</text>));
+        gridColumns.Add(grid.Column("Interv_01", header: "1º Interv.", style: "Interv_01_dias"));
+        gridColumns.Add(grid.Column("Interv_02", header: "2º Interv.", style: "Interv_02_dias"));
+        gridColumns.Add(grid.Column("Interv_03", header: "3º Interv.", style: "Interv_03_dias"));
+        gridColumns.Add(grid.Column("Interv_04", header: "4º Interv.", style: "Interv_04_dias"));
+        gridColumns.Add(grid.Column("Interv_05", header: "5º Interv.", style: "Interv_05_dias"));
+        gridColumns.Add(grid.Column("Interv_06", header: "6º Interv.", style: "Interv_06_dias"));
+        gridColumns.Add(grid.Column("Interv_07", header: "7º Interv.", style: "Interv_07_dias"));
+        gridColumns.Add(grid.Column("Interv_08", header: "8º Interv.", style: "Interv_08_dias"));
+        gridColumns.Add(grid.Column("Interv_09", header: "9º Interv.", style: "Interv_09_dias"));
+        gridColumns.Add(grid.Column("Interv_10", header: "10º Interv.", style: "Interv_10_dias"));
+        gridColumns.Add(grid.Column("Interv_11", header: "11º Interv.", style: "Interv_11_dias"));
+        gridColumns.Add(grid.Column("Interv_12", header: "12º Interv.", style: "Interv_12_dias"));
+        gridColumns.Add(grid.Column("Data_alteracao", header: "Data de Alteração", style: "Webgrid_col_data"));
+        gridColumns.Add(grid.Column("user", header: "user", style: "Webgrid_col_data"));
+        gridColumns.Add(grid.Column("Id", header: "Id", style: "Webgrid_col_data"));
+
+
+
+    } 
+        
+}
+
+<div id="grid">
+
+ @grid.GetHtml(
+         tableStyle: "webgrid-table-edit",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+                mode: WebGridPagerModes.All, columns: grid.Columns(gridColumns.ToArray()));
+
+</div>
+
+
+  

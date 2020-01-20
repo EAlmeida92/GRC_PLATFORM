@@ -1,0 +1,467 @@
+﻿﻿
+<style id="ccs_style" type="text/css">
+    .page-breaker {
+        display: block;
+        clear: both;
+        page-break-after: always;
+    }
+
+    .oculta {
+        display: none;
+    }
+
+    .mostra {
+        display: normal;
+    }
+
+    .graficos_textos {
+        height: 725px;
+        width: 1250px;
+    }
+
+    .div_pag {
+        display: none;
+        height: 725px;
+        width: 1250px;
+    }
+</style>
+
+
+<!DOCTYPE html>
+<html lang="en" style="background-color:white; min-width:1000px">
+<head>
+</head>
+<body id="RELATORIO_RESUMIDO">
+
+
+    @{
+        Layout = null;
+    }
+    @{
+        var ANO_VERSAO_REAL = @ViewData["ANO_VERSAO_REAL"];
+        var ANO_VERSAO_ANTE = @ViewData["ANO_VERSAO_ANTE"];
+        var MES_ACUM_REAL = @ViewData["MES_ACUM_REAL"];
+        var MES_ACUM_ANTE = @ViewData["MES_ACUM_ANTE"];
+        var MES_INI_PER_REAL = @ViewData["MES_INI_PER_REAL"];
+        var MES_INI_PER_ANTE = @ViewData["MES_INI_PER_ANTE"];
+        var MES_FIN_PER_REAL = @ViewData["MES_FIN_PER_REAL"];
+        var MES_FIN_PER_ANTE = @ViewData["MES_FIN_PER_ANTE"];
+    }
+    <table class="RELARORIO_RESUMIDO_CAPA" style="width:100%;height:750px;text-align:center">
+        <tr>
+            <td style="width:15%">
+                <p class="site-title">
+                    @if (Request.IsAuthenticated)
+                    {
+                        <text>
+
+
+                            @{ string IdentifyUser = User.Identity.Name;
+                                string caracter = "#";
+                                int Identifycaracter = IdentifyUser.IndexOf(caracter);
+                                var IdentifyLength = IdentifyUser.Length - Identifycaracter;
+                                var User1 = IdentifyUser.Substring(0, Identifycaracter);
+                                var Conexao = IdentifyUser.Substring(Identifycaracter + 1, IdentifyLength - 1);
+                                var logo_conexao = "/images/logo_" + @Conexao + ".png";
+
+                            }
+                            <img src=@logo_conexao style="width:200px" />
+
+                        </text>}
+
+            </td>
+
+            <td style="width:70%"></td>
+            <td style="width:15%"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td colspan="2" style="text-align:right">
+
+                <h1> RELATÓRIO RESUMIDO </h1>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td></td>
+            <td style="text-align:right"> <h2 style="text-align:right; color:blue">@Html.Raw(ViewData["MES_ACUM_REAL_EXTENSO"]) de @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_REAL))) </h2></td>
+
+        </tr>
+        <tr>
+            <td>di4you.pt</td>
+            <td></td>
+            <td style="text-align:right">
+                <div id="date"></div>
+            </td>
+        </tr>
+    </table>
+    <div class="page-breaker"></div>
+
+    <div id="pag_0" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_1_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_1_2" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_1_3" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+
+
+  @if (@ViewData["CMVMC_REAL_ACUM"].Equals("calc"))
+  {
+    <div id="pag_2_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_2" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+  }
+  else
+  if ((Convert.ToDecimal(@ViewData["CMVMC_REAL_ACUM"])) == 0) { }
+  else
+  {
+     <div id="pag_2_1" classe="div_pag"> </div>
+     <div class="page-breaker"></div>
+    <div id="pag_2" classe="div_pag"> </div>
+    <div class="page-breaker"></div>}
+
+    
+    <div id="pag_3_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_3" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_3_2" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_4_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+     <div id="pag_4" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_5" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_5_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_6_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_6" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_7_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_7" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_8_1" classe="div_pag"> </div>
+    <div class="page-breaker"></div>
+    <div id="pag_8" classe="div_pag"> </div>
+
+
+
+    @Html.Action("DEM_RESULT_MENSAL_COMP_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("DEM_RESULT_MENSAL_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("CMVMC_MENSAL_COMP_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("GASTOS_PESSOAL_MENSAL_COMP_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("GASTOS_PESSOAL_MENSAL_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("FSE_MENSAL_COMP_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("FSE_MENSAL_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("BALANCO_COMP_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("CASH_FLOW_MENSAL_COMP_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+    @Html.Action("INDICADORES_MENSAL_COMP_REL", "BI", new { Pesquisa_User = "tjalmeida" })
+
+
+
+
+</body>
+</html>
+
+
+
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+
+
+
+        $("#Peso_CMVMC_Comp").attr('style', 'padding-top:40px; width:1250px');
+        $("#Peso_GASTOS_PESSOAL_Comp").attr('style', 'padding-top:40px; width:1250px');
+        $("#graficos_Peso_FSE_Comp").attr('style', 'padding-top:40px; width:1250px');
+
+
+    });
+
+    $('div[id="body"]:eq(0)').attr("id", "body01");
+    $('div[id="body"]:eq(0)').attr("id", "body02");
+    $('div[id="body"]:eq(0)').attr("id", "body03");
+    $('div[id="body"]:eq(0)').attr("id", "body04");
+    $('div[id="body"]:eq(0)').attr("id", "body05");
+    $('div[id="body"]:eq(0)').attr("id", "body06");
+    $('div[id="body"]:eq(0)').attr("id", "body07");
+    $('div[id="body"]:eq(0)').attr("id", "body08");
+    $('div[id="body"]:eq(0)').attr("id", "body09");
+    $('div[id="body"]:eq(0)').attr("id", "body10");
+
+
+    $('#body01').addClass('oculta');
+    $('#body02').addClass('oculta');
+    $('#body03').addClass('oculta');
+    $('#body04').addClass('oculta');
+    $('#body05').addClass('oculta');
+    $('#body06').addClass('oculta');
+    $('#body07').addClass('oculta');
+    $('#body08').addClass('oculta');
+    $('#body09').addClass('oculta');
+    $('#body10').addClass('oculta');
+
+
+
+
+    $('#CAPA_DEM_RESULT_MENSAL_COMP_REL').addClass('oculta');
+    $('#CAPA_DEM_RESULT_MENSAL_REL').addClass('oculta');
+    $('#CAPA_CMVMC_MENSAL_COMP_REL').addClass('oculta');
+    $('#CAPA_GASTOS_PESSOAL_MENSAL_COMP_REL').addClass('oculta');
+    $('#CAPA_GASTOS_PESSOAL_MENSAL_REL').addClass('oculta');
+    $('#CAPA_FSE_MENSAL_COMP_REL').addClass('oculta');
+    $('#CAPA_FSE_MENSAL_REL').addClass('oculta');
+    $('#CAPA_BALANCO_COMP_REL').addClass('oculta');
+    $('#CAPA_CASH_FLOW_MENSAL_COMP_REL').addClass('oculta');
+    $('#CAPA_INDICADORES_MENSAL_COMP_REL').addClass('oculta');
+
+    $('#PAGE_BREAK_DEM_RESULT_MENSAL_COMP_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_DEM_RESULT_MENSAL_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_CMVMC_MENSAL_COMP_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_GASTOS_PESSOAL_MENSAL_COMP_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_GASTOS_PESSOAL_MENSAL_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_FSE_MENSAL_COMP_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_FSE_MENSAL_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_BALANCO_COMP_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_CASH_FLOW_MENSAL_COMP_REL').removeClass().addClass('oculta');
+    $('#PAGE_BREAK_INDICADORES_MENSAL_COMP_REL').removeClass().addClass('oculta');
+
+
+
+    n = new Date();
+    y = n.getFullYear();
+    m = n.getMonth() + 1;
+    d = n.getDate();
+    document.getElementById("date").innerHTML = "DATA : " + d + "/" + m + "/" + y;
+
+    $('#pag_0').addClass('mostra');
+    var PAG_0 = '<table>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+         '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#DEM_RESULT_MENSAL_PREST_SERV_quadro').html() + '</table>';
+    '</td>  </tr>' +
+    '</table>'
+    $('#pag_0').html(PAG_0)
+
+
+    $('#pag_1').addClass('mostra');
+    var PAG_1 = '<table>' +
+        '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+        '<div> <h2>' + $('#dem_result_mensal_comp_titulo_tabela').html() + '</h2></div>' +
+		'</td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+         '<table  style="width: 90%;  margin-left:5%;  margin-right:5%; font-size: 13px;">'  + $('#DEM_RESULT_MENSAL_COMP').html() + '</table>';
+    '</td>  </tr>' +
+    '</table>'
+    $('#pag_1').html(PAG_1)
+
+    $('#pag_1_1').addClass('mostra');
+    var PAG_1_1 = '<table>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+         '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#DEM_RESULT_MENSAL_EBITDA_quadro').html() + '</table>';
+    '</td>  </tr>' +
+    '</table>'
+    $('#pag_1_1').html(PAG_1_1)
+
+    $('#pag_1_2').addClass('mostra');
+    var PAG_1_2 = '<table>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+         '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#DEM_RESULT_MENSAL_RES_LIQUIDO_quadro').html() + '</table>';
+    '</td>  </tr>' +
+    '</table>'
+    $('#pag_1_2').html(PAG_1_2)
+
+
+    $('#pag_1_3').addClass('mostra');
+    var PAG_1_3 = '<table>' +
+        '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+        '<div> <h2>' + $('#dem_result_mensal_titulo_tabela').html() + '</h2></div>' +
+		'</td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+         '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#DEM_RESULT_MENSAL').html() + '</table>';
+    '</td>  </tr>' +
+    '</table>'
+    $('#pag_1_3').html(PAG_1_3)
+
+
+    $('#pag_2').addClass('mostra');
+    var PAG_2 = '<table>' +
+        '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+        '<div> <h2>' + $('#cmvmc_mensal_comp_titulo_tabela').html() + '</h2></div>' +
+		'</td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+           '<table  style="width: 90%;  margin-left:5%;  margin-right:5%; font-size: 13px;">' + $('#CMVMC_MENSAL_COMP').html() + '</table>'+
+    '</td>  </tr>' +
+        '<tr> <td> </td> <td>' +
+        '<table style="width: 100%">' + $('#Peso_CMVMC_Comp_table').html() + '</table>'
+        '</td>  </tr>' +
+        '</table>'
+    $('#pag_2').html(PAG_2)
+
+    $('#pag_2_1').addClass('mostra');
+    var PAG_2_1 = '<table>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+         '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#DEM_RESULT_MENSAL_CMVMC_quadro').html() + '</table>';
+    '</td>  </tr>' +
+    '</table>'
+    $('#pag_2_1').html(PAG_2_1)
+
+    
+    $('#pag_3').addClass('mostra');
+    var PAG_3 = '<table>' +
+        '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+        '<div> <h2>' + $('#gastos_pessoal_mensal_comp_titulo_tabela').html() + '</h2></div>' +
+		'</td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+        '<table  style="width: 90%;  margin-left:5%;  margin-right:5%; font-size: 13px;">' + $('#GASTOS_PESSOAL_MENSAL_COMP').html() + '</table>'+
+        '</td>  </tr>' +
+        '<tr> <td> </td> <td>' +
+        '<table style="width: 100%">' + $('#Peso_GASTOS_PESSOAL_Comp_table').html() + '</table>';
+        '</td>  </tr>' +
+        '</table>'
+        $('#pag_3').html(PAG_3)
+
+        $('#pag_3_1').addClass('mostra');
+        var PAG_3_1 = '<table>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+             '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#DEM_RESULT_MENSAL_GASTOS_PESSOAL_quadro').html() + '</table>';
+        '</td>  </tr>' +
+        '</table>'
+        $('#pag_3_1').html(PAG_3_1)
+
+
+        $('#pag_3_2').addClass('mostra');
+        var PAG_3_2 = '<table>' +
+            '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<div> <h2>' + $('#gastos_pessoal_mensal_titulo_tabela').html() + '</h2></div>' +
+            '</td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<table  style="width: 90%; margin-left:5%;  margin-right:5%; font-size: 13px;">' + $('#GASTOS_PESSOAL_MENSAL').html() + '</table>' +
+        '</td>  </tr>' +
+            '</table>'
+        $('#pag_3_2').html(PAG_3_2)
+
+
+
+    $('#pag_4').addClass('mostra');
+    var PAG_4 = '<table>' +
+        '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+        '<div> <h2>' + $('#fse_mensal_comp_titulo_tabela').html() + '</h2></div>' +
+		'</td>  </tr>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+        '<table  style="width: 90%; margin-left:5%;  margin-right:5%; font-size: 13px;">' + $('#FSE_MENSAL_COMP').html() + '</table>'+
+    '</td>  </tr>' +
+        '</table>'
+    $('#pag_4').html(PAG_4)
+
+    $('#pag_4_1').addClass('mostra');
+    var PAG_4_1 = '<table>' +
+        '<tr> <td colspan="3" style="text-align:center">' +
+         '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#DEM_RESULT_MENSAL_FSE_quadro').html() + '</table>';
+    '</td>  </tr>' +
+    '</table>'
+    $('#pag_4_1').html(PAG_4_1)
+
+    $('#pag_5').addClass('mostra');
+    var PAG_5 = '<table>' +
+        '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+        '<tr> <td> </td> <td>' +
+        '<table style="width: 1100px">' + $('#graficos_Peso_FSE_Comp').html() + '</table>';
+        '</td>  </tr>' +
+        '</table>'
+        $('#pag_5').html(PAG_5)
+
+        $('#pag_5_1').addClass('mostra');
+        var PAG_5_1 = '<table>' +
+            '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<div> <h2>' + $('#fse_mensal_titulo_tabela').html() + '</h2></div>' +
+            '</td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<table  style="width: 90%; margin-left:5%;  margin-right:5%; font-size: 13px;">' + $('#FSE_MENSAL').html() + '</table>' +
+        '</td>  </tr>' +
+            '</table>'
+        $('#pag_5_1').html(PAG_5_1)
+
+
+        $('#pag_6').addClass('mostra');
+        var PAG_6 = '<table>' +
+            '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<div> <h2>' + $('#balanco_comp_titulo_tabela').html() + '</h2></div>' +
+            '</td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<table  style="width: 90%; margin-left:5%;  margin-right:5%; font-size: 12px;">' + $('#BALANCO_COMP').html() + '</table>' +
+        '</td>  </tr>' +
+            '</table>'
+        $('#pag_6').html(PAG_6)
+
+
+        $('#pag_6_1').addClass('mostra');
+        var PAG_6_1 = '<table>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+             '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#BALANCO_COMP_ACUMULADO_COMP_quadro').html() + '</table>';
+        '</td>  </tr>' +
+        '</table>'
+        $('#pag_6_1').html(PAG_6_1)
+
+        $('#pag_7').addClass('mostra');
+        var PAG_7 = '<table>' +
+            '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<div> <h2>' + $('#cash_flow_mensal_comp_titulo_tabela').html() + '</h2></div>' +
+            '</td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<table  style="width: 90%; margin-left:5%;  margin-right:5%; font-size: 12px;">' + $('#CASH_FLOW_MENSAL_COMP').html() + '</table>' +
+        '</td>  </tr>' +
+            '</table>'
+        $('#pag_7').html(PAG_7)
+
+
+        $('#pag_7_1').addClass('mostra');
+        var PAG_7_1 = '<table>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+             '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#CFLOW_COMP_ACUMULADO_COMP_quadro').html() + '</table>';
+        '</td>  </tr>' +
+        '</table>'
+        $('#pag_7_1').html(PAG_7_1)
+
+
+        $('#pag_8').addClass('mostra');
+        var PAG_8 = '<table>' +
+            '<tr> <td style="width:10%"> </td><td  style="width:80%> </td><td  style="width:10%> </td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<div> <h2>' + $('#indicadores_mensal_comp_titulo_tabela').html() + '</h2></div>' +
+            '</td>  </tr>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+            '<table  style="width: 90%; margin-left:5%;  margin-right:5%; font-size: 12px;">' + $('#INDICADORES_MENSAL_COMP').html() + '</table>' +
+        '</td>  </tr>' +
+            '</table>'
+        $('#pag_8').html(PAG_8)
+
+        $('#pag_8_1').addClass('mostra');
+        var PAG_8_1 = '<table>' +
+            '<tr> <td colspan="3" style="text-align:center">' +
+             '<table  style="width: 100%;  margin-left:0%;  margin-right:0%; font-size: 13px;">' + $('#INDICADORES_MENSAL_COMP_ACUMULADO_COMP_quadro').html() + '</table>';
+        '</td>  </tr>' +
+        '</table>'
+        $('#pag_8_1').html(PAG_8_1)
+
+</script>
+

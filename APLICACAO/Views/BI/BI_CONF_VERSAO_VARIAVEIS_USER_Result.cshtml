@@ -1,0 +1,101 @@
+﻿@model IEnumerable<APLICACAO.PROC_BI_CONF_VERSAO_VARIAVEIS_USER_Result>
+
+
+
+
+
+<style type="text/css">
+    .webgrid-table-edit-gridconf
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+     
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        text-align: center;
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+      
+    }
+    .webgrid-footer
+    {
+    }
+    .ParametrosNum
+        {text-align: left;
+    }
+    .Parametros
+        {text-align: left;
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-alternating-row
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+
+</style>
+
+@{
+    var grid = new WebGrid(source: Model, defaultSort: "id_camp", canPage: true, rowsPerPage: 30, selectionFieldName: "selectedRow");
+    grid.SortDirection = SortDirection.Ascending; 
+}
+
+
+@{
+
+ 
+       
+
+    var gridColumns = new List<WebGridColumn>();
+    {
+
+        gridColumns.Add(grid.Column("ID", header: "ID", style: "id"));
+        gridColumns.Add(grid.Column("id_camp_calc", header: "Codigo", style: "id_camp_calc" ));
+        gridColumns.Add(grid.Column("desc_camp_calc", header: "Descrição da Variavel", style: "desc_camp_calc"));
+        gridColumns.Add(grid.Column("campocalc_resultado", header: "Valor da Variavel", style: "campocalc_resultado", canSort: false));
+        
+    } 
+        
+}
+
+<div id="grid">
+
+ @grid.GetHtml(
+         tableStyle: "webgrid-table-edit-gridconf",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+                mode: WebGridPagerModes.All, columns: grid.Columns(gridColumns.ToArray()))
+
+</div>

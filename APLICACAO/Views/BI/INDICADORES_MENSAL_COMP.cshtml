@@ -1,0 +1,1987 @@
+﻿@{
+    ViewBag.Title = "INDICADORES_MENSAL_COMP";
+}
+
+<style id="ccs_style" type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        text-align: right;
+        
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+        text-align: right;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 60px;
+
+    }
+        .webgrid-header_
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 30px;
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-rubrica
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+
+    }
+        .webgrid-total
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+        text-align: right;   
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+.webgrid-total-TOTAL
+    {
+         text-align: center;
+        background-color: #02020a;   
+        color: white;
+        padding: 3px 7px 2px;
+    }
+    .input {
+     width: 50px;
+     height: 25px;
+
+        text-align: justify;
+        background-color: #EAF2D3;
+        padding: 3px 4px 2px;
+       text-overflow:clip;
+    
+    }
+        .GRAVAR
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        color:#eaf2d3;
+         background-color: #d2d4f1        
+    }
+    .campocalc_resultado  {
+         background-color: #E3DFFF;
+         text-align: center;
+    }
+    .oculta_na_impressao {
+                
+        height: 30px;
+        display:none;
+    }
+                .titulos_mapas {
+        background-color: #7F7F7F;
+        text-align: center;
+        color: #FFFFFF;
+        vertical-align: middle;
+        font-size: 22px;
+        font-weight: bold;
+           }
+        /*NOTA table::after CSS param TOOLTIPS*/
+
+.tooltip {
+  position: relative;
+  /*display: inline-block;*/
+  /*border-bottom: 1px dotted black;*/
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  /*width: 125px;*/
+  width: 240px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  /*margin-left: -60px;*/
+  margin-left: -10px;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  /*left: 50%;*/
+  left: 5%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+    .calcular
+{display:none;
+ width:100%;
+ text-align:center;
+ 
+}
+    /*NOTA table::AQUI DEFINO  O  STYLE DOS BOTÕES*/
+
+.btn:focus, .btn::-moz-focus-inner{
+  outline:none;
+  border:none;
+}
+.btn{
+  font-family: arial;
+  font-size:14px;
+  text-transform: uppercase;
+  font-weight:700;
+  border:none;
+  padding:10px;
+  cursor: pointer;
+  display:inline-block;
+  text-decoration: none;
+  width: auto;
+}
+.btn-green{
+  background:green;
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 #006000 /*rgba(0, 96, 0, 0.6)*/;
+    width: auto;
+}
+.btn-green:hover{
+  background:#006000;
+  box-shadow:0 5px 0 #003f00;
+}
+.btn-blue{
+  background:rgba(0,0,139, 0.6);
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 rgba(0,0,59, 0.6);
+    width: auto;
+}
+.btn-blue:hover{
+  background:#2153a2;
+  box-shadow:0 5px 0 #00003B;
+}
+.btn-purple{
+  background:purple; opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #670167 /*rgba(103, 1, 103, 0.6)*/;
+    width: auto;
+}
+.btn-purple:hover{
+  background:#670167;
+  box-shadow:0 5px 0 #470047;
+}
+.btn-red{
+  background:red; opacity:0.7;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #d20000 /*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-red:hover{
+  background:#d20000;
+  box-shadow:0 5px 0 #b00000;
+}
+.btn-orange{
+  background:rgb(204 , 112 , 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(204 , 112 , 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-orange:hover{
+  background:rgb(204 , 112 , 0);
+  box-shadow:0 5px 0 rgb(204 , 112 , 0);
+}
+.btn-brown{
+  background:rgb(102, 0, 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(102, 0, 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-brown:hover{
+  background:rgb(102, 0, 0);
+  box-shadow:0 5px 0 rgb(102, 0, 0);
+}
+.btn-green:active,.btn-blue:active, .btn-purple:active, .btn-red:active, .btn-orange:active, .btn-brown:active{
+  position:relative;
+  top:5px;
+  box-shadow:inherit;
+}
+        option {
+       
+        direction: rtl; 
+
+    }
+    </style>
+
+
+@{
+    var ANO_VERSAO_REAL = @ViewData["ANO_VERSAO_REAL"];
+    var ANO_VERSAO_ANTE = @ViewData["ANO_VERSAO_ANTE"];
+    var MES_ACUM_REAL = @ViewData["MES_ACUM_REAL"];        
+    var MES_ACUM_ANTE = @ViewData["MES_ACUM_ANTE"];
+    var MES_INI_PER_REAL = @ViewData["MES_INI_PER_REAL"];
+    var MES_INI_PER_ANTE = @ViewData["MES_INI_PER_ANTE"];
+    var MES_FIN_PER_REAL = @ViewData["MES_FIN_PER_REAL"];
+    var MES_FIN_PER_ANTE = @ViewData["MES_FIN_PER_ANTE"]; 
+}
+
+
+
+<h2 id="indicadores_mensal_comp_titulo_tabela">INDICADORES - COMPARATIVO @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_REAL))) vs @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_ANTE)))</h2>
+<p></p>
+<table id="botoes">
+    <tr>
+        <td>
+            <button type="button" name="Mostrar" id="Mostrar" class="btn-brown"> Configurar Intervalos de Análise</button>
+        </td>
+        <td style="display:none">
+            <iframe id="txtArea1" style="display:none"></iframe>
+        </td>
+        <td>
+            <button type=button id="btnExport1" class="btn-blue" style="display:none" onclick="fnExcelReport('INDICADORES_MENSAL_COMP', 'Export HTML Table to Excel')">Excel</button>
+        </td>
+    </tr>
+</table>
+<p></p>
+<p></p>
+<p></p>
+
+
+<div class="calcular">
+    <h3 style="background-color:blueviolet; color:white;">Estamos a calcular os dados desta tabela. Iremos refrescando a página até que toda a tabela esteja calculada. </h3>
+    <p style="padding-bottom:5px"></p>
+</div>
+
+
+<table id="INDICADORES_MENSAL_COMP" class="webgrid-table" border="1">
+    <thead>
+        <tr class="oculta_na_impressao">
+            <td class="webgrid-header_" style="background-color:#efeeef; border-color:#efeeef;text-align:right;vertical-align:middle; padding-bottom:1px">Período a analisar - Mês Inicial : </td>
+            <td id="grid_mes_ini_ano_n_td" class="webgrid-header_" style="background-color:#efeeef; border-color:#efeeef; text-align:right; padding-left:35px"></td>
+            <td id="grid_mes_ini_ano_n-1_td" class="webgrid-header_" style="background-color:#efeeef; border-color:#efeeef; padding-left:35px"></td>
+            <td class="webgrid-header_" colspan="6" style="background-color:#efeeef; border-color:#efeeef"> </td>
+
+
+        </tr>
+        <tr class="oculta_na_impressao" style="background-color:#efeeef; border-color:#efeeef">
+            <td class="webgrid-header_" style="background-color:#efeeef; border-color:#efeeef; text-align:right;vertical-align:bottom;vertical-align:middle; padding-bottom:1px">Período a analisar - Mês Final: </td>
+            <td id="grid_mes_fin_ano_n_td" class="webgrid-header_" style="background-color:#efeeef; border-color:#efeeef; padding-left:35px"></td>
+            <td id="grid_mes_fin_ano_n-1_td" class="webgrid-header_" style="background-color:#efeeef; border-color:#efeeef; padding-left:35px"></td>
+            <td class="webgrid-header_" colspan="2" style="background-color:#efeeef; border-color:#efeeef; text-align:right;vertical-align:middle; padding-bottom:1px">Acumulado de Jan até ao Mês: </td>
+            <td id="grid_mes_acum_ano_n-1_td" class="webgrid-header_" style="background-color:#efeeef; border-color:#efeeef; padding-left:35px"></td>
+            <td id="grid_mes_acum_ano_n_td" class="webgrid-header_" style="background-color:#efeeef; border-color:#efeeef; padding-left:35px"></td>
+            <td class="webgrid-header_" colspan="2" style="background-color:#efeeef; border-color:#efeeef"> </td>
+        </tr>
+
+        <tr>
+            <td class="webgrid-header"> Rúbrica </td>
+            <td class="webgrid-header">
+                Média de
+                @{if (MES_INI_PER_REAL.Equals("1"))
+                    { <text>Jan</text>;
+                    }
+                    else
+                    {
+                        if (MES_INI_PER_REAL.Equals("2"))
+                        { <text>Fev</text>;
+                        }
+                        else
+                        {
+                            if (MES_INI_PER_REAL.Equals("3"))
+                            { <text>Mar</text>;
+                            }
+                            else
+                            {
+                                if (MES_INI_PER_REAL.Equals("4"))
+                                { <text>Abr</text>;
+                                }
+                                else
+                                {
+                                    if (MES_INI_PER_REAL.Equals("5"))
+                                    { <text>Mai</text>;
+                                    }
+                                    else
+                                    {
+                                        if (MES_INI_PER_REAL.Equals("6"))
+                                        { <text>Jun</text>;
+                                        }
+                                        else
+                                        {
+                                            if (MES_INI_PER_REAL.Equals("7"))
+                                            { <text>Jul</text>;
+                                            }
+                                            else
+                                            {
+                                                if (MES_INI_PER_REAL.Equals("8"))
+                                                { <text>Ago</text>;
+                                                }
+                                                else
+                                                {
+                                                    if (MES_INI_PER_REAL.Equals("9"))
+                                                    { <text>Set</text>;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (MES_INI_PER_REAL.Equals("10"))
+                                                        { <text>Out</text>;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (MES_INI_PER_REAL.Equals("11"))
+                                                            { <text>Nov</text>;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (MES_INI_PER_REAL.Equals("12"))
+                                                                { <text>Dez</text>;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }}  a
+                @{if (MES_FIN_PER_REAL.Equals("1"))
+                    { <text>Jan</text>;
+                    }
+                    else
+                    {
+                        if (MES_FIN_PER_REAL.Equals("2"))
+                        { <text>Fev</text>;
+                        }
+                        else
+                        {
+                            if (MES_FIN_PER_REAL.Equals("3"))
+                            { <text>Mar</text>;
+                            }
+                            else
+                            {
+                                if (MES_FIN_PER_REAL.Equals("4"))
+                                { <text>Abr</text>;
+                                }
+                                else
+                                {
+                                    if (MES_FIN_PER_REAL.Equals("5"))
+                                    { <text>Mai</text>;
+                                    }
+                                    else
+                                    {
+                                        if (MES_FIN_PER_REAL.Equals("6"))
+                                        { <text>Jun</text>;
+                                        }
+                                        else
+                                        {
+                                            if (MES_FIN_PER_REAL.Equals("7"))
+                                            { <text>Jul</text>;
+                                            }
+                                            else
+                                            {
+                                                if (MES_FIN_PER_REAL.Equals("8"))
+                                                { <text>Ago</text>;
+                                                }
+                                                else
+                                                {
+                                                    if (MES_FIN_PER_REAL.Equals("9"))
+                                                    { <text>Set</text>;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (MES_FIN_PER_REAL.Equals("10"))
+                                                        { <text>Out</text>;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (MES_FIN_PER_REAL.Equals("11"))
+                                                            { <text>Nov</text>;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (MES_FIN_PER_REAL.Equals("12"))
+                                                                { <text>Dez</text>;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }}
+                de @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_REAL)))
+            </td>
+            <td class="webgrid-header">
+                Média de
+                @{if (MES_INI_PER_ANTE.Equals("1"))
+                    { <text>Jan</text>;
+                    }
+                    else
+                    {
+                        if (MES_INI_PER_ANTE.Equals("2"))
+                        { <text>Fev</text>;
+                        }
+                        else
+                        {
+                            if (MES_INI_PER_ANTE.Equals("3"))
+                            { <text>Mar</text>;
+                            }
+                            else
+                            {
+                                if (MES_INI_PER_ANTE.Equals("4"))
+                                { <text>Abr</text>;
+                                }
+                                else
+                                {
+                                    if (MES_INI_PER_ANTE.Equals("5"))
+                                    { <text>Mai</text>;
+                                    }
+                                    else
+                                    {
+                                        if (MES_INI_PER_ANTE.Equals("6"))
+                                        { <text>Jun</text>;
+                                        }
+                                        else
+                                        {
+                                            if (MES_INI_PER_ANTE.Equals("7"))
+                                            { <text>Jul</text>;
+                                            }
+                                            else
+                                            {
+                                                if (MES_INI_PER_ANTE.Equals("8"))
+                                                { <text>Ago</text>;
+                                                }
+                                                else
+                                                {
+                                                    if (MES_INI_PER_ANTE.Equals("9"))
+                                                    { <text>Set</text>;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (MES_INI_PER_ANTE.Equals("10"))
+                                                        { <text>Out</text>;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (MES_INI_PER_ANTE.Equals("11"))
+                                                            { <text>Nov</text>;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (MES_INI_PER_ANTE.Equals("12"))
+                                                                { <text>Dez</text>;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }}  a
+                @{if (MES_FIN_PER_ANTE.Equals("1"))
+                    { <text>Jan</text>;
+                    }
+                    else
+                    {
+                        if (MES_FIN_PER_ANTE.Equals("2"))
+                        { <text>Fev</text>;
+                        }
+                        else
+                        {
+                            if (MES_FIN_PER_ANTE.Equals("3"))
+                            { <text>Mar</text>;
+                            }
+                            else
+                            {
+                                if (MES_FIN_PER_ANTE.Equals("4"))
+                                { <text>Abr</text>;
+                                }
+                                else
+                                {
+                                    if (MES_FIN_PER_ANTE.Equals("5"))
+                                    { <text>Mai</text>;
+                                    }
+                                    else
+                                    {
+                                        if (MES_FIN_PER_ANTE.Equals("6"))
+                                        { <text>Jun</text>;
+                                        }
+                                        else
+                                        {
+                                            if (MES_FIN_PER_ANTE.Equals("7"))
+                                            { <text>Jul</text>;
+                                            }
+                                            else
+                                            {
+                                                if (MES_FIN_PER_ANTE.Equals("8"))
+                                                { <text>Ago</text>;
+                                                }
+                                                else
+                                                {
+                                                    if (MES_FIN_PER_ANTE.Equals("9"))
+                                                    { <text>Set</text>;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (MES_FIN_PER_ANTE.Equals("10"))
+                                                        { <text>Out</text>;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (MES_FIN_PER_ANTE.Equals("11"))
+                                                            { <text>Nov</text>;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (MES_FIN_PER_ANTE.Equals("12"))
+                                                                { <text>Dez</text>;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }}
+                de @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_ANTE)))
+            </td>
+            <td class="webgrid-header"> Var Per %  </td>
+            <td class="webgrid-header"> Total  do ano @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_ANTE)))  </td>
+            <td class="webgrid-header">
+                Acum de Jan a
+                @{if (MES_ACUM_ANTE.Equals("1"))
+                    { <text>Jan</text>;
+                    }
+                    else
+                    {
+                        if (MES_ACUM_ANTE.Equals("2"))
+                        { <text>Fev</text>;
+                        }
+                        else
+                        {
+                            if (MES_ACUM_ANTE.Equals("3"))
+                            { <text>Mar</text>;
+                            }
+                            else
+                            {
+                                if (MES_ACUM_ANTE.Equals("4"))
+                                { <text>Abr</text>;
+                                }
+                                else
+                                {
+                                    if (MES_ACUM_ANTE.Equals("5"))
+                                    { <text>Mai</text>;
+                                    }
+                                    else
+                                    {
+                                        if (MES_ACUM_ANTE.Equals("6"))
+                                        { <text>Jun</text>;
+                                        }
+                                        else
+                                        {
+                                            if (MES_ACUM_ANTE.Equals("7"))
+                                            { <text>Jul</text>;
+                                            }
+                                            else
+                                            {
+                                                if (MES_ACUM_ANTE.Equals("8"))
+                                                { <text>Ago</text>;
+                                                }
+                                                else
+                                                {
+                                                    if (MES_ACUM_ANTE.Equals("9"))
+                                                    { <text>Set</text>;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (MES_ACUM_ANTE.Equals("10"))
+                                                        { <text>Out</text>;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (MES_ACUM_ANTE.Equals("11"))
+                                                            { <text>Nov</text>;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (MES_ACUM_ANTE.Equals("12"))
+                                                                { <text>Dez</text>;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }}
+                de @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_ANTE)))
+            </td>
+            <td class="webgrid-header">
+                Acum de Jan a
+                @{if (MES_ACUM_REAL.Equals("1"))
+                    { <text>Jan</text>;
+                    }
+                    else
+                    {
+                        if (MES_ACUM_REAL.Equals("2"))
+                        { <text>Fev</text>;
+                        }
+                        else
+                        {
+                            if (MES_ACUM_REAL.Equals("3"))
+                            { <text>Mar</text>;
+                            }
+                            else
+                            {
+                                if (MES_ACUM_REAL.Equals("4"))
+                                { <text>Abr</text>;
+                                }
+                                else
+                                {
+                                    if (MES_ACUM_REAL.Equals("5"))
+                                    { <text>Mai</text>;
+                                    }
+                                    else
+                                    {
+                                        if (MES_ACUM_REAL.Equals("6"))
+                                        { <text>Jun</text>;
+                                        }
+                                        else
+                                        {
+                                            if (MES_ACUM_REAL.Equals("7"))
+                                            { <text>Jul</text>;
+                                            }
+                                            else
+                                            {
+                                                if (MES_ACUM_REAL.Equals("8"))
+                                                { <text>Ago</text>;
+                                                }
+                                                else
+                                                {
+                                                    if (MES_ACUM_REAL.Equals("9"))
+                                                    { <text>Set</text>;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (MES_ACUM_REAL.Equals("10"))
+                                                        { <text>Out</text>;
+                                                        }
+                                                        else
+                                                        {
+                                                            if (MES_ACUM_REAL.Equals("11"))
+                                                            { <text>Nov</text>;
+                                                            }
+                                                            else
+                                                            {
+                                                                if (MES_ACUM_REAL.Equals("12"))
+                                                                { <text>Dez</text>;
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }}
+                de @Html.Raw((string.Format("{0:N}", @ANO_VERSAO_REAL)))
+            </td>
+            <td class="webgrid-header"> Var Acum % </td>
+            <td class="webgrid-header"> Var Acum </td>
+
+        </tr>
+    </thead>
+<tr>
+    <td  class="webgrid-rubrica"> Volume Negócios                            </td> 
+    <td  style="text-align:right" id="IND_VN_REAL_PER" itemid="IND_VN_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANTE_PER" itemid="IND_VN_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_VN_COMP_PER_P" >  @if (@ViewData["IND_VN_REAL_PER"].Equals("calc") || @ViewData["IND_VN_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VN_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VN_REAL_PER = Convert.ToInt32(@ViewData["IND_VN_REAL_PER"]); decimal IND_VN_ANTE_PER = Convert.ToInt32(@ViewData["IND_VN_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_VN_REAL_PER / IND_VN_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_VN_ANTE_TOTAL" itemid="IND_VN_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_ANTE_ACUM" itemid="IND_VN_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VN_REAL_ACUM" itemid="IND_VN_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VN_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_VN_COMP_ACUM_P" > @if (@ViewData["IND_VN_REAL_ACUM"].Equals("calc") || @ViewData["IND_VN_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VN_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VN_REAL_ACUM = Convert.ToInt32(@ViewData["IND_VN_REAL_ACUM"]); decimal IND_VN_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_VN_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_VN_REAL_ACUM / IND_VN_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_VN_COMP_ACUM_P" > @if (@ViewData["IND_VN_REAL_ACUM"].Equals("calc") || @ViewData["IND_VN_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VN_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VN_REAL_ACUM = Convert.ToInt32(@ViewData["IND_VN_REAL_ACUM"]); decimal IND_VN_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_VN_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_VN_REAL_ACUM - IND_VN_ANTE_ACUM)))))} } </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Margem Bruta                            </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_REAL_PER" itemid="IND_MARG_BRUTA_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANTE_PER" itemid="IND_MARG_BRUTA_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_MARG_BRUTA_COMP_PER_P" >  @if (@ViewData["IND_MARG_BRUTA_REAL_PER"].Equals("calc") || @ViewData["IND_MARG_BRUTA_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_BRUTA_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_BRUTA_REAL_PER = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_REAL_PER"]); decimal IND_MARG_BRUTA_ANTE_PER = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_BRUTA_REAL_PER / IND_MARG_BRUTA_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANTE_TOTAL" itemid="IND_MARG_BRUTA_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_ANTE_ACUM" itemid="IND_MARG_BRUTA_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_REAL_ACUM" itemid="IND_MARG_BRUTA_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_MARG_BRUTA_COMP_ACUM_P" > @if (@ViewData["IND_MARG_BRUTA_REAL_ACUM"].Equals("calc") || @ViewData["IND_MARG_BRUTA_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_BRUTA_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_BRUTA_REAL_ACUM = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_REAL_ACUM"]); decimal IND_MARG_BRUTA_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_BRUTA_REAL_ACUM / IND_MARG_BRUTA_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_MARG_BRUTA_COMP_ACUM_P" > @if (@ViewData["IND_MARG_BRUTA_REAL_ACUM"].Equals("calc") || @ViewData["IND_MARG_BRUTA_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_BRUTA_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_BRUTA_REAL_ACUM = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_REAL_ACUM"]); decimal IND_MARG_BRUTA_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_BRUTA_REAL_ACUM - IND_MARG_BRUTA_ANTE_ACUM)))))} } </td>
+ </tr>
+
+<tr>
+    <td  class="webgrid-rubrica"> Resultado Operacional                           </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_REAL_PER" itemid="IND_RES_OPER_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANTE_PER" itemid="IND_RES_OPER_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_RES_OPER_COMP_PER_P" >  @if (@ViewData["IND_RES_OPER_REAL_PER"].Equals("calc") || @ViewData["IND_RES_OPER_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RES_OPER_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RES_OPER_REAL_PER = Convert.ToInt32(@ViewData["IND_RES_OPER_REAL_PER"]); decimal IND_RES_OPER_ANTE_PER = Convert.ToInt32(@ViewData["IND_RES_OPER_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_RES_OPER_REAL_PER / IND_RES_OPER_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_RES_OPER_ANTE_TOTAL" itemid="IND_RES_OPER_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_ANTE_ACUM" itemid="IND_RES_OPER_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RES_OPER_REAL_ACUM" itemid="IND_RES_OPER_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RES_OPER_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_RES_OPER_COMP_ACUM_P" > @if (@ViewData["IND_RES_OPER_REAL_ACUM"].Equals("calc") || @ViewData["IND_RES_OPER_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RES_OPER_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RES_OPER_REAL_ACUM = Convert.ToInt32(@ViewData["IND_RES_OPER_REAL_ACUM"]); decimal IND_RES_OPER_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_RES_OPER_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_RES_OPER_REAL_ACUM / IND_RES_OPER_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_RES_OPER_COMP_ACUM_P" > @if (@ViewData["IND_RES_OPER_REAL_ACUM"].Equals("calc") || @ViewData["IND_RES_OPER_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RES_OPER_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RES_OPER_REAL_ACUM = Convert.ToInt32(@ViewData["IND_RES_OPER_REAL_ACUM"]); decimal IND_RES_OPER_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_RES_OPER_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_RES_OPER_REAL_ACUM - IND_RES_OPER_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+
+
+<tr>
+    <td  class="webgrid-rubrica"> EBITDA                           </td> 
+    <td  style="text-align:right" id="IND_EBITDA_REAL_PER" itemid="IND_EBITDA_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANTE_PER" itemid="IND_EBITDA_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_EBITDA_COMP_PER_P" >  @if (@ViewData["IND_EBITDA_REAL_PER"].Equals("calc") || @ViewData["IND_EBITDA_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_EBITDA_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_EBITDA_REAL_PER = Convert.ToInt32(@ViewData["IND_EBITDA_REAL_PER"]); decimal IND_EBITDA_ANTE_PER = Convert.ToInt32(@ViewData["IND_EBITDA_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_EBITDA_REAL_PER / IND_EBITDA_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_EBITDA_ANTE_TOTAL" itemid="IND_EBITDA_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_ANTE_ACUM" itemid="IND_EBITDA_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_EBITDA_REAL_ACUM" itemid="IND_EBITDA_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_EBITDA_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_EBITDA_COMP_ACUM_P" > @if (@ViewData["IND_EBITDA_REAL_ACUM"].Equals("calc") || @ViewData["IND_EBITDA_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_EBITDA_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_EBITDA_REAL_ACUM = Convert.ToInt32(@ViewData["IND_EBITDA_REAL_ACUM"]); decimal IND_EBITDA_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_EBITDA_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_EBITDA_REAL_ACUM / IND_EBITDA_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_EBITDA_COMP_ACUM_P" > @if (@ViewData["IND_EBITDA_REAL_ACUM"].Equals("calc") || @ViewData["IND_EBITDA_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_EBITDA_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_EBITDA_REAL_ACUM = Convert.ToInt32(@ViewData["IND_EBITDA_REAL_ACUM"]); decimal IND_EBITDA_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_EBITDA_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_EBITDA_REAL_ACUM - IND_EBITDA_ANTE_ACUM)))))} } </td>
+ </tr>
+
+<tr>
+    <td  class="webgrid-rubrica"> Margem BRUTA %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_REAL_PER" itemid="IND_MARG_BRUTA_PERC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANTE_PER" itemid="IND_MARG_BRUTA_PERC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_MARG_BRUTA_PERC_COMP_PER_P" >  @if (@ViewData["IND_MARG_BRUTA_PERC_REAL_PER"].Equals("calc") || @ViewData["IND_MARG_BRUTA_PERC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_BRUTA_PERC_REAL_PER = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_REAL_PER"]); decimal IND_MARG_BRUTA_PERC_ANTE_PER = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_BRUTA_PERC_REAL_PER / IND_MARG_BRUTA_PERC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANTE_TOTAL" itemid="IND_MARG_BRUTA_PERC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_ANTE_ACUM" itemid="IND_MARG_BRUTA_PERC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_BRUTA_PERC_REAL_ACUM" itemid="IND_MARG_BRUTA_PERC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_BRUTA_PERC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_MARG_BRUTA_PERC_COMP_ACUM_P" > @if (@ViewData["IND_MARG_BRUTA_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_MARG_BRUTA_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_BRUTA_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_REAL_ACUM"]); decimal IND_MARG_BRUTA_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_BRUTA_PERC_REAL_ACUM / IND_MARG_BRUTA_PERC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_MARG_BRUTA_PERC_COMP_ACUM_P" > @if (@ViewData["IND_MARG_BRUTA_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_MARG_BRUTA_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_BRUTA_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_REAL_ACUM"]); decimal IND_MARG_BRUTA_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_MARG_BRUTA_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_BRUTA_PERC_REAL_ACUM - IND_MARG_BRUTA_PERC_ANTE_ACUM)))))} } </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Margem EBITDA %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_REAL_PER" itemid="IND_MARG_EBITDA_PERC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANTE_PER" itemid="IND_MARG_EBITDA_PERC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_MARG_EBITDA_PERC_COMP_PER_P" >  @if (@ViewData["IND_MARG_EBITDA_PERC_REAL_PER"].Equals("calc") || @ViewData["IND_MARG_EBITDA_PERC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_EBITDA_PERC_REAL_PER = Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_REAL_PER"]); decimal IND_MARG_EBITDA_PERC_ANTE_PER = Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_EBITDA_PERC_REAL_PER / IND_MARG_EBITDA_PERC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANTE_TOTAL" itemid="IND_MARG_EBITDA_PERC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_ANTE_ACUM" itemid="IND_MARG_EBITDA_PERC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_EBITDA_PERC_REAL_ACUM" itemid="IND_MARG_EBITDA_PERC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_EBITDA_PERC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_MARG_EBITDA_PERC_COMP_ACUM_P" > @if (@ViewData["IND_MARG_EBITDA_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_MARG_EBITDA_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_EBITDA_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_REAL_ACUM"]); decimal IND_MARG_EBITDA_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_EBITDA_PERC_REAL_ACUM / IND_MARG_EBITDA_PERC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_MARG_EBITDA_PERC_COMP_ACUM_P" > @if (@ViewData["IND_MARG_EBITDA_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_MARG_EBITDA_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_EBITDA_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_REAL_ACUM"]); decimal IND_MARG_EBITDA_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_MARG_EBITDA_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_EBITDA_PERC_REAL_ACUM - IND_MARG_EBITDA_PERC_ANTE_ACUM)))))} } </td>
+ </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Margem Operacional %                           </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_REAL_PER" itemid="IND_MARG_OPER_PERC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANTE_PER" itemid="IND_MARG_OPER_PERC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_MARG_OPER_PERC_COMP_PER_P" >  @if (@ViewData["IND_MARG_OPER_PERC_REAL_PER"].Equals("calc") || @ViewData["IND_MARG_OPER_PERC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_OPER_PERC_REAL_PER = Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_REAL_PER"]); decimal IND_MARG_OPER_PERC_ANTE_PER = Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_OPER_PERC_REAL_PER / IND_MARG_OPER_PERC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANTE_TOTAL" itemid="IND_MARG_OPER_PERC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_ANTE_ACUM" itemid="IND_MARG_OPER_PERC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_MARG_OPER_PERC_REAL_ACUM" itemid="IND_MARG_OPER_PERC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_MARG_OPER_PERC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_MARG_OPER_PERC_COMP_ACUM_P" > @if (@ViewData["IND_MARG_OPER_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_MARG_OPER_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_OPER_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_REAL_ACUM"]); decimal IND_MARG_OPER_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_OPER_PERC_REAL_ACUM / IND_MARG_OPER_PERC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_MARG_OPER_PERC_COMP_ACUM_P" > @if (@ViewData["IND_MARG_OPER_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_MARG_OPER_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_MARG_OPER_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_REAL_ACUM"]); decimal IND_MARG_OPER_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_MARG_OPER_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_MARG_OPER_PERC_REAL_ACUM - IND_MARG_OPER_PERC_ANTE_ACUM)))))} } </td>
+ </tr>
+      <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               
+               </tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Rentabilidade do Capital Próprio (ROE) %                           </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_REAL_PER" itemid="IND_RENT_CAP_PROPR_PERC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANTE_PER" itemid="IND_RENT_CAP_PROPR_PERC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_RENT_CAP_PROPR_PERC_COMP_PER_P" >  @if (@ViewData["IND_RENT_CAP_PROPR_PERC_REAL_PER"].Equals("calc") || @ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RENT_CAP_PROPR_PERC_REAL_PER = Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_REAL_PER"]); decimal IND_RENT_CAP_PROPR_PERC_ANTE_PER = Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_RENT_CAP_PROPR_PERC_REAL_PER / IND_RENT_CAP_PROPR_PERC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANTE_TOTAL" itemid="IND_RENT_CAP_PROPR_PERC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_ANTE_ACUM" itemid="IND_RENT_CAP_PROPR_PERC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_PROPR_PERC_REAL_ACUM" itemid="IND_RENT_CAP_PROPR_PERC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_PROPR_PERC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_RENT_CAP_PROPR_PERC_COMP_ACUM_P" > @if (@ViewData["IND_RENT_CAP_PROPR_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RENT_CAP_PROPR_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_REAL_ACUM"]); decimal IND_RENT_CAP_PROPR_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_RENT_CAP_PROPR_PERC_REAL_ACUM / IND_RENT_CAP_PROPR_PERC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_RENT_CAP_PROPR_PERC_COMP_ACUM_P" > @if (@ViewData["IND_RENT_CAP_PROPR_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RENT_CAP_PROPR_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_REAL_ACUM"]); decimal IND_RENT_CAP_PROPR_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_RENT_CAP_PROPR_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_RENT_CAP_PROPR_PERC_REAL_ACUM - IND_RENT_CAP_PROPR_PERC_ANTE_ACUM)))))} } </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> NFM/VENDAS %                           </td> 
+    <td  style="text-align:right" id="IND_NFM_VENDAS_PERC_REAL_PER" itemid="IND_NFM_VENDAS_PERC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM_VENDAS_PERC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM_VENDAS_PERC_ANTE_PER" itemid="IND_NFM_VENDAS_PERC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM_VENDAS_PERC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_NFM_VENDAS_PERC_COMP_PER_P" >  @if (@ViewData["IND_NFM_VENDAS_PERC_REAL_PER"].Equals("calc") || @ViewData["IND_NFM_VENDAS_PERC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NFM_VENDAS_PERC_REAL_PER = Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_REAL_PER"]); decimal IND_NFM_VENDAS_PERC_ANTE_PER = Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_NFM_VENDAS_PERC_REAL_PER / IND_NFM_VENDAS_PERC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_NFM_VENDAS_PERC_ANTE_TOTAL" itemid="IND_NFM_VENDAS_PERC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM_VENDAS_PERC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM_VENDAS_PERC_ANTE_ACUM" itemid="IND_NFM_VENDAS_PERC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM_VENDAS_PERC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_NFM_VENDAS_PERC_REAL_ACUM" itemid="IND_NFM_VENDAS_PERC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NFM_VENDAS_PERC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_NFM_VENDAS_PERC_COMP_ACUM_P" > @if (@ViewData["IND_NFM_VENDAS_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_NFM_VENDAS_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NFM_VENDAS_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_REAL_ACUM"]); decimal IND_NFM_VENDAS_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_NFM_VENDAS_PERC_REAL_ACUM / IND_NFM_VENDAS_PERC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_NFM_VENDAS_PERC_COMP_ACUM_P" > @if (@ViewData["IND_NFM_VENDAS_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_NFM_VENDAS_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NFM_VENDAS_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_REAL_ACUM"]); decimal IND_NFM_VENDAS_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_NFM_VENDAS_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_NFM_VENDAS_PERC_REAL_ACUM - IND_NFM_VENDAS_PERC_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+
+<tr>
+    <td  class="webgrid-rubrica"> Passivo Financeiro / Capital Próprio                           </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_CAP_PROPR_REAL_PER" itemid="IND_PASS_FINANC_CAP_PROPR_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_CAP_PROPR_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_CAP_PROPR_ANTE_PER" itemid="IND_PASS_FINANC_CAP_PROPR_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_PASS_FINANC_CAP_PROPR_COMP_PER_P" >  @if (@ViewData["IND_PASS_FINANC_CAP_PROPR_REAL_PER"].Equals("calc") || @ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_CAP_PROPR_REAL_PER = Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_REAL_PER"]); decimal IND_PASS_FINANC_CAP_PROPR_ANTE_PER = Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_CAP_PROPR_REAL_PER / IND_PASS_FINANC_CAP_PROPR_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_PASS_FINANC_CAP_PROPR_ANTE_TOTAL" itemid="IND_PASS_FINANC_CAP_PROPR_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM" itemid="IND_PASS_FINANC_CAP_PROPR_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_CAP_PROPR_REAL_ACUM" itemid="IND_PASS_FINANC_CAP_PROPR_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_CAP_PROPR_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_PASS_FINANC_CAP_PROPR_COMP_ACUM_P" > @if (@ViewData["IND_PASS_FINANC_CAP_PROPR_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_CAP_PROPR_REAL_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_REAL_ACUM"]); decimal IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_CAP_PROPR_REAL_ACUM / IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_PASS_FINANC_CAP_PROPR_COMP_ACUM_P" > @if (@ViewData["IND_PASS_FINANC_CAP_PROPR_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_CAP_PROPR_REAL_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_REAL_ACUM"]); decimal IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_CAP_PROPR_REAL_ACUM - IND_PASS_FINANC_CAP_PROPR_ANTE_ACUM)))))} } </td>
+ </tr>
+
+
+<tr>
+    <td  class="webgrid-rubrica"> Passivo Financeiro / EBITDA                           </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_EBITDA_REAL_PER" itemid="IND_PASS_FINANC_EBITDA_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_EBITDA_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_EBITDA_ANTE_PER" itemid="IND_PASS_FINANC_EBITDA_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_EBITDA_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_PASS_FINANC_EBITDA_COMP_PER_P" >  @if (@ViewData["IND_PASS_FINANC_EBITDA_REAL_PER"].Equals("calc") || @ViewData["IND_PASS_FINANC_EBITDA_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_EBITDA_REAL_PER = Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_REAL_PER"]); decimal IND_PASS_FINANC_EBITDA_ANTE_PER = Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_EBITDA_REAL_PER / IND_PASS_FINANC_EBITDA_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_PASS_FINANC_EBITDA_ANTE_TOTAL" itemid="IND_PASS_FINANC_EBITDA_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_EBITDA_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_EBITDA_ANTE_ACUM" itemid="IND_PASS_FINANC_EBITDA_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_EBITDA_REAL_ACUM" itemid="IND_PASS_FINANC_EBITDA_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_PASS_FINANC_EBITDA_COMP_ACUM_P" > @if (@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_EBITDA_REAL_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"]); decimal IND_PASS_FINANC_EBITDA_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_EBITDA_REAL_ACUM / IND_PASS_FINANC_EBITDA_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_PASS_FINANC_EBITDA_COMP_ACUM_P" > @if (@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_EBITDA_REAL_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"]); decimal IND_PASS_FINANC_EBITDA_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_EBITDA_REAL_ACUM - IND_PASS_FINANC_EBITDA_ANTE_ACUM)))))} } </td>
+ </tr>
+
+    <tr>
+    <td  class="webgrid-rubrica"> Encargos Financeiros / EBITDA %                           </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC_EBITDA_PERC_REAL_PER" itemid="IND_ENCAR_FINANC_EBITDA_PERC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC_EBITDA_PERC_ANTE_PER" itemid="IND_ENCAR_FINANC_EBITDA_PERC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_ENCAR_FINANC_EBITDA_PERC_COMP_PER_P" >  @if (@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_REAL_PER"].Equals("calc") || @ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_ENCAR_FINANC_EBITDA_PERC_REAL_PER = Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_REAL_PER"]); decimal IND_ENCAR_FINANC_EBITDA_PERC_ANTE_PER = Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_ENCAR_FINANC_EBITDA_PERC_REAL_PER / IND_ENCAR_FINANC_EBITDA_PERC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_ENCAR_FINANC_EBITDA_PERC_ANTE_TOTAL" itemid="IND_ENCAR_FINANC_EBITDA_PERC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM" itemid="IND_ENCAR_FINANC_EBITDA_PERC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM" itemid="IND_ENCAR_FINANC_EBITDA_PERC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_ENCAR_FINANC_EBITDA_PERC_COMP_ACUM_P" > @if (@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM"]); decimal IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM / IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_ENCAR_FINANC_EBITDA_PERC_COMP_ACUM_P" > @if (@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM"]); decimal IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_ENCAR_FINANC_EBITDA_PERC_REAL_ACUM - IND_ENCAR_FINANC_EBITDA_PERC_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Rentabilidade do Cap. Utilizado (ROCE) %                           </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_REAL_PER" itemid="IND_RENT_CAP_UTILIZ_PERC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANTE_PER" itemid="IND_RENT_CAP_UTILIZ_PERC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_RENT_CAP_UTILIZ_PERC_COMP_PER_P" >  @if (@ViewData["IND_RENT_CAP_UTILIZ_PERC_REAL_PER"].Equals("calc") || @ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RENT_CAP_UTILIZ_PERC_REAL_PER = Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_REAL_PER"]); decimal IND_RENT_CAP_UTILIZ_PERC_ANTE_PER = Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_RENT_CAP_UTILIZ_PERC_REAL_PER / IND_RENT_CAP_UTILIZ_PERC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANTE_TOTAL" itemid="IND_RENT_CAP_UTILIZ_PERC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM" itemid="IND_RENT_CAP_UTILIZ_PERC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM" itemid="IND_RENT_CAP_UTILIZ_PERC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_RENT_CAP_UTILIZ_PERC_COMP_ACUM_P" > @if (@ViewData["IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM"]); decimal IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM / IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_RENT_CAP_UTILIZ_PERC_COMP_ACUM_P" > @if (@ViewData["IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM"]); decimal IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_RENT_CAP_UTILIZ_PERC_REAL_ACUM - IND_RENT_CAP_UTILIZ_PERC_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Valor Económico Acrescentado (EVA)                           </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_REAL_PER" itemid="IND_VAL_ECON_ACRESC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANTE_PER" itemid="IND_VAL_ECON_ACRESC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_VAL_ECON_ACRESC_COMP_PER_P" >  @if (@ViewData["IND_VAL_ECON_ACRESC_REAL_PER"].Equals("calc") || @ViewData["IND_VAL_ECON_ACRESC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VAL_ECON_ACRESC_REAL_PER = Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_REAL_PER"]); decimal IND_VAL_ECON_ACRESC_ANTE_PER = Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_VAL_ECON_ACRESC_REAL_PER / IND_VAL_ECON_ACRESC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANTE_TOTAL" itemid="IND_VAL_ECON_ACRESC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_ANTE_ACUM" itemid="IND_VAL_ECON_ACRESC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAL_ECON_ACRESC_REAL_ACUM" itemid="IND_VAL_ECON_ACRESC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAL_ECON_ACRESC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_VAL_ECON_ACRESC_COMP_ACUM_P" > @if (@ViewData["IND_VAL_ECON_ACRESC_REAL_ACUM"].Equals("calc") || @ViewData["IND_VAL_ECON_ACRESC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VAL_ECON_ACRESC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_REAL_ACUM"]); decimal IND_VAL_ECON_ACRESC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_VAL_ECON_ACRESC_REAL_ACUM / IND_VAL_ECON_ACRESC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_VAL_ECON_ACRESC_COMP_ACUM_P" > @if (@ViewData["IND_VAL_ECON_ACRESC_REAL_ACUM"].Equals("calc") || @ViewData["IND_VAL_ECON_ACRESC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VAL_ECON_ACRESC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_REAL_ACUM"]); decimal IND_VAL_ECON_ACRESC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_VAL_ECON_ACRESC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_VAL_ECON_ACRESC_REAL_ACUM - IND_VAL_ECON_ACRESC_ANTE_ACUM)))))} } </td>
+ </tr>
+          <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               
+               </tr>
+
+<tr>
+    <td  class="webgrid-rubrica"> Fundo de Maneio                           </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_REAL_PER" itemid="IND_FUNDO_MANEIO_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANTE_PER" itemid="IND_FUNDO_MANEIO_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_FUNDO_MANEIO_COMP_PER_P" >  @if (@ViewData["IND_FUNDO_MANEIO_REAL_PER"].Equals("calc") || @ViewData["IND_FUNDO_MANEIO_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_FUNDO_MANEIO_REAL_PER = Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_REAL_PER"]); decimal IND_FUNDO_MANEIO_ANTE_PER = Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_FUNDO_MANEIO_REAL_PER / IND_FUNDO_MANEIO_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANTE_TOTAL" itemid="IND_FUNDO_MANEIO_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_ANTE_ACUM" itemid="IND_FUNDO_MANEIO_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_FUNDO_MANEIO_REAL_ACUM" itemid="IND_FUNDO_MANEIO_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_FUNDO_MANEIO_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_FUNDO_MANEIO_COMP_ACUM_P" > @if (@ViewData["IND_FUNDO_MANEIO_REAL_ACUM"].Equals("calc") || @ViewData["IND_FUNDO_MANEIO_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_FUNDO_MANEIO_REAL_ACUM = Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_REAL_ACUM"]); decimal IND_FUNDO_MANEIO_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_FUNDO_MANEIO_REAL_ACUM / IND_FUNDO_MANEIO_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_FUNDO_MANEIO_COMP_ACUM_P" > @if (@ViewData["IND_FUNDO_MANEIO_REAL_ACUM"].Equals("calc") || @ViewData["IND_FUNDO_MANEIO_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_FUNDO_MANEIO_REAL_ACUM = Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_REAL_ACUM"]); decimal IND_FUNDO_MANEIO_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_FUNDO_MANEIO_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_FUNDO_MANEIO_REAL_ACUM - IND_FUNDO_MANEIO_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+
+<tr>
+    <td  class="webgrid-rubrica"> Necessidades de Fundo de Maneio                           </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_REAL_PER" itemid="IND_NECESS_FUNDO_MANEIO_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANTE_PER" itemid="IND_NECESS_FUNDO_MANEIO_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_NECESS_FUNDO_MANEIO_COMP_PER_P" >  @if (@ViewData["IND_NECESS_FUNDO_MANEIO_REAL_PER"].Equals("calc") || @ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NECESS_FUNDO_MANEIO_REAL_PER = Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_REAL_PER"]); decimal IND_NECESS_FUNDO_MANEIO_ANTE_PER = Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_NECESS_FUNDO_MANEIO_REAL_PER / IND_NECESS_FUNDO_MANEIO_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANTE_TOTAL" itemid="IND_NECESS_FUNDO_MANEIO_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_ANTE_ACUM" itemid="IND_NECESS_FUNDO_MANEIO_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_NECESS_FUNDO_MANEIO_REAL_ACUM" itemid="IND_NECESS_FUNDO_MANEIO_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NECESS_FUNDO_MANEIO_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_NECESS_FUNDO_MANEIO_COMP_ACUM_P" > @if (@ViewData["IND_NECESS_FUNDO_MANEIO_REAL_ACUM"].Equals("calc") || @ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NECESS_FUNDO_MANEIO_REAL_ACUM = Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_REAL_ACUM"]); decimal IND_NECESS_FUNDO_MANEIO_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_NECESS_FUNDO_MANEIO_REAL_ACUM / IND_NECESS_FUNDO_MANEIO_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_NECESS_FUNDO_MANEIO_COMP_ACUM_P" > @if (@ViewData["IND_NECESS_FUNDO_MANEIO_REAL_ACUM"].Equals("calc") || @ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NECESS_FUNDO_MANEIO_REAL_ACUM = Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_REAL_ACUM"]); decimal IND_NECESS_FUNDO_MANEIO_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_NECESS_FUNDO_MANEIO_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_NECESS_FUNDO_MANEIO_REAL_ACUM - IND_NECESS_FUNDO_MANEIO_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Tesouraria Líquida                           </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_REAL_PER" itemid="IND_TESOUR_LIQU_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANTE_PER" itemid="IND_TESOUR_LIQU_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_TESOUR_LIQU_COMP_PER_P" >  @if (@ViewData["IND_TESOUR_LIQU_REAL_PER"].Equals("calc") || @ViewData["IND_TESOUR_LIQU_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_TESOUR_LIQU_REAL_PER = Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_REAL_PER"]); decimal IND_TESOUR_LIQU_ANTE_PER = Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_TESOUR_LIQU_REAL_PER / IND_TESOUR_LIQU_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANTE_TOTAL" itemid="IND_TESOUR_LIQU_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_ANTE_ACUM" itemid="IND_TESOUR_LIQU_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_TESOUR_LIQU_REAL_ACUM" itemid="IND_TESOUR_LIQU_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_TESOUR_LIQU_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_TESOUR_LIQU_COMP_ACUM_P" > @if (@ViewData["IND_TESOUR_LIQU_REAL_ACUM"].Equals("calc") || @ViewData["IND_TESOUR_LIQU_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_TESOUR_LIQU_REAL_ACUM = Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_REAL_ACUM"]); decimal IND_TESOUR_LIQU_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_TESOUR_LIQU_REAL_ACUM / IND_TESOUR_LIQU_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_TESOUR_LIQU_COMP_ACUM_P" > @if (@ViewData["IND_TESOUR_LIQU_REAL_ACUM"].Equals("calc") || @ViewData["IND_TESOUR_LIQU_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_TESOUR_LIQU_REAL_ACUM = Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_REAL_ACUM"]); decimal IND_TESOUR_LIQU_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_TESOUR_LIQU_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_TESOUR_LIQU_REAL_ACUM - IND_TESOUR_LIQU_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Autonomia Financeira %                           </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_REAL_PER" itemid="IND_AUTOM_FINANC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANTE_PER" itemid="IND_AUTOM_FINANC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_AUTOM_FINANC_COMP_PER_P" >  @if (@ViewData["IND_AUTOM_FINANC_REAL_PER"].Equals("calc") || @ViewData["IND_AUTOM_FINANC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_AUTOM_FINANC_REAL_PER = Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_REAL_PER"]); decimal IND_AUTOM_FINANC_ANTE_PER = Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_AUTOM_FINANC_REAL_PER / IND_AUTOM_FINANC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANTE_TOTAL" itemid="IND_AUTOM_FINANC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_ANTE_ACUM" itemid="IND_AUTOM_FINANC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_AUTOM_FINANC_REAL_ACUM" itemid="IND_AUTOM_FINANC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_AUTOM_FINANC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_AUTOM_FINANC_COMP_ACUM_P" > @if (@ViewData["IND_AUTOM_FINANC_REAL_ACUM"].Equals("calc") || @ViewData["IND_AUTOM_FINANC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_AUTOM_FINANC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_REAL_ACUM"]); decimal IND_AUTOM_FINANC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_AUTOM_FINANC_REAL_ACUM / IND_AUTOM_FINANC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_AUTOM_FINANC_COMP_ACUM_P" > @if (@ViewData["IND_AUTOM_FINANC_REAL_ACUM"].Equals("calc") || @ViewData["IND_AUTOM_FINANC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_AUTOM_FINANC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_REAL_ACUM"]); decimal IND_AUTOM_FINANC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_AUTOM_FINANC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_AUTOM_FINANC_REAL_ACUM - IND_AUTOM_FINANC_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Passivo Financeiro                           </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_REAL_PER" itemid="IND_PASS_FINANC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANTE_PER" itemid="IND_PASS_FINANC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_PASS_FINANC_COMP_PER_P" >  @if (@ViewData["IND_PASS_FINANC_REAL_PER"].Equals("calc") || @ViewData["IND_PASS_FINANC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_REAL_PER = Convert.ToInt32(@ViewData["IND_PASS_FINANC_REAL_PER"]); decimal IND_PASS_FINANC_ANTE_PER = Convert.ToInt32(@ViewData["IND_PASS_FINANC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_REAL_PER / IND_PASS_FINANC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANTE_TOTAL" itemid="IND_PASS_FINANC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_ANTE_ACUM" itemid="IND_PASS_FINANC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_PASS_FINANC_REAL_ACUM" itemid="IND_PASS_FINANC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_PASS_FINANC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_PASS_FINANC_COMP_ACUM_P" > @if (@ViewData["IND_PASS_FINANC_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_REAL_ACUM"]); decimal IND_PASS_FINANC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_REAL_ACUM / IND_PASS_FINANC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_PASS_FINANC_COMP_ACUM_P" > @if (@ViewData["IND_PASS_FINANC_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_PASS_FINANC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_PASS_FINANC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_REAL_ACUM"]); decimal IND_PASS_FINANC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_REAL_ACUM - IND_PASS_FINANC_ANTE_ACUM)))))} } </td>
+ </tr>
+          <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               
+               </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> Nº de Trabalhadores                           </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_REAL_PER" itemid="IND_NUM_TRABALH_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANTE_PER" itemid="IND_NUM_TRABALH_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_NUM_TRABALH_COMP_PER_P" >  @if (@ViewData["IND_NUM_TRABALH_REAL_PER"].Equals("calc") || @ViewData["IND_NUM_TRABALH_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NUM_TRABALH_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NUM_TRABALH_REAL_PER = Convert.ToInt32(@ViewData["IND_NUM_TRABALH_REAL_PER"]); decimal IND_NUM_TRABALH_ANTE_PER = Convert.ToInt32(@ViewData["IND_NUM_TRABALH_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_NUM_TRABALH_REAL_PER / IND_NUM_TRABALH_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANTE_TOTAL" itemid="IND_NUM_TRABALH_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_ANTE_ACUM" itemid="IND_NUM_TRABALH_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_NUM_TRABALH_REAL_ACUM" itemid="IND_NUM_TRABALH_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_NUM_TRABALH_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_NUM_TRABALH_COMP_ACUM_P" > @if (@ViewData["IND_NUM_TRABALH_REAL_ACUM"].Equals("calc") || @ViewData["IND_NUM_TRABALH_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NUM_TRABALH_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NUM_TRABALH_REAL_ACUM = Convert.ToInt32(@ViewData["IND_NUM_TRABALH_REAL_ACUM"]); decimal IND_NUM_TRABALH_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_NUM_TRABALH_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_NUM_TRABALH_REAL_ACUM / IND_NUM_TRABALH_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_NUM_TRABALH_COMP_ACUM_P" > @if (@ViewData["IND_NUM_TRABALH_REAL_ACUM"].Equals("calc") || @ViewData["IND_NUM_TRABALH_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_NUM_TRABALH_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_NUM_TRABALH_REAL_ACUM = Convert.ToInt32(@ViewData["IND_NUM_TRABALH_REAL_ACUM"]); decimal IND_NUM_TRABALH_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_NUM_TRABALH_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_NUM_TRABALH_REAL_ACUM - IND_NUM_TRABALH_ANTE_ACUM)))))} } </td>
+ </tr>
+<tr>
+    <td  class="webgrid-rubrica"> Vendas por Trabalhador                           </td> 
+    <td  style="text-align:right" id="IND_VENDAS_TRABALH_REAL_PER" itemid="IND_VENDAS_TRABALH_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS_TRABALH_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS_TRABALH_ANTE_PER" itemid="IND_VENDAS_TRABALH_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS_TRABALH_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_VENDAS_TRABALH_COMP_PER_P" >  @if (@ViewData["IND_VENDAS_TRABALH_REAL_PER"].Equals("calc") || @ViewData["IND_VENDAS_TRABALH_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VENDAS_TRABALH_REAL_PER = Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_REAL_PER"]); decimal IND_VENDAS_TRABALH_ANTE_PER = Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_VENDAS_TRABALH_REAL_PER / IND_VENDAS_TRABALH_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_VENDAS_TRABALH_ANTE_TOTAL" itemid="IND_VENDAS_TRABALH_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS_TRABALH_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS_TRABALH_ANTE_ACUM" itemid="IND_VENDAS_TRABALH_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS_TRABALH_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VENDAS_TRABALH_REAL_ACUM" itemid="IND_VENDAS_TRABALH_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VENDAS_TRABALH_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_VENDAS_TRABALH_COMP_ACUM_P" > @if (@ViewData["IND_VENDAS_TRABALH_REAL_ACUM"].Equals("calc") || @ViewData["IND_VENDAS_TRABALH_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VENDAS_TRABALH_REAL_ACUM = Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_REAL_ACUM"]); decimal IND_VENDAS_TRABALH_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_VENDAS_TRABALH_REAL_ACUM / IND_VENDAS_TRABALH_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_VENDAS_TRABALH_COMP_ACUM_P" > @if (@ViewData["IND_VENDAS_TRABALH_REAL_ACUM"].Equals("calc") || @ViewData["IND_VENDAS_TRABALH_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VENDAS_TRABALH_REAL_ACUM = Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_REAL_ACUM"]); decimal IND_VENDAS_TRABALH_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_VENDAS_TRABALH_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_VENDAS_TRABALH_REAL_ACUM - IND_VENDAS_TRABALH_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+<tr>
+    <td  class="webgrid-rubrica"> VAB por Trabalhador                           </td> 
+    <td  style="text-align:right" id="IND_VAB_TRABALH_REAL_PER" itemid="IND_VAB_TRABALH_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_TRABALH_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_TRABALH_ANTE_PER" itemid="IND_VAB_TRABALH_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_TRABALH_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_VAB_TRABALH_COMP_PER_P" >  @if (@ViewData["IND_VAB_TRABALH_REAL_PER"].Equals("calc") || @ViewData["IND_VAB_TRABALH_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VAB_TRABALH_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VAB_TRABALH_REAL_PER = Convert.ToInt32(@ViewData["IND_VAB_TRABALH_REAL_PER"]); decimal IND_VAB_TRABALH_ANTE_PER = Convert.ToInt32(@ViewData["IND_VAB_TRABALH_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_VAB_TRABALH_REAL_PER / IND_VAB_TRABALH_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_VAB_TRABALH_ANTE_TOTAL" itemid="IND_VAB_TRABALH_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_TRABALH_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_TRABALH_ANTE_ACUM" itemid="IND_VAB_TRABALH_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_TRABALH_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_VAB_TRABALH_REAL_ACUM" itemid="IND_VAB_TRABALH_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_VAB_TRABALH_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_VAB_TRABALH_COMP_ACUM_P" > @if (@ViewData["IND_VAB_TRABALH_REAL_ACUM"].Equals("calc") || @ViewData["IND_VAB_TRABALH_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VAB_TRABALH_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VAB_TRABALH_REAL_ACUM = Convert.ToInt32(@ViewData["IND_VAB_TRABALH_REAL_ACUM"]); decimal IND_VAB_TRABALH_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_VAB_TRABALH_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_VAB_TRABALH_REAL_ACUM / IND_VAB_TRABALH_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_VAB_TRABALH_COMP_ACUM_P" > @if (@ViewData["IND_VAB_TRABALH_REAL_ACUM"].Equals("calc") || @ViewData["IND_VAB_TRABALH_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_VAB_TRABALH_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_VAB_TRABALH_REAL_ACUM = Convert.ToInt32(@ViewData["IND_VAB_TRABALH_REAL_ACUM"]); decimal IND_VAB_TRABALH_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_VAB_TRABALH_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_VAB_TRABALH_REAL_ACUM - IND_VAB_TRABALH_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+
+<tr>
+    <td  class="webgrid-rubrica"> Gastos com Pessoal/VAB %                           </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_VAB_PERC_REAL_PER" itemid="IND_GAST_PESSOAL_VAB_PERC_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_VAB_PERC_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_VAB_PERC_ANTE_PER" itemid="IND_GAST_PESSOAL_VAB_PERC_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_GAST_PESSOAL_VAB_PERC_COMP_PER_P" >  @if (@ViewData["IND_GAST_PESSOAL_VAB_PERC_REAL_PER"].Equals("calc") || @ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_GAST_PESSOAL_VAB_PERC_REAL_PER = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_REAL_PER"]); decimal IND_GAST_PESSOAL_VAB_PERC_ANTE_PER = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_GAST_PESSOAL_VAB_PERC_REAL_PER / IND_GAST_PESSOAL_VAB_PERC_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_VAB_PERC_ANTE_TOTAL" itemid="IND_GAST_PESSOAL_VAB_PERC_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM" itemid="IND_GAST_PESSOAL_VAB_PERC_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM" itemid="IND_GAST_PESSOAL_VAB_PERC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_GAST_PESSOAL_VAB_PERC_COMP_ACUM_P" > @if (@ViewData["IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM"]); decimal IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM / IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_GAST_PESSOAL_VAB_PERC_COMP_ACUM_P" > @if (@ViewData["IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM"].Equals("calc") || @ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM"]); decimal IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_GAST_PESSOAL_VAB_PERC_REAL_ACUM - IND_GAST_PESSOAL_VAB_PERC_ANTE_ACUM)))))} } </td>
+ </tr>
+    
+
+
+
+<tr>
+    <td  class="webgrid-rubrica"> Gastos com Pessoal por Colaborador                           </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_TRABALH_REAL_PER" itemid="IND_GAST_PESSOAL_TRABALH_PER" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_TRABALH_REAL_PER"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_TRABALH_ANTE_PER" itemid="IND_GAST_PESSOAL_TRABALH_PER" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_PER"])))  </td> 
+    <td class="webgrid-rubrica" id="IND_GAST_PESSOAL_TRABALH_COMP_PER_P" >  @if (@ViewData["IND_GAST_PESSOAL_TRABALH_REAL_PER"].Equals("calc") || @ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_PER"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_PER"]).Equals(0)){<text>    -</text> ;} else { decimal IND_GAST_PESSOAL_TRABALH_REAL_PER = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_REAL_PER"]); decimal IND_GAST_PESSOAL_TRABALH_ANTE_PER = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_PER"]);   @Html.Raw((string.Format("{0:N}", ((IND_GAST_PESSOAL_TRABALH_REAL_PER / IND_GAST_PESSOAL_TRABALH_ANTE_PER) * 100) - 100)))<text>%</text>} } </td>
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_TRABALH_ANTE_TOTAL" itemid="IND_GAST_PESSOAL_TRABALH_TOTAL" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_TOTAL"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_TRABALH_ANTE_ACUM" itemid="IND_GAST_PESSOAL_TRABALH_ACUM" itemref="@ViewData["versao_ante"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_ACUM"])))  </td> 
+    <td  style="text-align:right" id="IND_GAST_PESSOAL_TRABALH_REAL_ACUM" itemid="IND_GAST_PESSOAL_TRABALH_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}",@ViewData["IND_GAST_PESSOAL_TRABALH_REAL_ACUM"])))  </td> 
+     <td class="webgrid-rubrica" id="IND_GAST_PESSOAL_TRABALH_COMP_ACUM_P" > @if (@ViewData["IND_GAST_PESSOAL_TRABALH_REAL_ACUM"].Equals("calc") || @ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_GAST_PESSOAL_TRABALH_REAL_ACUM = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_REAL_ACUM"]); decimal IND_GAST_PESSOAL_TRABALH_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_GAST_PESSOAL_TRABALH_REAL_ACUM / IND_GAST_PESSOAL_TRABALH_ANTE_ACUM) * 100) - 100)))<text>%</text>} } </td>
+     <td class="webgrid-rubrica" id="IND_GAST_PESSOAL_TRABALH_COMP_ACUM_P" > @if (@ViewData["IND_GAST_PESSOAL_TRABALH_REAL_ACUM"].Equals("calc") || @ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_ACUM"].Equals("calc")) { <text>    -</text> } else {if (Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_ACUM"]).Equals(0)){<text>    -</text> ;} else { decimal IND_GAST_PESSOAL_TRABALH_REAL_ACUM = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_REAL_ACUM"]); decimal IND_GAST_PESSOAL_TRABALH_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_GAST_PESSOAL_TRABALH_ANTE_ACUM"]);   @Html.Raw((string.Format("{0:N}", ((IND_GAST_PESSOAL_TRABALH_REAL_ACUM - IND_GAST_PESSOAL_TRABALH_ANTE_ACUM)))))} } </td>
+ </tr>
+          <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               
+               </tr>
+
+
+
+
+  </table>
+
+
+
+  @if (@ViewData["IND_PASS_FINANC_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_ANTE_ACUM"].Equals("calc") @*|| @ViewData["EBITDA_ANUALIZA_REAL_ACUM"].Equals("calc") || @ViewData["EBITDA_ANUALIZA_ANTE_ACUM"].Equals("calc")*@ || @ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"].Equals("calc") ) {<canvas id="GRAFICO_CFLOW_COMP_ACUMULADO_COMP"  style="display:none"></canvas>} else { if ((Convert.ToDecimal(@ViewData["IND_PASS_FINANC_REAL_ACUM"])) == 0) {<canvas id="GRAFICO_INDICADORES_MENSAL_RESUMIDOCOMP_COMP"  style="display:none"></canvas>} else { 
+          <div class="page-breaker"></div> 
+<table id="INDICADORES_MENSAL_COMP_ACUMULADO_COMP_quadro" class="graficos_textos" style="width:100%; height:50%">
+     <tr style="max-height:50px"> <td class="titulos_mapas"  colspan="2"> Indicadores Económicos e Financeiros </td> </tr>
+     <tr>
+        <td  style="width:50%"> O Total do Passivo Financeiro em @Html.Raw(ViewData["MES_ACUM_REAL_EXTENSO"]) de @Html.Raw(ViewData["ANO_VERSAO_REAL"]) atingiu o valor de 
+             @if (@ViewData["IND_PASS_FINANC_REAL_ACUM"].Equals("calc") ) { <text>    -</text>  } else {@Html.Raw((string.Format("{0:N}",(Convert.ToDecimal(@ViewData["IND_PASS_FINANC_REAL_ACUM"])))))} €,
+           sendo que em  @Html.Raw(ViewData["MES_ACUM_ANTE_EXTENSO"]) de @Html.Raw(ViewData["ANO_VERSAO_ANTE"]) era de
+       @if ( @ViewData["IND_PASS_FINANC_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else {@Html.Raw((string.Format("{0:N}", (Convert.ToDecimal(@ViewData["IND_PASS_FINANC_ANTE_ACUM"]) ))))} €,
+   verificando-se @if (@ViewData["IND_PASS_FINANC_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else {if ((Convert.ToDecimal(@ViewData["IND_PASS_FINANC_REAL_ACUM"]) ) >= (Convert.ToDecimal(@ViewData["IND_PASS_FINANC_ANTE_ACUM"]) ))         {  <text> um crescimento de </text> ; }  else   {  <text> uma diminuição de </text>  ; }}
+    @if (@ViewData["IND_PASS_FINANC_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else { if ((Convert.ToInt32(@ViewData["IND_PASS_FINANC_ANTE_ACUM"])).Equals(0)){<text> 100 %</text>  } else { decimal IND_PASS_FINANC_REAL_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_REAL_ACUM"]) ; decimal IND_PASS_FINANC_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_ANTE_ACUM"]) ; @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_REAL_ACUM / IND_PASS_FINANC_ANTE_ACUM) * 100) - 100))) <text>%</text>} }.
+    <p  style="margin-bottom: 0.4em;">
+        @*O Total do Capital Próprio  em @Html.Raw(ViewData["MES_ACUM_REAL_EXTENSO"]) de @Html.Raw(ViewData["ANO_VERSAO_REAL"]) atingiu o valor de 
+             @if (@ViewData["EBITDA_ANUALIZA_REAL_ACUM"].Equals("calc") ) { <text>    -</text>  } else {@Html.Raw((string.Format("{0:N}",(Convert.ToDecimal(@ViewData["EBITDA_ANUALIZA_REAL_ACUM"])))))} €,
+           sendo que em  @Html.Raw(ViewData["MES_ACUM_ANTE_EXTENSO"]) de @Html.Raw(ViewData["ANO_VERSAO_ANTE"]) era de
+       @if ( @ViewData["EBITDA_ANUALIZA_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else {@Html.Raw((string.Format("{0:N}", (Convert.ToDecimal(@ViewData["EBITDA_ANUALIZA_ANTE_ACUM"]) ))))} €,
+   verificando-se @if (@ViewData["EBITDA_ANUALIZA_REAL_ACUM"].Equals("calc") || @ViewData["EBITDA_ANUALIZA_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else {if ((Convert.ToDecimal(@ViewData["EBITDA_ANUALIZA_REAL_ACUM"]) ) >= (Convert.ToDecimal(@ViewData["EBITDA_ANUALIZA_ANTE_ACUM"]) ))         {  <text> um crescimento de </text> ; }  else   {  <text> uma diminuição de </text>  ; }}
+    @if (@ViewData["EBITDA_ANUALIZA_REAL_ACUM"].Equals("calc") || @ViewData["EBITDA_ANUALIZA_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else { if ((Convert.ToInt32(@ViewData["EBITDA_ANUALIZA_ANTE_ACUM"])).Equals(0)){<text> 100 %</text>  } else { decimal EBITDA_ANUALIZA_REAL_ACUM = Convert.ToInt32(@ViewData["EBITDA_ANUALIZA_REAL_ACUM"]) ; decimal EBITDA_ANUALIZA_ANTE_ACUM = Convert.ToInt32(@ViewData["EBITDA_ANUALIZA_ANTE_ACUM"]) ; @Html.Raw((string.Format("{0:N}", ((EBITDA_ANUALIZA_REAL_ACUM / EBITDA_ANUALIZA_ANTE_ACUM) * 100) - 100))) <text>%</text>} }.
+       <p  style="margin-bottom: 0.4em;">*@
+        Assim, o Rácio do Nível de Endividamento (Passivo Financeiro/EBITDA Anualizado)  em @Html.Raw(ViewData["MES_ACUM_REAL_EXTENSO"]) de @Html.Raw(ViewData["ANO_VERSAO_REAL"]) atingiu o valor de 
+             @if (@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"].Equals("calc") ) { <text>    -</text>  } else {@Html.Raw((string.Format("{0:N}",(Convert.ToDecimal(@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"])))))<text>anos</text>} ,
+           sendo que em  @Html.Raw(ViewData["MES_ACUM_ANTE_EXTENSO"]) de @Html.Raw(ViewData["ANO_VERSAO_ANTE"]) era de
+       @if ( @ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else {@Html.Raw((string.Format("{0:N}", (Convert.ToDecimal(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"]) ))))<text>anos</text>} ,
+   verificando-se @if (@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else {if ((Convert.ToDecimal(@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"]) ) >= (Convert.ToDecimal(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"]) ))         {  <text> um aumento de </text> ; }  else   {  <text> uma redução de </text>  ; }}
+    @if (@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"].Equals("calc") || @ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"].Equals("calc") ) { <text>    -</text>  } else { if ((Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"])).Equals(0)){<text>  -    </text>  } else { decimal IND_PASS_FINANC_EBITDA_REAL_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_REAL_ACUM"]) ; decimal IND_PASS_FINANC_EBITDA_ANTE_ACUM = Convert.ToInt32(@ViewData["IND_PASS_FINANC_EBITDA_ANTE_ACUM"]) ; @Html.Raw((string.Format("{0:N}", ((IND_PASS_FINANC_EBITDA_REAL_ACUM - IND_PASS_FINANC_EBITDA_ANTE_ACUM) ) ))) <text>anos</text>} }.
+    </td>
+      
+         <td style="width:100%">
+             <canvas type="submit" id="GRAFICO_INDICADORES_MENSAL_RESUMIDOCOMP_COMP"></canvas>
+         </td>
+     </tr>
+    </table>
+    }}
+
+@*<div id="GRAVAROPER_DIRXX"  style="display:none">
+   
+
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", FormMethod.Get))
+    {
+       <div id="GRAVAR" class="GRAVAR">
+    @Html.ActionLink("GRAVAR","BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { 
+    Pesquisa_User = "tjalmeida",  id_camp = "id_camp", campocalc_resultado="campocalc_resultado"}, null)
+</div> 
+       
+    }
+</div>*@
+
+
+<div id="CONFIGURARXX" style="display:none">
+   
+
+    @using (Html.BeginForm("GRC_ALERTAS_RESUMO", "GRC", FormMethod.Get))
+    {
+       <div id="CONFIGURAR_CAMPO" class="CONFIGURAR_CAMPO">
+        @Html.ActionLink("Configurar","BI_CAMP_CALC", "BI", new { id_camp_calc = "id_camp_calc", Pesquisa_User = "tjalmeida", versao="versao"}, null)
+       </div> 
+         
+    }
+</div>
+
+
+
+@*<div id="grid_mes_ini_ano_n" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO = "", MES_INI_PER = "MES_INI_PER", MES_FIN_PER = "", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>*@
+<div id="grid_mes_ini_ano_n" class="oculta_na_impressao_ tooltip">
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], id_camp = ViewData["ID_MES_INI_PER_REAL"], FormMethod.Get }))
+    { <div class="tooltip" style="width:100%">
+        @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_REAL, "id_mes", "mes", ViewData["MES_INI_PER_REAL"]), new
+   {
+       @class = "form -control",
+       @style = "width:100%; height:30px; text-align-last:center;",
+       onchange = "this.form.submit();"@*, dir = "rtl"*@ })
+        <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Periodo Corrente.</span>
+    </div>
+    }
+</div>
+@*<div id="grid_mes_ini_ano_n-1" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO = "", MES_INI_PER = "MES_INI_PER", MES_FIN_PER = "", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>*@
+<div id="grid_mes_ini_ano_n-1" class="oculta_na_impressao_ tooltip">
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], id_camp = ViewData["ID_MES_INI_PER_ANTE"], FormMethod.Get }))
+            { <div class="tooltip" style="width:100%">
+        @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_ANTE, "id_mes", "mes", ViewData["MES_INI_PER_ANTE"]), new { @class = "form -control", @style = "width:100%; height:30px; text-align-last:center;", onchange = "this.form.submit();" })
+        <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Periodo Corrente.</span>
+    </div>
+    }
+</div>
+@*<div id="grid_mes_fin_ano_n" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "MES_FIN_PER", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>*@
+<div id="grid_mes_fin_ano_n" class="oculta_na_impressao_ tooltip">
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], id_camp = ViewData["ID_MES_FIN_PER_REAL"], FormMethod.Get }))
+    { <div class="tooltip" style="width:100%">
+        @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_REAL, "id_mes", "mes", ViewData["MES_FIN_PER_REAL"]), new { @class = "form -control", @style = "width:100%; height:30px; text-align-last:center;", onchange = "this.form.submit();" })
+        <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Periodo Corrente.</span>
+    </div>
+    }
+</div>
+@*<div id="grid_mes_fin_ano_n-1" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "MES_FIN_PER", MES_ACUM = "", TIPO_APUR_CMVMC = "" }) </div>*@
+<div id="grid_mes_fin_ano_n-1" class="oculta_na_impressao_ tooltip">
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], id_camp = ViewData["ID_MES_FIN_PER_ANTE"], FormMethod.Get }))
+            { <div class="tooltip" style="width:100%">
+        @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_ANTE, "id_mes", "mes", ViewData["MES_FIN_PER_ANTE"]), new { @class = "form -control", @style = "width:100%; height:30px; text-align-last:center;", onchange = "this.form.submit();" })
+        <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Periodo Corrente.</span>
+    </div>
+    }
+</div>
+@*<div id="grid_mes_acum_ano_n" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "", MES_ACUM = "MES_ACUM", TIPO_APUR_CMVMC = "" }) </div>*@
+<div id="grid_mes_acum_ano_n" class="oculta_na_impressao_ tooltip">
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_real"], id_camp = ViewData["ID_MES_ACUM_REAL"], FormMethod.Get }))
+            { <div class="tooltip" style="width:100%">
+        @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_REAL, "id_mes", "mes", ViewData["MES_ACUM_REAL"]), new { @class = "form -control", @style = "width:100%; height:30px; text-align-last:center;", onchange = "this.form.submit();" })
+        <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Acumulado.</span>
+    </div>
+    }
+</div>
+@*<div id="grid_mes_acum_ano_n-1" class="oculta_na_impressao_ tooltip"> <span class="tooltiptext">Clique para definir outro mês, pressionando a tecla Enter para Gravar. </span> @Html.Action("BI_CONF_VERSAO_VARIAVEIS_USER_Result", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], ANO = "", MES_INI_PER = "", MES_FIN_PER = "", MES_ACUM = "MES_ACUM", TIPO_APUR_CMVMC = "" }) </div>*@
+<div id="grid_mes_acum_ano_n-1" class="oculta_na_impressao_ tooltip">
+    @using (Html.BeginForm("BI_CONF_VERSAO_VARIAVEIS_USER_ALT", "BI", new { Pesquisa_User = "tjalmeida", versao = @ViewData["versao_ante"], id_camp = ViewData["ID_MES_ACUM_ANTE"], FormMethod.Get }))
+    { <div class="tooltip" style="width:100%">
+        @Html.DropDownList("campocalc_resultado", new SelectList(ViewBag.LISTA_MESES_ANTE, "id_mes", "mes", ViewData["MES_ACUM_ANTE"]), new { @class = "form -control", @style = "width:100%; height:30px; text-align-last:center;", onchange = "this.form.submit();" })
+        <span class="tooltiptext">Clique na lista para selecionar outro mês para a Análise do Acumulado.</span>
+    </div>
+    }
+</div>
+
+
+  @section scripts {
+
+      
+
+@{int DESATIVA_DATATBLE = Convert.ToInt32(@ViewData["desativa_datatable"]);
+}
+@if (DESATIVA_DATATBLE.Equals(1)) { }
+else
+{
+
+    <script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.fixedColumns.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.buttons.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/buttons.flash.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/pdfmake.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/vfs_fonts.js")"></script>
+    <script src="@Url.Content("~/Scripts/buttons.html5.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/buttons.print.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.responsive.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.fixedHeader.min.js")"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
+}
+
+<script src="@Url.Content("~/Scripts/chart.js@2.8.0.js")"></script>
+
+    <script type="text/javascript">
+
+        //NOTA TA: REFRESCA PAGINA DE 20 EM 20 SEGUNDOS SE HEXISTIREM CÉLULAS A CALCULAR
+
+        setTimeout(function () {
+            var num_car = $('#INDICADORES_MENSAL_COMP td').text().length
+            var num_car_ = $('#INDICADORES_MENSAL_COMP td').text().replace('calc', '').length
+
+            if (num_car == num_car_) { } else
+            {
+                window.location.reload(1);
+
+            }
+        }, 20000);
+
+
+
+        $(document).ready(function () {
+
+            var num_car = $('#INDICADORES_MENSAL_COMP td').text().length
+            var num_car_ = $('#INDICADORES_MENSAL_COMP td').text().replace('calc', '').length
+
+            if (num_car == num_car_) { } else
+            {
+
+                $(".calcular").attr('style', 'display:block');
+            }
+
+
+            
+@*------------------------------------------------GRAFICO_INDICADORES_MENSAL_RESUMIDOCOMP_COMP-----------------------------------------------------------*@
+            var ANO_VERSAO_REAL = @Html.Raw((string.Format("{0:0}", ViewData["ANO_VERSAO_REAL"])));
+            var ANO_VERSAO_REAL_ = ANO_VERSAO_REAL.toString().substr(ANO_VERSAO_REAL.toString().length - 2,ANO_VERSAO_REAL.toString().length);
+
+            var ANO_VERSAO_ANTE = @Html.Raw((string.Format("{0:0}", ViewData["ANO_VERSAO_ANTE"])));
+            var ANO_VERSAO_ANTE_ = ANO_VERSAO_ANTE.toString().substr(ANO_VERSAO_ANTE.toString().length - 2,ANO_VERSAO_ANTE.toString().length);
+
+
+
+            if(@ViewData["MES_ACUM_REAL"]<1){ var IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO };
+            if(@ViewData["MES_ACUM_REAL"]<2){ var IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO };
+            if(@ViewData["MES_ACUM_REAL"]<3){ var IND_PASS_FINANC_EBITDA_ANO_N_MARCO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_MARCO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_MARCO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_MARCO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_MARCO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_MARCO };
+            if(@ViewData["MES_ACUM_REAL"]<4){ var IND_PASS_FINANC_EBITDA_ANO_N_ABRIL = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_ABRIL_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_ABRIL= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_ABRIL"]))); var IND_PASS_FINANC_EBITDA_ANO_N_ABRIL_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_ABRIL };
+            if(@ViewData["MES_ACUM_REAL"]<5){ var IND_PASS_FINANC_EBITDA_ANO_N_MAIO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_MAIO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_MAIO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_MAIO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_MAIO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_MAIO };
+            if(@ViewData["MES_ACUM_REAL"]<6){ var IND_PASS_FINANC_EBITDA_ANO_N_JUNHO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_JUNHO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_JUNHO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_JUNHO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_JUNHO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_JUNHO };
+            if(@ViewData["MES_ACUM_REAL"]<7){ var IND_PASS_FINANC_EBITDA_ANO_N_JULHO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_JULHO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_JULHO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_JULHO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_JULHO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_JULHO };
+            if(@ViewData["MES_ACUM_REAL"]<8){ var IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO };
+            if(@ViewData["MES_ACUM_REAL"]<9){ var IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO };
+            if(@ViewData["MES_ACUM_REAL"]<10){ var IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO };
+            if(@ViewData["MES_ACUM_REAL"]<11){ var IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO };
+            if(@ViewData["MES_ACUM_REAL"]<12){ var IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO = 'nd'; var IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO"]))); var IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO_MAX_MIN = IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO };
+
+            if(@ViewData["MES_ACUM_REAL"]<1){ var IND_PASS_FINANC_ANO_N_JANEIRO = 'nd'; var IND_PASS_FINANC_ANO_N_JANEIRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_JANEIRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_JANEIRO"]))); var IND_PASS_FINANC_ANO_N_JANEIRO_MAX_MIN = IND_PASS_FINANC_ANO_N_JANEIRO };
+            if(@ViewData["MES_ACUM_REAL"]<2){ var IND_PASS_FINANC_ANO_N_FEVEREIRO = 'nd'; var IND_PASS_FINANC_ANO_N_FEVEREIRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_FEVEREIRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_FEVEREIRO"]))); var IND_PASS_FINANC_ANO_N_FEVEREIRO_MAX_MIN = IND_PASS_FINANC_ANO_N_FEVEREIRO };
+            if(@ViewData["MES_ACUM_REAL"]<3){ var IND_PASS_FINANC_ANO_N_MARCO = 'nd'; var IND_PASS_FINANC_ANO_N_MARCO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_MARCO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_MARCO"]))); var IND_PASS_FINANC_ANO_N_MARCO_MAX_MIN = IND_PASS_FINANC_ANO_N_MARCO };
+            if(@ViewData["MES_ACUM_REAL"]<4){ var IND_PASS_FINANC_ANO_N_ABRIL = 'nd'; var IND_PASS_FINANC_ANO_N_ABRIL_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_ABRIL= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_ABRIL"]))); var IND_PASS_FINANC_ANO_N_ABRIL_MAX_MIN = IND_PASS_FINANC_ANO_N_ABRIL };
+            if(@ViewData["MES_ACUM_REAL"]<5){ var IND_PASS_FINANC_ANO_N_MAIO = 'nd'; var IND_PASS_FINANC_ANO_N_MAIO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_MAIO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_MAIO"]))); var IND_PASS_FINANC_ANO_N_MAIO_MAX_MIN = IND_PASS_FINANC_ANO_N_MAIO };
+            if(@ViewData["MES_ACUM_REAL"]<6){ var IND_PASS_FINANC_ANO_N_JUNHO = 'nd'; var IND_PASS_FINANC_ANO_N_JUNHO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_JUNHO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_JUNHO"]))); var IND_PASS_FINANC_ANO_N_JUNHO_MAX_MIN = IND_PASS_FINANC_ANO_N_JUNHO };
+            if(@ViewData["MES_ACUM_REAL"]<7){ var IND_PASS_FINANC_ANO_N_JULHO = 'nd'; var IND_PASS_FINANC_ANO_N_JULHO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_JULHO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_JULHO"]))); var IND_PASS_FINANC_ANO_N_JULHO_MAX_MIN = IND_PASS_FINANC_ANO_N_JULHO };
+            if(@ViewData["MES_ACUM_REAL"]<8){ var IND_PASS_FINANC_ANO_N_AGOSTO = 'nd'; var IND_PASS_FINANC_ANO_N_AGOSTO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_AGOSTO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_AGOSTO"]))); var IND_PASS_FINANC_ANO_N_AGOSTO_MAX_MIN = IND_PASS_FINANC_ANO_N_AGOSTO };
+            if(@ViewData["MES_ACUM_REAL"]<9){ var IND_PASS_FINANC_ANO_N_SETEMBRO = 'nd'; var IND_PASS_FINANC_ANO_N_SETEMBRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_SETEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_SETEMBRO"]))); var IND_PASS_FINANC_ANO_N_SETEMBRO_MAX_MIN = IND_PASS_FINANC_ANO_N_SETEMBRO };
+            if(@ViewData["MES_ACUM_REAL"]<10){ var IND_PASS_FINANC_ANO_N_OUTUBRO = 'nd'; var IND_PASS_FINANC_ANO_N_OUTUBRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_OUTUBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_OUTUBRO"]))); var IND_PASS_FINANC_ANO_N_OUTUBRO_MAX_MIN = IND_PASS_FINANC_ANO_N_OUTUBRO };
+            if(@ViewData["MES_ACUM_REAL"]<11){ var IND_PASS_FINANC_ANO_N_NOVEMBRO = 'nd'; var IND_PASS_FINANC_ANO_N_NOVEMBRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_NOVEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_NOVEMBRO"]))); var IND_PASS_FINANC_ANO_N_NOVEMBRO_MAX_MIN = IND_PASS_FINANC_ANO_N_NOVEMBRO };
+            if(@ViewData["MES_ACUM_REAL"]<12){ var IND_PASS_FINANC_ANO_N_DEZEMBRO = 'nd'; var IND_PASS_FINANC_ANO_N_DEZEMBRO_MAX_MIN = 0;  } else { var IND_PASS_FINANC_ANO_N_DEZEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_DEZEMBRO"]))); var IND_PASS_FINANC_ANO_N_DEZEMBRO_MAX_MIN = IND_PASS_FINANC_ANO_N_DEZEMBRO };
+
+
+
+            var Indicadores_mensal_ResumidoComp_Eixo_max_princ= Math.max( IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_MARCO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_ABRIL_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_MAIO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_JUNHO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_JULHO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO_MAX_MIN,
+
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_JANEIRO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_FEVEREIRO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_MARCO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_ABRIL"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_MAIO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_JUNHO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_JULHO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_AGOSTO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_SETEMBRO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_OUTUBRO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_NOVEMBRO"]))),
+                               @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_DEZEMBRO"])))
+                                     );
+            var Indicadores_mensal_ResumidoComp_Eixo_min_princ= Math.min(  IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_MARCO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_ABRIL_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_MAIO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_JUNHO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_JULHO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO_MAX_MIN,
+                               IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO_MAX_MIN,
+
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_JANEIRO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_FEVEREIRO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_MARCO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_ABRIL"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_MAIO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_JUNHO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_JULHO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_AGOSTO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_SETEMBRO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_OUTUBRO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_NOVEMBRO"]))),
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_EBITDA_ANO_N_1_DEZEMBRO"])))
+                                   );
+            var Indicadores_mensal_ResumidoComp_Eixo_max_secon= Math.max(
+                               IND_PASS_FINANC_ANO_N_JANEIRO_MAX_MIN,
+                               IND_PASS_FINANC_ANO_N_FEVEREIRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_MARCO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_ABRIL_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_MAIO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_JUNHO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_JULHO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_AGOSTO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_SETEMBRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_OUTUBRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_NOVEMBRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_DEZEMBRO_MAX_MIN ,
+
+
+
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JANEIRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_FEVEREIRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_MARCO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_ABRIL"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_MAIO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JUNHO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JULHO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_AGOSTO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_SETEMBRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_OUTUBRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_NOVEMBRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_DEZEMBRO"])))
+
+                                    );
+            var Indicadores_mensal_ResumidoComp_Eixo_min_secon= Math.min(
+                               IND_PASS_FINANC_ANO_N_JANEIRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_FEVEREIRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_MARCO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_ABRIL_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_MAIO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_JUNHO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_JULHO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_AGOSTO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_SETEMBRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_OUTUBRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_NOVEMBRO_MAX_MIN ,
+                               IND_PASS_FINANC_ANO_N_DEZEMBRO_MAX_MIN ,
+
+
+                                   @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JANEIRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_FEVEREIRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_MARCO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_ABRIL"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_MAIO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JUNHO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JULHO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_AGOSTO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_SETEMBRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_OUTUBRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_NOVEMBRO"]))),
+                                    @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_DEZEMBRO"])))
+
+                                  );
+
+            //NOTA TA: Aqui trato o minimo e o maximo do eixo principal
+            if(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_princ)>=Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_princ))
+            {
+                var Indicadores_mensal_ResumidoComp_Eixo_max_princ_=(Math.ceil(Indicadores_mensal_ResumidoComp_Eixo_max_princ/Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_princ),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_princ),0).toString().length-1);
+                var Indicadores_mensal_ResumidoComp_Eixo_min_princ_= (Math.floor(Indicadores_mensal_ResumidoComp_Eixo_min_princ/Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_princ),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_princ),0).toString().length-1);
+                //alert(Indicadores_mensal_ResumidoComp_Eixo_max_princ_);
+                //alert(Indicadores_mensal_ResumidoComp_Eixo_min_princ_);
+            }
+            else
+            {
+                var Indicadores_mensal_ResumidoComp_Eixo_max_princ_=(Math.ceil(Indicadores_mensal_ResumidoComp_Eixo_max_princ/Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_princ),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_princ),0).toString().length-1);
+                var Indicadores_mensal_ResumidoComp_Eixo_min_princ_= (Math.floor(Indicadores_mensal_ResumidoComp_Eixo_min_princ/Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_princ),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_princ),0).toString().length-1);}
+
+            //NOTA TA: Aqui trato o minimo e o maximo do eixo secundario
+
+            if(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_secon)>=Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_secon))
+            {
+                var Indicadores_mensal_ResumidoComp_Eixo_max_secon_=(Math.ceil(Indicadores_mensal_ResumidoComp_Eixo_max_secon/Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_secon),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_secon),0).toString().length-1);
+                var Indicadores_mensal_ResumidoComp_Eixo_min_secon_= (Math.floor(Indicadores_mensal_ResumidoComp_Eixo_min_secon/Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_secon),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_secon),0).toString().length-1);
+                //alert(Indicadores_mensal_ResumidoComp_Eixo_max_secon_);
+                //alert(Indicadores_mensal_ResumidoComp_Eixo_min_secon_);
+            }
+            else
+            {
+                var Indicadores_mensal_ResumidoComp_Eixo_max_secon_=(Math.ceil(Indicadores_mensal_ResumidoComp_Eixo_max_secon/Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_secon),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_secon),0).toString().length-1);
+                var Indicadores_mensal_ResumidoComp_Eixo_min_secon_= (Math.floor(Indicadores_mensal_ResumidoComp_Eixo_min_secon/Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_secon),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_secon),0).toString().length-1);}
+
+
+            if(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_princ)/Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_princ)>=Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_secon)/Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_secon))
+            { if(Indicadores_mensal_ResumidoComp_Eixo_max_princ > 0 && Indicadores_mensal_ResumidoComp_Eixo_min_princ <0 ){ var Indicadores_mensal_ResumidoComp_Eixo_min_secon__=(Indicadores_mensal_ResumidoComp_Eixo_min_princ_*Indicadores_mensal_ResumidoComp_Eixo_max_secon_)/Indicadores_mensal_ResumidoComp_Eixo_max_princ_;} else { var Indicadores_mensal_ResumidoComp_Eixo_min_secon__=Indicadores_mensal_ResumidoComp_Eixo_min_secon_;}
+                if(Indicadores_mensal_ResumidoComp_Eixo_max_secon > 0 && Indicadores_mensal_ResumidoComp_Eixo_min_secon <0 ){ var Indicadores_mensal_ResumidoComp_Eixo_min_princ__=(Indicadores_mensal_ResumidoComp_Eixo_min_secon__*Indicadores_mensal_ResumidoComp_Eixo_max_princ_)/Indicadores_mensal_ResumidoComp_Eixo_max_secon_;} else { var Indicadores_mensal_ResumidoComp_Eixo_min_princ__=Indicadores_mensal_ResumidoComp_Eixo_min_princ_;}}
+            else
+            {if(Indicadores_mensal_ResumidoComp_Eixo_max_secon > 0 && Indicadores_mensal_ResumidoComp_Eixo_min_secon <0 ){ var Indicadores_mensal_ResumidoComp_Eixo_min_princ__=(Indicadores_mensal_ResumidoComp_Eixo_min_secon_*Indicadores_mensal_ResumidoComp_Eixo_max_princ_)/Indicadores_mensal_ResumidoComp_Eixo_max_secon_;} else { var Indicadores_mensal_ResumidoComp_Eixo_min_princ__=Indicadores_mensal_ResumidoComp_Eixo_min_princ_;}
+                if(Indicadores_mensal_ResumidoComp_Eixo_max_princ > 0 && Indicadores_mensal_ResumidoComp_Eixo_min_princ <0 ){ var Indicadores_mensal_ResumidoComp_Eixo_min_secon__=(Indicadores_mensal_ResumidoComp_Eixo_min_princ__*Indicadores_mensal_ResumidoComp_Eixo_max_secon_)/Indicadores_mensal_ResumidoComp_Eixo_max_princ_;} else { var Indicadores_mensal_ResumidoComp_Eixo_min_secon__=Indicadores_mensal_ResumidoComp_Eixo_min_secon_;}
+            }
+
+
+
+            if(Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_princ)/Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_princ)>=Math.abs(Indicadores_mensal_ResumidoComp_Eixo_max_secon)/Math.abs(Indicadores_mensal_ResumidoComp_Eixo_min_secon))
+            { if(Indicadores_mensal_ResumidoComp_Eixo_min_princ > 0 && Indicadores_mensal_ResumidoComp_Eixo_max_princ <0 ){ var Indicadores_mensal_ResumidoComp_Eixo_max_secon__=(Indicadores_mensal_ResumidoComp_Eixo_max_princ_*Indicadores_mensal_ResumidoComp_Eixo_min_secon_)/Indicadores_mensal_ResumidoComp_Eixo_min_princ_;} else { var Indicadores_mensal_ResumidoComp_Eixo_max_secon__=Indicadores_mensal_ResumidoComp_Eixo_max_secon_;}
+                if(Indicadores_mensal_ResumidoComp_Eixo_min_secon > 0 && Indicadores_mensal_ResumidoComp_Eixo_max_secon <0 ){ var Indicadores_mensal_ResumidoComp_Eixo_max_princ__=(Indicadores_mensal_ResumidoComp_Eixo_max_secon__*Indicadores_mensal_ResumidoComp_Eixo_min_princ_)/Indicadores_mensal_ResumidoComp_Eixo_min_secon_;} else { var Indicadores_mensal_ResumidoComp_Eixo_max_princ__=Indicadores_mensal_ResumidoComp_Eixo_max_princ_;}}
+            else
+            {if(Indicadores_mensal_ResumidoComp_Eixo_min_secon > 0 && Indicadores_mensal_ResumidoComp_Eixo_max_secon <0 ){ var Indicadores_mensal_ResumidoComp_Eixo_max_princ__=(Indicadores_mensal_ResumidoComp_Eixo_max_secon_*Indicadores_mensal_ResumidoComp_Eixo_min_princ_)/Indicadores_mensal_ResumidoComp_Eixo_min_secon_;} else { var Indicadores_mensal_ResumidoComp_Eixo_max_princ__=Indicadores_mensal_ResumidoComp_Eixo_max_princ_;}
+                if(Indicadores_mensal_ResumidoComp_Eixo_min_princ > 0 && Indicadores_mensal_ResumidoComp_Eixo_max_princ <0 ){ var Indicadores_mensal_ResumidoComp_Eixo_max_secon__=(Indicadores_mensal_ResumidoComp_Eixo_max_princ__*Indicadores_mensal_ResumidoComp_Eixo_min_secon_)/Indicadores_mensal_ResumidoComp_Eixo_min_princ_;} else { var Indicadores_mensal_ResumidoComp_Eixo_max_secon__=Indicadores_mensal_ResumidoComp_Eixo_max_secon_;}
+            }
+
+
+            var GRAFICO_INDICADORES_MENSAL_RESUMIDOCOMP_COMP=document.getElementById('GRAFICO_INDICADORES_MENSAL_RESUMIDOCOMP_COMP').getContext('2d');
+
+            var GRAFICO_INDICADORES_MENSAL_RESUMIDOCOMP_COMP=new Chart(GRAFICO_INDICADORES_MENSAL_RESUMIDOCOMP_COMP, {
+                // The type of chart we want to create
+                type: 'bar',
+
+                // The data for our dataset
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                    datasets: [
+                                            {
+                                                label:  'NºAnos' + ANO_VERSAO_REAL_,
+
+                                                yAxisID: 'A',
+                                                //backgroundColor: 'rgb(255, 255, 255)',
+                                                borderColor: 'rgb(255, 102, 0)',
+                                                data: [
+                                               IND_PASS_FINANC_EBITDA_ANO_N_JANEIRO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_FEVEREIRO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_MARCO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_ABRIL ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_MAIO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_JUNHO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_JULHO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_AGOSTO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_SETEMBRO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_OUTUBRO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_NOVEMBRO ,
+                                               IND_PASS_FINANC_EBITDA_ANO_N_DEZEMBRO ,
+                                                ],
+                                                type: 'line'
+
+
+                                            },
+                        {
+                            label:  'PassFin' + ANO_VERSAO_REAL_,
+                            yAxisID: 'B',
+                            backgroundColor: 'rgba(255, 102, 0, 0.7)',
+                            borderColor: 'rgba(255, 102, 0, 0.7)',
+                            data: [
+                           IND_PASS_FINANC_ANO_N_JANEIRO ,
+                           IND_PASS_FINANC_ANO_N_FEVEREIRO ,
+                           IND_PASS_FINANC_ANO_N_MARCO ,
+                           IND_PASS_FINANC_ANO_N_ABRIL ,
+                           IND_PASS_FINANC_ANO_N_MAIO ,
+                           IND_PASS_FINANC_ANO_N_JUNHO ,
+                           IND_PASS_FINANC_ANO_N_JULHO ,
+                           IND_PASS_FINANC_ANO_N_AGOSTO ,
+                           IND_PASS_FINANC_ANO_N_SETEMBRO ,
+                           IND_PASS_FINANC_ANO_N_OUTUBRO ,
+                           IND_PASS_FINANC_ANO_N_NOVEMBRO ,
+                           IND_PASS_FINANC_ANO_N_DEZEMBRO ,
+                            ],
+                            type: 'bar'
+
+
+                        },
+                        {
+                            label: 'Pass. Financeiro ' + ANO_VERSAO_ANTE_,
+                            yAxisID: 'B',
+                            backgroundColor: 'rgba(135, 191 , 97, 0.7)',
+                            borderColor:  'rgba(135, 191 , 97, 0.7)',
+                            data: [
+                                 @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JANEIRO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_FEVEREIRO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_MARCO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_ABRIL"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_MAIO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JUNHO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_JULHO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_AGOSTO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_SETEMBRO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_OUTUBRO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_NOVEMBRO"]))),
+                                @Html.Raw((string.Format("{0:0}", @ViewData["IND_PASS_FINANC_ANO_N_1_DEZEMBRO"]))),
+
+
+                            ],
+                        },
+                    ]
+                },
+
+                // Configuration options go here
+
+                options: {
+                    title: {
+                        display: false,
+                        text: 'IND_PASS_FINANC e DEM. RESULT.',
+                        fontStyle: 'bold',
+                        fontSize: 8
+                    },
+
+
+
+                    tooltips: {
+                        callbacks: {
+                            // this callback is used to create the tooltip label
+                            label: function(tooltipItem, data) {
+                                // get the data label and data value to display
+                                // convert the data value to local string so it uses a comma seperated number
+                                var dataLabel = data.labels[tooltipItem.index];
+                                var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].toLocaleString();
+
+                                // make this isn't a multi-line label (e.g. [["label 1 - line 1, "line 2, ], [etc...]])
+                                if (Chart.helpers.isArray(dataLabel)) {
+                                    // show value on first line of multiline label
+                                    // need to clone because we are changing the value
+                                    dataLabel = dataLabel.slice();
+                                    dataLabel[0] += value;
+                                } else {
+                                    dataLabel += value;
+                                }
+
+                                // return the text to display on the tooltip
+                                return dataLabel;
+                            }
+                        }
+                    },
+
+
+                    scales: {
+                        yAxes: [
+
+                            { id: 'A',
+                                type: 'linear',
+                                position: 'left',
+                                ticks: {
+                                    min: Math.round(Indicadores_mensal_ResumidoComp_Eixo_min_princ__,0),
+                                    max:  Math.round(Indicadores_mensal_ResumidoComp_Eixo_max_princ__,0),
+                                    beginAtZero: false,
+                                    callback: function(value, index, values) {
+                                        return value.toLocaleString()+ " anos";
+                                    }
+                                }
+                            },
+
+
+
+                        {    id: 'B',
+                            type: 'linear',
+                            position: 'right',
+                            ticks: {
+                                min: Math.round(Indicadores_mensal_ResumidoComp_Eixo_min_secon__,0),
+                                max:  Math.round(Indicadores_mensal_ResumidoComp_Eixo_max_secon__,0),
+                                beginAtZero: false,
+                                callback: function(value, index, values) {
+                                    return value.toLocaleString();
+                                }
+                            }
+                        }
+
+
+
+                        ]
+                    }
+                },
+
+            });
+
+                         @*---------------------------------MONSTAR/OCULTAR LINHAS DE CONFIGURAÇÃO DE INTERVALOS DE MESES DA TABELA----------------------------------------------------------*@
+            var grid_mes_ini_ano_n = document.getElementById("grid_mes_ini_ano_n");
+            var grid_mes_ini_ano_n_1 = document.getElementById("grid_mes_ini_ano_n-1");
+            var grid_mes_fin_ano_n = document.getElementById("grid_mes_fin_ano_n");
+            var grid_mes_fin_ano_n_1 = document.getElementById("grid_mes_fin_ano_n-1");
+            var grid_mes_acum_ano_n = document.getElementById("grid_mes_acum_ano_n");
+            var grid_mes_acum_ano_n_1 = document.getElementById("grid_mes_acum_ano_n-1");
+
+            $(".oculta_na_impressao").hide();
+            $(function () {
+                $("#Mostrar").click(function () {
+                    //$("#grid00").show();
+                    if (userAgent.search(/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i) != -1) {
+                        if ($("#INDICADORES_MENSAL_COMP_wrapper tr.oculta_na_impressao ").is(":visible") == false) { $("#INDICADORES_MENSAL_COMP_wrapper tr.oculta_na_impressao").show(); $("#INDICADORES_MENSAL_COMP tr.oculta_na_impressao").hide(); } else { $("#INDICADORES_MENSAL_COMP_wrapper tr.oculta_na_impressao").hide(); };
+
+                        var linha_1 = $(".dataTables_scrollHeadInner").html().replace("height: 0px; display: table-row;", "display: table-row;");
+                        $(".dataTables_scrollHeadInner").html(linha_1);
+                        var linha_2 = $(".DTFC_LeftHeadWrapper").html().replace("height: 0px; display: table-row;", "display: table-row;");
+                        $(".DTFC_LeftHeadWrapper").html(linha_2);
+                        var linha_1_celula = $(".dataTables_scrollHeadInner").html().replace("height: 0px; display: table-row;", "display: table-row;");
+                        $(".dataTables_scrollHeadInner").html(linha_1_celula);
+                        var linha_2_celula = $(".DTFC_LeftHeadWrapper").html().replace("height: 0px; display: table-row;", "display: table-row;");
+                        $(".DTFC_LeftHeadWrapper").html(linha_2_celula);
+
+
+
+                    } else { if ($("#INDICADORES_MENSAL_COMP_wrapper tr.oculta_na_impressao ").is(":visible") == false) { $("#INDICADORES_MENSAL_COMP tr.oculta_na_impressao").show(); } else { $("#INDICADORES_MENSAL_COMP tr.oculta_na_impressao").hide(); }; }
+                    if ($("#INDICADORES_MENSAL_COMP_wrapper").find("#grid_mes_ini_ano_n_td").is(':empty') == true) {
+                        $("#INDICADORES_MENSAL_COMP_wrapper").find("#grid_mes_ini_ano_n_td").html(grid_mes_ini_ano_n);
+                        $("#INDICADORES_MENSAL_COMP_wrapper").find("#grid_mes_ini_ano_n-1_td").html(grid_mes_ini_ano_n_1);
+                        $("#INDICADORES_MENSAL_COMP_wrapper").find("#grid_mes_fin_ano_n_td").html(grid_mes_fin_ano_n);
+                        $("#INDICADORES_MENSAL_COMP_wrapper").find("#grid_mes_fin_ano_n-1_td").html(grid_mes_fin_ano_n_1);
+                        $("#INDICADORES_MENSAL_COMP_wrapper").find("#grid_mes_acum_ano_n_td").html(grid_mes_acum_ano_n);
+                        $("#INDICADORES_MENSAL_COMP_wrapper").find("#grid_mes_acum_ano_n-1_td").html(grid_mes_acum_ano_n_1);
+                        $("#INDICADORES_MENSAL_COMP_wrapper div.oculta_na_impressao_").show();
+                    }
+
+                });
+
+                $("div.oculta_na_impressao_").hide();
+
+
+
+
+
+            });
+
+
+
+           @*------------------------------OCUTO CABEÇALHOS DE GRELHA-------------------------------------------------------------*@
+            //$("#grid th").find('"a[href*=' + "'" + "ID" + "&'" + ']"').parent().addClass('id');
+            //$("#grid th").find('"a[href*=' + "'" + "id_camp_calc" + "&'" + ']"').parent().addClass('id_camp_calc');
+            //$("#grid th").find('"a[href*=' + "'" + "desc_camp_calc" + "&'" + ']"').parent().addClass('desc_camp_calc');
+            ////$("#grid th").find('"a[href*=' + "'" + "campocalc_resultado" + "&'" + ']"').parent().addClass('campocalc_resultado');
+
+            //$("#grid ").find(".id").hide();
+            //$("#grid ").find(".id_camp_calc").hide();
+            //$("#grid ").find(".desc_camp_calc").hide();
+            //var alt_Valor_da_Variavel = $("#grid th").parent().html().replace('Valor da Variavel', 'Mês');
+            //$("#grid th").parent().html(alt_Valor_da_Variavel)
+
+            //--------------------------------TRATO os CAMPOS de SELECCAO DO MÊS--------------------------
+
+
+            //$(" .campocalc_resultado ").click(function () {
+
+            //    //alert("teste");
+            //    if ($(this).children().attr('class') != "input") {
+            //        var id = $(this).parent().find(".id").html();
+            //        var idconteudoOriginal = $(this).parent().parent().parent().parent().parent().attr('id');
+            //        //var findidconteudoOriginal = '.' + idconteudoOriginal + '';
+
+
+            //        var conteudoOriginal = $(this).text();
+
+
+
+            //        var ReplaceHrefID = $("#GRAVAROPER_DIRXX form").html();
+
+
+
+            //        $(this).html("<input class='input' value='" + conteudoOriginal + "'/>");
+            //        $(this).children().first().focus();
+
+            //    }
+
+
+            //    // NOTA TA: Keypress significa que a instrução é cumprida quando o utilizador faz "enter"
+            //    $(this).children().first().keypress(function (e) {
+            //        if (e.which == 13) {
+
+            //            if ($(this).parent().parent().parent().parent().find('.GRAVAR').text() == "") {
+            //                $(this).parent().parent().parent().parent().prepend(ReplaceHrefID);
+            //            }
+            //            else { $(this).parent().parent().parent().parent().find('.GRAVAR').html(ReplaceHrefID) }
+
+
+            //            //NOTA TA: Aqui re-faço a href do botão com todos os campos preenchidos de origem
+            //            var ValorInicial_id_camp = id;
+            //            var ReplaceHref_id_camp = $(this).parent().parent().parent().parent().find('.GRAVAR').html().replace('id_camp=id_camp', 'id_camp' + '=' + ValorInicial_id_camp);
+            //            $(this).parent().parent().parent().parent().find('.GRAVAR').html(ReplaceHref_id_camp);
+
+
+            //            var hrefalterar1 = $(this).parent().parent().parent().parent().find('.GRAVAR').html();
+
+            //            var valor = $(this).val()
+            //            if ($(this).val() == "" ||  $(this).val() <= 0 || $(this).val() >=13 || valor != parseInt(valor, 10)) {
+            //                var novoConteudo = conteudoOriginal;
+            //                alert("Por favor, Insira um Valor de 1 a 12.")
+            //            }
+            //            else {
+            //                var novoConteudo = $(this).val();
+            //            }
+
+
+
+
+            //            $(this).parent().text(novoConteudo);
+            //            $(this).parent().removeClass("celulaEmEdicao");
+
+
+            //            var ReplaceHref1 = hrefalterar1.replace('campocalc_resultado=campocalc_resultado', 'campocalc_resultado' + '=' + novoConteudo);
+
+            //            $('#' + idconteudoOriginal).find('.GRAVAR').html(ReplaceHref1);
+
+
+            //            //-------------------INICIO: ACRESCENTEI para evitar passo debotão GRAVAR----
+            //            var href_alt = document.querySelector('#' + idconteudoOriginal+ ' .GRAVAR a').href
+            //            var href_alt_ = href_alt.replace('"','').replace('amp;','').replace('amp;','')
+
+            //            var x = document.getElementsByClassName("GRAVAR");
+            //            var i;
+            //            for (i = 0; i < x.length; i++) {
+            //                x[i].style.display = "none";
+
+            //            }
+
+            //            //alert(ReplaceHref1);
+
+            //            window.location.href = href_alt_
+
+                        //-------------------FIM: ACRESCENTEI para evitar passo debotão GRAVAR----
+            //                              }
+
+            //    });
+
+
+            //})
+
+
+             @*--------------------------Aqui trato o Botão para configuração do Campo-----------------------------------------------------------------*@
+
+
+
+
+            $(".webgrid-table td").click(function () {
+                var idconteudoOriginal = $(this).attr('itemid');
+                var versaoconteudoOriginal = $(this).attr('itemref');
+
+                 //alert(idconteudoOriginal);
+                if (typeof idconteudoOriginal === "undefined")
+             { }
+             else {
+                    var ReplaceHrefID = $("#CONFIGURARXX form").html().replace('id_camp_calc=id_camp_calc', 'id_camp_calc' + '=' + idconteudoOriginal).replace('versao=versao', 'versao' + '=' + versaoconteudoOriginal);
+                    if ($(this).find('.CONFIGURAR_CAMPO').text() == "") {
+                        $(this).prepend(ReplaceHrefID);
+             }
+             }
+
+                 //alert($(this).find('.CONFIGURAR_CAMPO').text());
+             })
+
+        })
+
+
+            //------------------ NOTA TA: INICIO DE TRATAMENTO DE TABELA COM DATATABLE-------------------
+
+
+            var userAgent = navigator.userAgent.toLowerCase();
+            if (userAgent.search(/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i) != -1) {
+                var table = $('#INDICADORES_MENSAL_COMP').DataTable({
+                    aaSorting: [],
+                    columnDefs: [
+                      { orderable: false, targets: '_all' }
+                    ],
+                    scrollY: "800px",
+                    scrollX: true,
+                    scrollCollapse: true,
+                    paging: false,
+
+                    fixedColumns: {
+                        leftColumns: 1
+
+                    },
+                    buttons: [
+                            'copy', 'csv', 'print',
+                     {
+                         extend: 'pdfHtml5',
+                         orientation: 'landscape',
+                         pageSize: 'LEGAL'
+                     },
+
+                    {
+                        extend: 'excelHtml5',
+                        customize: function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            //nota ta: exemplo de como pintar coluna a melhorar
+                            //$('row c[r^="A"]', sheet).each( function () {
+                            // $(this).attr( 's', '15' );});
+                        }
+                    }
+                    ],
+
+                });
+                $('#btnExport1').attr('style', 'display:block');
+            }
+
+                //--------------NOTA TA: SE NÃO FOR MOBILE DOU UM TRATENTO DIFERENTE-------
+
+
+            else {
+                var table = $('#INDICADORES_MENSAL_COMP').DataTable({
+                    aaSorting: [],
+                    dom: 'Bfrtip',
+                    columnDefs: [
+                    { orderable: false, targets: '_all' }
+                    ],
+                    paging: false,
+                    responsive: false,
+                    fixedHeader: true,
+
+                    // scrollY:        "800",
+                    // scrollX:        true,
+                    //scrollCollapse: true,
+                    //paging:         false,
+                    //fixedColumns:   {
+                    //    leftColumns: 1,
+                    //    rightColumns: 1
+                    //},
+
+
+
+
+
+                    buttons: [
+                        'copy', 'csv', 'print',
+                    {
+                        extend: 'pdfHtml5',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL'
+                    },
+
+                    {
+                        extend: 'excelHtml5',
+                        customize: function (xlsx) {
+                            var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            //nota ta: exemplo de como pintar coluna a melhorar
+                            //$('row c[r^="A"]', sheet).each( function () {
+                            // $(this).attr( 's', '15' );});
+                        }
+                    }
+                    ],
+
+
+
+                });
+
+                //NOTA TA: AQUI DEVERIA CONSEGUIR FIXAR O HEADER, MAS NÃO ESTOU A CONSEGUIR... A MELHORAR
+                //new $.fn.dataTable.FixedHeader(table);
+            }
+
+            $(".DTFC_LeftBodyWrapper").css("top", "10px");
+            $('button').addClass('btn-blue');
+
+            //------------------ NOTA TA: FIM DE TRATAMENTO DE TABELA COM DATATABLE-------------------
+
+
+
+</script>
+
+
+@*-----------------------------NOTA TA: INICIO DE EXTRAIR PARA EXCEL E HTML ---------------------------------------------------------*@
+
+<script type="text/javascript">
+            function fnExcelReport(table, name) {
+                var table1 = '#' + table
+                var ccs_style = $("#ccs_style").html();
+                var styletabela = $(table1).attr("class");
+                var indexOf_Ini_styletabela = $("#ccs_style").html().indexOf(styletabela)
+                var indexOf_Fim_styletabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).indexOf("}");
+                var ccs_style_tabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).substring(0, indexOf_Fim_styletabela).replace("{", "").replace(styletabela, "");
+
+
+                var tab_text = "<table style=" + "'" + ccs_style_tabela + "'" + "><tr>";
+                var textRange; var j = 0; var i = 0;
+                tab = document.getElementById(table); // id of table
+
+
+
+                for (j = 0 ; j < tab.rows.length ; j++) {
+                    var tab_rows = tab.rows[j].innerHTML;
+                    for (i = 0 ; i < tab.rows[j].cells.length ; i++) {
+
+                        var texto_linha = tab_rows;
+                        var style_celula_ini = texto_linha.indexOf('class="');
+                        var style_celula_fim = texto_linha.substring(style_celula_ini, 999999999999).replace('class="', '').indexOf('"');
+                        var style_celula = texto_linha.substring(style_celula_ini, 999999999999).replace('class="', '').substring(0, style_celula_fim);
+
+                        var indexOf_Ini_styletabela = $("#ccs_style").html().indexOf(style_celula)
+                        var indexOf_Fim_styletabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).indexOf("}");
+                        var ccs_style_tabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).substring(0, indexOf_Fim_styletabela).replace("{", "").replace(style_celula, "");
+
+                        tab_rows = tab_rows.replace('class="' + style_celula + '"', 'style="' + ccs_style_tabela + '"')
+
+                    }
+
+                    tab_text = tab_text + tab_rows + "</tr>";
+                    //tab_text=tab_text+"</tr>";
+                }
+
+                tab_text = tab_text + "</table>";
+                tab_text = tab_text.split('&nbsp;').join('.');
+                tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+                tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+                tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+                {
+                    txtArea1.document.open("txt/html", "replace");
+                    txtArea1.document.write(tab_text);
+                    txtArea1.document.close();
+                    txtArea1.focus();
+                    sa = txtArea1.document.execCommand("SaveAs", true, "Transferir.xls");
+
+                    return (sa);
+                }
+                else                 //other browser not tested on IE 11
+
+                 sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+                return (sa);
+
+
+            }
+</script>
+
+@*-----------------------------NOTA TA: FIM DE EXTRAIR PARA EXCEL E HTML ---------------------------------------------------------*@
+}
+
+
+

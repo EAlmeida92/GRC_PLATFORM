@@ -1,0 +1,194 @@
+﻿
+
+<!-- NOTA TA: aqui fica a minha grelha do cliente --->
+
+@model List<APLICACAO.View_GRC_TAB_CL>
+
+@if (Request.IsAuthenticated) {
+    <text>
+        Estou Autenticado como: @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+    </text>
+} else {
+        <text>
+        Não estou autenticado
+    </text>
+}
+
+
+
+
+
+@{
+    ViewBag.Title = "Lista de Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        text-align: center;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        padding: 3px 7px 2px;
+    }
+    .webgrid-alternating-row
+    {
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+    /*NOTA TA: criei as class abaixo para identificar cada algumas das colunas da GRID*/
+
+    .fact {
+    }
+    .recebimentos {
+    }
+     
+     /*NOTA TA: class para o a definição dos estilo do rodapé*/
+        .Sub_Total_Texto {
+        text-align: center;
+        background-color: #3c48ea;
+        padding: 3px 7px 2px;
+        color: white;
+        font-size: 16px;
+        width: 100%;       
+    }
+     
+     .Sub_Total {
+        text-align: right;
+        background-color: #3c48ea;
+        padding: 3px 7px 2px;
+        color: white;
+        font-size: 16px;
+        width: 100%;       
+    }
+
+</style>
+@{
+    var grid1 = new WebGrid(source: Model, defaultSort: "nome", canPage: true, rowsPerPage: 5);
+}
+
+ @grid1.GetHtml(
+         tableStyle: "webgrid-table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+        mode: WebGridPagerModes.All,
+         columns: grid1.Columns(
+         grid1.Column(columnName: "no", header: "Nº"),
+         grid1.Column(columnName: "nome", header: "NOME"),
+         grid1.Column(columnName: "ncont", header: "NIF"),
+         grid1.Column("VER", header: null, format: @<text>@Html.ActionLink("Lista de Clientes", "LISTA_CLIENTES", "GRC")</text>)
+         //grid1.Column( "SELECCIONAR",header:"", style: "text-align-center", format:(item) => item.GetSelectLink("Select"))
+
+
+
+     )
+  )
+
+@{
+    var grid2 = new WebGrid(source: Model, defaultSort: "no", canPage: true, rowsPerPage: 5);
+   
+}
+@grid2.GetHtml(
+         tableStyle: "webgrid-table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+        mode: WebGridPagerModes.All,
+        columns: grid2.Columns(
+grid2.Column(columnName: "Tipo_Pagamento", header: "Tipo de Pagamento"),
+grid2.Column(columnName: "Dias_Pagamento", header: "Prazo Pagamento"),
+grid2.Column(columnName: "Plafond", header: "Plafond"),
+grid2.Column(columnName: "Plafond_Seguro", header: "Plafond Seguro"),
+grid2.Column(columnName: "Comercial", header: "Comercial"),
+grid2.Column(columnName: "Zona", header: "Zona"),
+grid2.Column(columnName: "Bloqueado", header: "Bloqueado")))
+
+
+<div id="grid">
+
+  
+@Html.Action("PROC_GRC_VER_CLIENTE_Grid3_Result", "GRC", null)
+
+</div>
+
+
+
+@section scripts {
+
+
+@*    NOTA TA: AQUI CRIO AS LINHAS DO SUBTOTAL DA GRELHA: EXEMPLO:ELE PROCURA O ELEMENTO COM ID=GRID E OS ELEMENTOS COM O ESTILO .SALDO, PERCORRE OS ELEMENTOS E SOMA.*@
+   
+     <script type="text/javascript">
+
+
+         $(grid).ready(function () {
+      
+             var totalfact = 0;
+             var totalrecebimentos= 0;
+
+
+            $('#grid .fact').each(function () {
+
+                totalfact = totalfact + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.'));
+
+            });
+
+            $('#grid .recebimentos').each(function () {
+
+                totalrecebimentos = totalrecebimentos + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.'));
+
+            });
+             
+
+            $('#grid tbody').prepend('<tr><td class=Sub_Total_Texto ><b>Total:</b></td><td class=Sub_Total ><b>'
+                + Number(totalfact.toFixed(2)).toLocaleString('de-DE') + '<b><td class=Sub_Total><b>'
+                + Number(totalrecebimentos.toFixed(2)).toLocaleString('de-DE') + '<b><td colspan="4" class=Sub_Total><b>' + '</b></td></tr>');
+         
+        });
+
+    </script>
+    
+}
+
+

@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "teste";
+}
+
+
+<table id="mainTable">
+      <thead>
+      <tr>
+        <th>Col 1</th>
+        <th>Col 2</th>
+        <th>Col 3</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+          <td>data</td>
+          <td>data</td>
+          <td>data</td>
+      </tr>
+      <tr>
+          <td>data</td>
+          <td>
+               <table class="nestedTable">
+                   <tr><th>Col 1</th><th>Col 3</th></tr>
+                   <tr>
+                       <td>nested data</td><td>nested data 1</td>
+                    </tr>
+               </table>
+          </td>
+          <td>data</td>
+      </tr>
+    </tbody>
+</table>
+
+
+<select id="cols" class="multiselect" multiple="multiple" name="cols[]">
+    <option value="Col1">Col1</option>
+    <option value="Col2">Col2</option>
+    <option value="Col3">Col3</option>
+</select>
+
+

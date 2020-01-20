@@ -1,0 +1,428 @@
+﻿<canvas id="GRAFICO_FSE_MENSAL_COMP_FSE_TRAB_ESPECIAL_001"></canvas>
+
+<script src="@Url.Content("~/Scripts/chart.js@2.8.0.js")"></script>
+@*------------------------------------------------GRAFICO_FSE_MENSAL_COMP_FSE_TRAB_ESPECIAL_001-----------------------------------------------------------*@
+<script>
+
+    var ANO_VERSAO_REAL = @Html.Raw((string.Format("{0:0}", ViewData["ANO_VERSAO_REAL"])));
+    var ANO_VERSAO_REAL_ = ANO_VERSAO_REAL.toString().substr(ANO_VERSAO_REAL.toString().length - 2,ANO_VERSAO_REAL.toString().length);
+
+    var ANO_VERSAO_ANTE = @Html.Raw((string.Format("{0:0}", ViewData["ANO_VERSAO_ANTE"])));
+    var ANO_VERSAO_ANTE_ = ANO_VERSAO_ANTE.toString().substr(ANO_VERSAO_ANTE.toString().length - 2,ANO_VERSAO_ANTE.toString().length);
+
+
+
+    if(@ViewData["MES_ACUM_REAL"]<1){ var IND_VN_ANO_N_JANEIRO = 'nd'; var IND_VN_ANO_N_JANEIRO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_JANEIRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_JANEIRO"]))); var IND_VN_ANO_N_JANEIRO_MAX_MIN = IND_VN_ANO_N_JANEIRO };
+    if(@ViewData["MES_ACUM_REAL"]<2){ var IND_VN_ANO_N_FEVEREIRO = 'nd'; var IND_VN_ANO_N_FEVEREIRO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_FEVEREIRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_FEVEREIRO"]))); var IND_VN_ANO_N_FEVEREIRO_MAX_MIN = IND_VN_ANO_N_FEVEREIRO };
+    if(@ViewData["MES_ACUM_REAL"]<3){ var IND_VN_ANO_N_MARCO = 'nd'; var IND_VN_ANO_N_MARCO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_MARCO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_MARCO"]))); var IND_VN_ANO_N_MARCO_MAX_MIN = IND_VN_ANO_N_MARCO };
+    if(@ViewData["MES_ACUM_REAL"]<4){ var IND_VN_ANO_N_ABRIL = 'nd'; var IND_VN_ANO_N_ABRIL_MAX_MIN = 0;  } else { var IND_VN_ANO_N_ABRIL= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_ABRIL"]))); var IND_VN_ANO_N_ABRIL_MAX_MIN = IND_VN_ANO_N_ABRIL };
+    if(@ViewData["MES_ACUM_REAL"]<5){ var IND_VN_ANO_N_MAIO = 'nd'; var IND_VN_ANO_N_MAIO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_MAIO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_MAIO"]))); var IND_VN_ANO_N_MAIO_MAX_MIN = IND_VN_ANO_N_MAIO };
+    if(@ViewData["MES_ACUM_REAL"]<6){ var IND_VN_ANO_N_JUNHO = 'nd'; var IND_VN_ANO_N_JUNHO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_JUNHO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_JUNHO"]))); var IND_VN_ANO_N_JUNHO_MAX_MIN = IND_VN_ANO_N_JUNHO };
+    if(@ViewData["MES_ACUM_REAL"]<7){ var IND_VN_ANO_N_JULHO = 'nd'; var IND_VN_ANO_N_JULHO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_JULHO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_JULHO"]))); var IND_VN_ANO_N_JULHO_MAX_MIN = IND_VN_ANO_N_JULHO };
+    if(@ViewData["MES_ACUM_REAL"]<8){ var IND_VN_ANO_N_AGOSTO = 'nd'; var IND_VN_ANO_N_AGOSTO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_AGOSTO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_AGOSTO"]))); var IND_VN_ANO_N_AGOSTO_MAX_MIN = IND_VN_ANO_N_AGOSTO };
+    if(@ViewData["MES_ACUM_REAL"]<9){ var IND_VN_ANO_N_SETEMBRO = 'nd'; var IND_VN_ANO_N_SETEMBRO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_SETEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_SETEMBRO"]))); var IND_VN_ANO_N_SETEMBRO_MAX_MIN = IND_VN_ANO_N_SETEMBRO };
+    if(@ViewData["MES_ACUM_REAL"]<10){ var IND_VN_ANO_N_OUTUBRO = 'nd'; var IND_VN_ANO_N_OUTUBRO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_OUTUBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_OUTUBRO"]))); var IND_VN_ANO_N_OUTUBRO_MAX_MIN = IND_VN_ANO_N_OUTUBRO };
+    if(@ViewData["MES_ACUM_REAL"]<11){ var IND_VN_ANO_N_NOVEMBRO = 'nd'; var IND_VN_ANO_N_NOVEMBRO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_NOVEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_NOVEMBRO"]))); var IND_VN_ANO_N_NOVEMBRO_MAX_MIN = IND_VN_ANO_N_NOVEMBRO };
+    if(@ViewData["MES_ACUM_REAL"]<12){ var IND_VN_ANO_N_DEZEMBRO = 'nd'; var IND_VN_ANO_N_DEZEMBRO_MAX_MIN = 0;  } else { var IND_VN_ANO_N_DEZEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["IND_VN_ANO_N_DEZEMBRO"]))); var IND_VN_ANO_N_DEZEMBRO_MAX_MIN = IND_VN_ANO_N_DEZEMBRO };
+
+    if(@ViewData["MES_ACUM_REAL"]<1){ var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_JANEIRO"]))); var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_JANEIRO };
+    if(@ViewData["MES_ACUM_REAL"]<2){ var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO"]))); var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO };
+    if(@ViewData["MES_ACUM_REAL"]<3){ var FSE_TRAB_ESPECIAL_ANO_N_MARCO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_MARCO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_MARCO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_MARCO"]))); var FSE_TRAB_ESPECIAL_ANO_N_MARCO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_MARCO };
+    if(@ViewData["MES_ACUM_REAL"]<4){ var FSE_TRAB_ESPECIAL_ANO_N_ABRIL = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_ABRIL_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_ABRIL= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_ABRIL"]))); var FSE_TRAB_ESPECIAL_ANO_N_ABRIL_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_ABRIL };
+    if(@ViewData["MES_ACUM_REAL"]<5){ var FSE_TRAB_ESPECIAL_ANO_N_MAIO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_MAIO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_MAIO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_MAIO"]))); var FSE_TRAB_ESPECIAL_ANO_N_MAIO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_MAIO };
+    if(@ViewData["MES_ACUM_REAL"]<6){ var FSE_TRAB_ESPECIAL_ANO_N_JUNHO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_JUNHO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_JUNHO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_JUNHO"]))); var FSE_TRAB_ESPECIAL_ANO_N_JUNHO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_JUNHO };
+    if(@ViewData["MES_ACUM_REAL"]<7){ var FSE_TRAB_ESPECIAL_ANO_N_JULHO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_JULHO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_JULHO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_JULHO"]))); var FSE_TRAB_ESPECIAL_ANO_N_JULHO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_JULHO };
+    if(@ViewData["MES_ACUM_REAL"]<8){ var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_AGOSTO"]))); var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_AGOSTO };
+    if(@ViewData["MES_ACUM_REAL"]<9){ var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO"]))); var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO };
+    if(@ViewData["MES_ACUM_REAL"]<10){ var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO"]))); var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO };
+    if(@ViewData["MES_ACUM_REAL"]<11){ var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO"]))); var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO };
+    if(@ViewData["MES_ACUM_REAL"]<12){ var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO= @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO"]))); var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO };
+
+
+    var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_JANEIRO;
+    var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO + FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_MARCO + FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM = FSE_TRAB_ESPECIAL_ANO_N_ABRIL + FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_MAIO + FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_JUNHO + FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_JULHO + FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_AGOSTO + FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO + FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO + FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO + FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM = FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO + FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM;
+
+
+
+
+    if(@ViewData["MES_ACUM_REAL"]<1){ var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<2){ var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<3){ var FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<4){ var FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM= FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<5){ var FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<6){ var FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<7){ var FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<8){ var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<9){ var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<10){ var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<11){ var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM };
+    if(@ViewData["MES_ACUM_REAL"]<12){ var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM = 'nd'; var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM_MAX_MIN = 0;  } else { var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM= FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM; var FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM_MAX_MIN = FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM };
+
+
+
+
+    var FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO"])));
+    var FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_MARCO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_MARCO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_MARCO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_MAIO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_MAIO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_MAIO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_JULHO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JULHO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_JULHO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO_ACUM;
+    var FSE_TRAB_ESPECIAL_ANO_N_1_DEZEMBRO_ACUM = @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_DEZEMBRO"]))) + FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO_ACUM;
+
+
+    var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ= Math.max(
+                       FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM_MAX_MIN,
+
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_MARCO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_MAIO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JULHO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_DEZEMBRO_ACUM,
+                             );
+    var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ= Math.min(
+
+                       FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM_MAX_MIN,
+                       FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM_MAX_MIN,
+
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_MARCO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_MAIO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JULHO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_DEZEMBRO_ACUM,
+                           );
+    var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon= Math.max(
+                       FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_MARCO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_ABRIL_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_MAIO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_JUNHO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_JULHO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_MAX_MIN ,
+
+
+
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_MARCO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_MAIO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JULHO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_DEZEMBRO"]))),
+
+                            );
+    var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon= Math.min(
+                       FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_MARCO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_ABRIL_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_MAIO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_JUNHO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_JULHO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_MAX_MIN ,
+                       FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_MAX_MIN ,
+
+
+                           @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_MARCO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_MAIO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JULHO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO"]))),
+                            @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_DEZEMBRO"]))),
+
+                          );
+
+    //NOTA TA: Aqui trato o minimo e o maximo do eixo principal
+    if(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ)>=Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ))
+    {
+        var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_=(Math.ceil(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ/Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ),0).toString().length-1);
+        var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_= (Math.floor(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ/Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ),0).toString().length-1);
+        //alert(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_);
+        //alert(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_);
+    }
+    else
+    {
+        var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_=(Math.ceil(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ/Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ),0).toString().length-1);
+        var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_= (Math.floor(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ/Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ),0).toString().length-1);}
+
+    //NOTA TA: Aqui trato o minimo e o maximo do eixo secundario
+
+    if(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon)>=Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon))
+    {
+        var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_=(Math.ceil(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon/Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon),0).toString().length-1);
+        var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_= (Math.floor(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon/Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon),0).toString().length-1);
+        //alert(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_);
+        //alert(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_);
+    }
+    else
+    {
+        var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_=(Math.ceil(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon/Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon),0).toString().length-1);
+        var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_= (Math.floor(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon/Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon),0).toString().length-1),0))*Math.pow(10,Math.round(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon),0).toString().length-1);}
+
+
+    if(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ)/Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ)>=Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon)/Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon))
+    { if(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ > 0 && FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ <0 ){ var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon__=(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_*FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_)/FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_;} else { var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon__=FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_;}
+        if(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon > 0 && FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon <0 ){ var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ__=(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon__*FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_)/FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_;} else { var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ__=FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_;}}
+    else
+    {if(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon > 0 && FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon <0 ){ var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ__=(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_*FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_)/FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_;} else { var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ__=FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_;}
+        if(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ > 0 && FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ <0 ){ var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon__=(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ__*FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_)/FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_;} else { var FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon__=FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_;}
+    }
+
+
+
+    if(Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ)/Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ)>=Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon)/Math.abs(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon))
+    { if(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ > 0 && FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ <0 ){ var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon__=(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_*FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_)/FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_;} else { var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon__=FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_;}
+        if(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon > 0 && FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon <0 ){ var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ__=(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon__*FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_)/FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_;} else { var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ__=FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_;}}
+    else
+    {if(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon > 0 && FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon <0 ){ var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ__=(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_*FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_)/FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_;} else { var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ__=FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ_;}
+        if(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ > 0 && FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ <0 ){ var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon__=(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ__*FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon_)/FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ_;} else { var FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon__=FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon_;}
+    }
+
+
+    var GRAFICO_FSE_MENSAL_COMP_FSE_TRAB_ESPECIAL_001=document.getElementById('GRAFICO_FSE_MENSAL_COMP_FSE_TRAB_ESPECIAL_001').getContext('2d');
+
+    var GRAFICO_FSE_MENSAL_COMP_FSE_TRAB_ESPECIAL_001=new Chart(GRAFICO_FSE_MENSAL_COMP_FSE_TRAB_ESPECIAL_001, {
+        // The type of chart we want to create
+        type: 'bar',
+
+        // The data for our dataset
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+            datasets: [
+               {
+                   label: 'Trab. Esp.(ac) ' + ANO_VERSAO_REAL_,
+                   yAxisID: 'A',
+                   //backgroundColor: 'rgb(201, 10, 10)',
+                   borderColor: 'rgb(250 , 83 , 0)',
+                   data: [
+                       FSE_TRAB_ESPECIAL_ANO_N_JANEIRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_MARCO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_ABRIL_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_MAIO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_JUNHO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_JULHO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_AGOSTO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO_ACUM,
+                   ],
+                   type: 'line'
+
+
+               },
+                              {
+                                  label: 'Trab. Esp.(ac) ' + ANO_VERSAO_ANTE_,
+                                  yAxisID: 'A',
+                                  //backgroundColor: 'rgb(201, 10, 10)',
+                                  borderColor: 'rgb(0,221,0)',
+                                  data: [
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_MARCO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_MAIO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_JULHO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO_ACUM,
+                       FSE_TRAB_ESPECIAL_ANO_N_1_DEZEMBRO_ACUM,
+                                  ],
+                                  type: 'line'
+
+
+                              },
+                {
+                    label:  'Trab. Esp.(m) ' + ANO_VERSAO_REAL_,
+                    yAxisID: 'B',
+                    backgroundColor: 'rgba(250 , 83 , 0, 0.5)',
+                    borderColor: 'rgba(250 , 83 , 0, 0.5)',
+                    data: [
+                  FSE_TRAB_ESPECIAL_ANO_N_JANEIRO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_FEVEREIRO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_MARCO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_ABRIL,
+                  FSE_TRAB_ESPECIAL_ANO_N_MAIO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_JUNHO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_JULHO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_AGOSTO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_SETEMBRO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_OUTUBRO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_NOVEMBRO ,
+                  FSE_TRAB_ESPECIAL_ANO_N_DEZEMBRO ,
+                    ],
+                },
+                {
+                    label:  'Trab. Esp.(m) ' + ANO_VERSAO_ANTE_,
+                    yAxisID: 'B',
+                    backgroundColor: 'rgba(0,221,0, 0.4)',
+                    borderColor: 'rgba(0,221,0, 0.4)',
+                    data: [
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JANEIRO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_FEVEREIRO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_MARCO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_ABRIL"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_MAIO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JUNHO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_JULHO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_AGOSTO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_SETEMBRO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_OUTUBRO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_NOVEMBRO"]))),
+                       @Html.Raw((string.Format("{0:0}", @ViewData["FSE_TRAB_ESPECIAL_ANO_N_1_DEZEMBRO"]))),
+                    ],
+                },
+
+
+            ]
+        },
+
+        // Configuration options go here
+
+        options: {
+            title: {
+                display: false,
+                text: 'FSE_TRAB_ESPECIAL_MENSAL_1',
+                fontStyle: 'bold',
+                fontSize: 8
+            },
+
+
+
+            tooltips: {
+                callbacks: {
+                    // this callback is used to create the tooltip label
+                    label: function(tooltipItem, data) {
+                        // get the data label and data value to display
+                        // convert the data value to local string so it uses a comma seperated number
+                        var dataLabel = data.labels[tooltipItem.index];
+                        var value = ': ' + data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index].toLocaleString();
+
+                        // make this isn't a multi-line label (e.g. [["label 1 - line 1, "line 2, ], [etc...]])
+                        if (Chart.helpers.isArray(dataLabel)) {
+                            // show value on first line of multiline label
+                            // need to clone because we are changing the value
+                            dataLabel = dataLabel.slice();
+                            dataLabel[0] += value;
+                        } else {
+                            dataLabel += value;
+                        }
+
+                        // return the text to display on the tooltip
+                        return dataLabel;
+                    }
+                }
+            },
+
+
+            scales: {
+                yAxes: [
+                                        {    id: 'A',
+                                            type: 'linear',
+                                            position: 'left',
+                                            ticks: {
+                                                min:  Math.round(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_princ__,0),
+                                                max:  Math.round(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_princ__,0),
+                                                beginAtZero: false,
+                                                callback: function(value, index, values) {
+                                                    return value.toLocaleString();
+                                                }
+                                            }
+                                        },
+
+                    { id: 'B',
+                        type: 'linear',
+                        position: 'right',
+                        ticks: {
+                            min: Math.round(FSE_TRAB_ESPECIAL_Mensal_Eixo_min_secon__,0),
+                            max:  Math.round(FSE_TRAB_ESPECIAL_Mensal_Eixo_max_secon__,0),
+                            beginAtZero: false,
+                            callback: function(value, index, values) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    },
+
+
+
+
+
+
+                ]
+            }
+        },
+
+    });
+
+</script>

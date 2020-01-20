@@ -1,0 +1,842 @@
+﻿<h1>IDADE_SALDOS</h1>
+
+
+<p>
+    Pesquisar por Número, Nome ou NIF  
+
+   <!-- NOTA TA: aqui ficam os campos de pesquisa da grelha de clientes --->
+
+    @using (Html.BeginForm("IDADE_SALDOS", "GRC", FormMethod.Get))
+    {
+        <l>Número                           </l>  @Html.TextBox("Pesquisa_no")     
+        <l>Nome                             </l>  @Html.TextBox("Pesquisa_nome")   
+        <p></p>       
+        <l>Comercial:                        </l>  @Html.DropDownList("Filtro_Comercial", ViewData["Comercial1"] as SelectList, "")
+        <l>Tipo de Pagamento:               </l>  @Html.DropDownList("Filtro_Tipo_Pagamento", ViewData["Tipo_Pagamento1"] as SelectList, "")
+        <p></p>
+        <l>Zona do Cliente:                 </l>  @Html.DropDownList("Filtro_Zona", ViewData["Zona1"] as SelectList, "")
+        <l>Filtro por Evolução do PMR:      </l>  @Html.DropDownList("Filtro_por_Evolucao_do_PMR")
+        <p></p>
+        <l>Colunas da Grelha:               </l>  @Html.DropDownList("Colunas_Opcao_Numero")
+        <l>Visualizar Comparação com Ano Anterior:  </l>  @Html.DropDownList("Colunas_Opcao_Ve_ANTE")
+        <l>Vê Saldos a Negativo:  </l>  @Html.DropDownList("Colunas_Opcao_Sld_Negativo")
+        <l>User:  </l>  @Html.DropDownList("Pesquisa_User")
+        <p></p> 
+        <input type="submit" value="Actualizar Dados" />
+        <input type="button" name="Mostrar" value="Definir Intervalos" id="Mostrar"/>
+    }
+</p>
+
+
+
+@*@{
+
+    <input type="text" name="TESTETA" id="TESTETA">
+      
+ 
+}*@
+
+
+</p>
+
+
+
+<div id="grid1">
+
+     
+ 
+     
+@Html.Action("GRC_CONF_IDADE_SALDOS_Result", "GRC", null);
+
+
+</div>
+ 
+
+
+<!-- NOTA TA: aqui fica a definição do Modelo para a Grelha --->
+
+@model IEnumerable<APLICACAO.PROC_GRC_IDADE_SALDOS_Result>
+
+@{
+    ViewBag.Title = "IDADE_SALDOS";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- NOTA TA: aqui fica o CSS da Grelha --->
+
+<style type="text/css">
+    .table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+
+                     
+    }
+
+
+     .webgrid-table td, th {
+            border: solid 1px #FFFFFF;
+             text-align: center;
+
+
+
+     
+
+        }
+
+    .webgrid-header th {
+      
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+
+    
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+         width: 100%;
+        text-align: right;
+        vertical-align: top;
+
+
+
+       
+    }
+
+    .webgrid-alternating-row {
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-selected-row {
+        font-weight: bold;
+        background-color: #E3DFFF;
+
+    }
+
+    .hideColumn {
+        visibility: hidden;
+    }
+    .nome {
+    text-align: left;
+    }
+       
+
+
+
+     /*NOTA TA: class para o a definição dos estilo do rodapé*/
+     
+          
+     .header_script 
+       {
+
+        width: 100%;
+        background-color: #e8eef4;
+        border-right: solid 1px #FFFFFF;
+        border-bottom: solid 1px #FFFFFF;
+        vertical-align: middle;
+        position: relative;
+        display: inline-block;
+        visibility: visible;
+                    
+    }
+          .header_script1 
+       {
+        width: 100%;
+        background-color: #e8eef4;
+        background-color: #FFFFFF;
+        border-right: solid 1px #FFFFFF;
+        border-bottom: solid 1px #FFFFFF;
+        vertical-align: middle;
+        text-align: center;
+        white-space: nowrap;
+        position: relative;
+        display: block;
+        visibility: visible;
+        
+                    
+    }
+
+        .header_script2 
+       {
+        width: 100%;
+         color: white;
+        background-color: #FFFFFF;
+        border-bottom: solid 1px #FFFFFF;
+        vertical-align: middle;
+        position: relative;
+        visibility: visible;
+        
+                    
+    }
+        .Sub_Total_Texto {
+        text-align: center;
+        background-color: #3c48ea;
+        color: white;
+        font-size: 16px;
+        
+        
+    }
+     
+     .Sub_Total {
+        width: 100%;
+        vertical-align:top;
+        text-align: center;
+        background-color: #3c48ea;
+        color: white;
+        font-size: 16px;
+        position: initial;
+        display: inline-table;
+ 
+        
+    }
+
+     .tabelaEditavel {
+    border:solid 1px;
+    width:100%
+}
+
+.tabelaEditavel td {
+    border:solid 1px;
+}
+
+.tabelaEditavel .celulaEmEdicao {
+    padding: 0;
+}
+
+.celulaEmEdicao input[type=text]{
+    width:100%;
+    border:0;
+    background-color:rgb(255,253,210);  
+}
+ .input {
+     width: 100%;
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 4px 2px;
+    }
+
+</style>
+
+
+
+
+<!-- NOTA TA: aqui ficam definições principais da Grelha--->
+
+@{
+    var grid = new WebGrid(source: Model, defaultSort: "Saldo_N", selectionFieldName: "no", canPage: true, rowsPerPage: 150000);
+    grid.SortDirection = SortDirection.Descending; 
+
+}
+
+
+
+
+<!-- NOTA TA: aqui ficam as Variaveis dos Cabeçalhos da Grellha--->
+
+
+
+
+<!-- NOTA TA: aqui fica a condição para a Grelha ser Mensal ou Trimestral --->
+
+@{
+
+    var gridColumns = new List<WebGridColumn>();
+    var escolha = ViewData["opcaocolunas"];
+    var escolha2 = (Convert.ToString(ViewData["opcaocolunas2"]));
+    var Interv_01_dias = " 0 - " + (Convert.ToString(ViewData["Interv_01_dias"]));
+    var Interv_02_dias = (Convert.ToString(ViewData["Interv_01_dias"])) + " - " + (Convert.ToString(ViewData["Interv_02_dias"]));
+    var Interv_03_dias = (Convert.ToString(ViewData["Interv_02_dias"])) + " - " + (Convert.ToString(ViewData["Interv_03_dias"]));
+    var Interv_04_dias = (Convert.ToString(ViewData["Interv_03_dias"])) + " - " + (Convert.ToString(ViewData["Interv_04_dias"]));
+    var Interv_05_dias = (Convert.ToString(ViewData["Interv_04_dias"])) + " - " + (Convert.ToString(ViewData["Interv_05_dias"]));
+    var Interv_06_dias = (Convert.ToString(ViewData["Interv_05_dias"])) + " - " + (Convert.ToString(ViewData["Interv_06_dias"]));
+    var Interv_07_dias = (Convert.ToString(ViewData["Interv_06_dias"])) + " - " + (Convert.ToString(ViewData["Interv_07_dias"]));
+    var Interv_08_dias = (Convert.ToString(ViewData["Interv_07_dias"])) + " - " + (Convert.ToString(ViewData["Interv_08_dias"]));
+    var Interv_09_dias = (Convert.ToString(ViewData["Interv_08_dias"])) + " - " + (Convert.ToString(ViewData["Interv_09_dias"]));
+    var Interv_10_dias = (Convert.ToString(ViewData["Interv_09_dias"])) + " - " + (Convert.ToString(ViewData["Interv_10_dias"]));
+    var Interv_11_dias = (Convert.ToString(ViewData["Interv_10_dias"])) + " - " + (Convert.ToString(ViewData["Interv_11_dias"]));
+    var Interv_12_dias = (Convert.ToString(ViewData["Interv_11_dias"])) + " - " + (Convert.ToString(ViewData["Interv_12_dias"]));
+    var Interv_01_dias_fim = " > " + (Convert.ToString(ViewData["Interv_01_dias"]));
+    var Interv_02_dias_fim = " > " + (Convert.ToString(ViewData["Interv_02_dias"]));
+    var Interv_03_dias_fim = " > " + (Convert.ToString(ViewData["Interv_03_dias"]));
+    var Interv_04_dias_fim = " > " + (Convert.ToString(ViewData["Interv_04_dias"]));
+    var Interv_05_dias_fim = " > " + (Convert.ToString(ViewData["Interv_05_dias"]));
+    var Interv_06_dias_fim = " > " + (Convert.ToString(ViewData["Interv_06_dias"]));
+    var Interv_07_dias_fim = " > " + (Convert.ToString(ViewData["Interv_07_dias"]));
+    var Interv_08_dias_fim = " > " + (Convert.ToString(ViewData["Interv_08_dias"]));
+    var Interv_09_dias_fim = " > " + (Convert.ToString(ViewData["Interv_09_dias"]));
+    var Interv_10_dias_fim = " > " + (Convert.ToString(ViewData["Interv_10_dias"]));
+    var Interv_11_dias_fim = " > " + (Convert.ToString(ViewData["Interv_11_dias"]));
+    var Interv_12_dias_fim = " > " + (Convert.ToString(ViewData["Interv_12_dias"]));
+
+
+
+
+
+   // gridColumns.Add(grid.Column("VER", style: "VER", header: null, format: @<text>@Html.ActionLink("Ver", "VER_CLIENTE", "GRC", new { NUM_CLIENT_SELECT = item.no }, null)</text>));
+    gridColumns.Add(grid.Column("no", "Código", style: "no", format:@<text>@Html.ActionLink((string)(@item.no).ToString(), "VER_CLIENTE", "GRC", new { NUM_CLIENT_SELECT = item.no }, null)</text>));
+    gridColumns.Add(grid.Column("nome", "Nome", style: "nome"));
+    gridColumns.Add(grid.Column("Saldo_N", style: "Saldo_N", header: "TOTAL DE SALDO", format: (item) => string.Format("{0:N}", item.Saldo_N)));
+    if (escolha2 == "Sim")
+    {
+        gridColumns.Add(grid.Column("Saldo_N_1", style: "Saldo_N_1", header: "TOTAL DE SALDO", format: (item) => string.Format("{0:N}", item.Saldo_N_1)));
+    }
+    gridColumns.Add(grid.Column("Sald_Nao_Venc_N", style: "Sald_Nao_Venc_N", header: "TOTAL NÃO VENCIDOS", format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N)));
+    if (escolha2 == "Sim")
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1", style: "Sald_Nao_Venc_N_1", header: "TOTAL NÃO VENCIDOS", format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1)));
+    }
+    gridColumns.Add(grid.Column("Sald_Venc_N", style: "Sald_Venc_N", header: "TOTAL VENCIDOS", format: (item) => string.Format("{0:N}", item.Sald_Venc_N)));
+    if (escolha2 == "Sim")
+    {
+        gridColumns.Add(grid.Column("Sald_Venc_N_1", style: "Sald_Venc_N_1", header: "TOTAL VENCIDOS", format: (item) => string.Format("{0:N}", item.Sald_Venc_N_1)));
+    }
+
+    if (Convert.ToInt32(escolha) >= 1)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per1", style: "Sald_Nao_Venc_N_Per1", header: Interv_01_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per1)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per1", style: "Sald_Nao_Venc_N_1_Per1", header: Interv_01_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per1)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 2)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per2", style: "Sald_Nao_Venc_N_Per2", header: Interv_02_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per2)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per2", style: "Sald_Nao_Venc_N_1_Per2", header: Interv_02_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per2)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 3)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per3", style: "Sald_Nao_Venc_N_Per3", header: Interv_03_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per3)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per3", style: "Sald_Nao_Venc_N_1_Per3", header: Interv_03_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per3)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 4)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per4", style: "Sald_Nao_Venc_N_Per4", header: Interv_04_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per4)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per4", style: "Sald_Nao_Venc_N_1_Per4", header: Interv_04_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per4)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 5)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per5", style: "Sald_Nao_Venc_N_Per5", header: Interv_05_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per5)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per5", style: "Sald_Nao_Venc_N_1_Per5", header: Interv_05_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per5)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 6)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per6", style: "Sald_Nao_Venc_N_Per6", header: Interv_06_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per6)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per6", style: "Sald_Nao_Venc_N_1_Per6", header: Interv_06_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per6)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 7)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per7", style: "Sald_Nao_Venc_N_Per7", header: Interv_07_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per7)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per7", style: "Sald_Nao_Venc_N_1_Per7", header: Interv_07_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per7)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 8)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per8", style: "Sald_Nao_Venc_N_Per8", header: Interv_08_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per8)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per8", style: "Sald_Nao_Venc_N_1_Per8", header: Interv_08_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per8)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 9)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per9", style: "Sald_Nao_Venc_N_Per9", header: Interv_09_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per9)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per9", style: "Sald_Nao_Venc_N_1_Per9", header: Interv_09_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per9)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 10)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per10", style: "Sald_Nao_Venc_N_Per10", header: Interv_10_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per10)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per10", style: "Sald_Nao_Venc_N_1_Per10", header: Interv_10_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per10)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 11)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per11", style: "Sald_Nao_Venc_N_Per11", header: Interv_11_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per11)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per11", style: "Sald_Nao_Venc_N_1_Per11", header: Interv_11_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per11)));
+        }
+    }
+    if (Convert.ToInt32(escolha) >= 12)
+    {
+        gridColumns.Add(grid.Column("Sald_Nao_Venc_N_Per12", style: "Sald_Nao_Venc_N_Per12", header: Interv_12_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_Per12)));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column("Sald_Nao_Venc_N_1_Per12", style: "Sald_Nao_Venc_N_1_Per12", header: Interv_12_dias, format: (item) => string.Format("{0:N}", item.Sald_Nao_Venc_N_1_Per12)));
+        }
+    }
+
+    if (Convert.ToInt32(escolha) == 1)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_01_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_01_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 2)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_02_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_02_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 3)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_03_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_03_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 4)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_04_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_04_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 5)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_05_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4 - item.Sald_Nao_Venc_N_Per5) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_05_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4 - item.Sald_Nao_Venc_N_1_Per5) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 6)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_06_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4 - item.Sald_Nao_Venc_N_Per5 - item.Sald_Nao_Venc_N_Per6) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_06_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4 - item.Sald_Nao_Venc_N_1_Per5 - item.Sald_Nao_Venc_N_1_Per6) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 7)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_07_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4 - item.Sald_Nao_Venc_N_Per5 - item.Sald_Nao_Venc_N_Per6 - item.Sald_Nao_Venc_N_Per7) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_07_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4 - item.Sald_Nao_Venc_N_1_Per5 - item.Sald_Nao_Venc_N_1_Per6 - item.Sald_Nao_Venc_N_1_Per7) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 8)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_08_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4 - item.Sald_Nao_Venc_N_Per5 - item.Sald_Nao_Venc_N_Per6 - item.Sald_Nao_Venc_N_Per7 - item.Sald_Nao_Venc_N_Per8) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_08_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4 - item.Sald_Nao_Venc_N_1_Per5 - item.Sald_Nao_Venc_N_1_Per6 - item.Sald_Nao_Venc_N_1_Per7 - item.Sald_Nao_Venc_N_1_Per8) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 9)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_09_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4 - item.Sald_Nao_Venc_N_Per5 - item.Sald_Nao_Venc_N_Per6 - item.Sald_Nao_Venc_N_Per7 - item.Sald_Nao_Venc_N_Per8 - item.Sald_Nao_Venc_N_Per9) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_09_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4 - item.Sald_Nao_Venc_N_1_Per5 - item.Sald_Nao_Venc_N_1_Per6 - item.Sald_Nao_Venc_N_1_Per7 - item.Sald_Nao_Venc_N_1_Per8 - item.Sald_Nao_Venc_N_1_Per9) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 10)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_10_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4 - item.Sald_Nao_Venc_N_Per5 - item.Sald_Nao_Venc_N_Per6 - item.Sald_Nao_Venc_N_Per7 - item.Sald_Nao_Venc_N_Per8 - item.Sald_Nao_Venc_N_Per9 - item.Sald_Nao_Venc_N_Per10) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_10_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4 - item.Sald_Nao_Venc_N_1_Per5 - item.Sald_Nao_Venc_N_1_Per6 - item.Sald_Nao_Venc_N_1_Per7 - item.Sald_Nao_Venc_N_1_Per8 - item.Sald_Nao_Venc_N_1_Per9 - item.Sald_Nao_Venc_N_1_Per10) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 11)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_11_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4 - item.Sald_Nao_Venc_N_Per5 - item.Sald_Nao_Venc_N_Per6 - item.Sald_Nao_Venc_N_Per7 - item.Sald_Nao_Venc_N_Per8 - item.Sald_Nao_Venc_N_Per9 - item.Sald_Nao_Venc_N_Per10 - item.Sald_Nao_Venc_N_Per11) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_11_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4 - item.Sald_Nao_Venc_N_1_Per5 - item.Sald_Nao_Venc_N_1_Per6 - item.Sald_Nao_Venc_N_1_Per7 - item.Sald_Nao_Venc_N_1_Per8 - item.Sald_Nao_Venc_N_1_Per9 - item.Sald_Nao_Venc_N_1_Per10 - item.Sald_Nao_Venc_N_1_Per11) : "0"));
+        }
+    }
+    if (Convert.ToInt32(escolha) == 12)
+    {
+        gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_Per_Fim", header: Interv_12_dias_fim, format: item => item.Sald_Venc_N != 0 ? string.Format("{0:N}", item.Sald_Venc_N - item.Sald_Nao_Venc_N_Per1 - item.Sald_Nao_Venc_N_Per2 - item.Sald_Nao_Venc_N_Per3 - item.Sald_Nao_Venc_N_Per4 - item.Sald_Nao_Venc_N_Per5 - item.Sald_Nao_Venc_N_Per6 - item.Sald_Nao_Venc_N_Per7 - item.Sald_Nao_Venc_N_Per8 - item.Sald_Nao_Venc_N_Per9 - item.Sald_Nao_Venc_N_Per10 - item.Sald_Nao_Venc_N_Per11 - item.Sald_Nao_Venc_N_Per12) : "0"));
+        if (escolha2 == "Sim")
+        {
+            gridColumns.Add(grid.Column(style: "Sald_Nao_Venc_N_1_Per_Fim", header: Interv_12_dias_fim, format: item => item.Sald_Venc_N_1 != 0 ? string.Format("{0:N}", item.Sald_Venc_N_1 - item.Sald_Nao_Venc_N_1_Per1 - item.Sald_Nao_Venc_N_1_Per2 - item.Sald_Nao_Venc_N_1_Per3 - item.Sald_Nao_Venc_N_1_Per4 - item.Sald_Nao_Venc_N_1_Per5 - item.Sald_Nao_Venc_N_1_Per6 - item.Sald_Nao_Venc_N_1_Per7 - item.Sald_Nao_Venc_N_1_Per8 - item.Sald_Nao_Venc_N_1_Per9 - item.Sald_Nao_Venc_N_1_Per10 - item.Sald_Nao_Venc_N_1_Per11 - item.Sald_Nao_Venc_N_1_Per12) : "0"));
+        }
+    }
+  
+  
+}
+
+
+
+<!-- NOTA TA: aqui ficam as Restantes Deifinições da Grelha--->
+
+
+ <!--------- DEI UM ID A GRID--------->
+<div id="grid">
+
+    @grid.GetHtml(
+         tableStyle: "table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+               mode: WebGridPagerModes.All, columns: grid.Columns(gridColumns.ToArray()));
+
+    </div>
+
+    @section scripts {
+
+
+
+@*    NOTA TA: AQUI CRIO AS LINHAS DO SUBTOTAL DA GRELHA: EXEMPLO:ELE PROCURA O ELEMENTO COM ID=GRID E OS ELEMENTOS COM O ESTILO .SALDO, PERCORRE OS ELEMENTOS E SOMA.*@
+        <script type="text/javascript">
+
+
+
+
+
+
+            $(document).ready(function () {
+
+
+                var totalsaldo = 0;
+                var totalsaldon1 = 0;
+                var totalsald_Nao_Venc = 0;
+                var totalsald_Nao_Vencn1 = 0;
+                var totalsald_Venc = 0;
+                var totalsald_Vencn1 = 0;
+                var totalsald_Nao_Venc_Per1 = 0;
+                var totalsald_Nao_Venc_Per1_n1 = 0;
+                var totalsald_Nao_Venc_Per2 = 0;
+                var totalsald_Nao_Venc_Per2_n1 = 0;
+                var totalsald_Nao_Venc_Per3 = 0;
+                var totalsald_Nao_Venc_Per3_n1 = 0;
+                var totalsald_Nao_Venc_Per4 = 0;
+                var totalsald_Nao_Venc_Per4_n1 = 0;
+                var totalsald_Nao_Venc_Per5 = 0;
+                var totalsald_Nao_Venc_Per5_n1 = 0;
+                var totalsald_Nao_Venc_Per6 = 0;
+                var totalsald_Nao_Venc_Per6_n1 = 0;
+                var totalsald_Nao_Venc_Per7 = 0;
+                var totalsald_Nao_Venc_Per7_n1 = 0;
+                var totalsald_Nao_Venc_Per8 = 0;
+                var totalsald_Nao_Venc_Per8_n1 = 0;
+                var totalsald_Nao_Venc_Per9 = 0;
+                var totalsald_Nao_Venc_Per9_n1 = 0;
+                var totalsald_Nao_Venc_Per10 = 0;
+                var totalsald_Nao_Venc_Per10_n1 = 0;
+                var totalsald_Nao_Venc_Per11 = 0;
+                var totalsald_Nao_Venc_Per11_n1 = 0;
+                var totalsald_Nao_Venc_Per12 = 0;
+                var totalsald_Nao_Venc_Per12_n1 = 0;
+                var totalsald_Nao_Venc_PerFim = 0;
+                var totalsald_Nao_Venc_PerFim_n1 = 0;
+
+
+                $('#grid .Saldo_N').each(function () { totalsaldo = totalsaldo + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Saldo_N_1').each(function () { totalsaldon1 = totalsaldon1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N').each(function () { totalsald_Nao_Venc = totalsald_Nao_Venc + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1').each(function () { totalsald_Nao_Vencn1 = totalsald_Nao_Vencn1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Venc_N').each(function () { totalsald_Venc = totalsald_Venc + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Venc_N_1').each(function () { totalsald_Vencn1 = totalsald_Vencn1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per1').each(function () { totalsald_Nao_Venc_Per1 = totalsald_Nao_Venc_Per1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per1').each(function () { totalsald_Nao_Venc_Per1_n1 = totalsald_Nao_Venc_Per1_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per2').each(function () { totalsald_Nao_Venc_Per2 = totalsald_Nao_Venc_Per2 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per2').each(function () { totalsald_Nao_Venc_Per2_n1 = totalsald_Nao_Venc_Per2_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per3').each(function () { totalsald_Nao_Venc_Per3 = totalsald_Nao_Venc_Per3 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per3').each(function () { totalsald_Nao_Venc_Per3_n1 = totalsald_Nao_Venc_Per3_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per4').each(function () { totalsald_Nao_Venc_Per4 = totalsald_Nao_Venc_Per4 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per4').each(function () { totalsald_Nao_Venc_Per4_n1 = totalsald_Nao_Venc_Per4_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per5').each(function () { totalsald_Nao_Venc_Per5 = totalsald_Nao_Venc_Per5 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per5').each(function () { totalsald_Nao_Venc_Per5_n1 = totalsald_Nao_Venc_Per5_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per6').each(function () { totalsald_Nao_Venc_Per6 = totalsald_Nao_Venc_Per6 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per6').each(function () { totalsald_Nao_Venc_Per6_n1 = totalsald_Nao_Venc_Per6_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per7').each(function () { totalsald_Nao_Venc_Per7 = totalsald_Nao_Venc_Per7 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per7').each(function () { totalsald_Nao_Venc_Per7_n1 = totalsald_Nao_Venc_Per7_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per8').each(function () { totalsald_Nao_Venc_Per8 = totalsald_Nao_Venc_Per8 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per8').each(function () { totalsald_Nao_Venc_Per8_n1 = totalsald_Nao_Venc_Per8_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per9').each(function () { totalsald_Nao_Venc_Per9 = totalsald_Nao_Venc_Per9 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per9').each(function () { totalsald_Nao_Venc_Per9_n1 = totalsald_Nao_Venc_Per9_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per10').each(function () { totalsald_Nao_Venc_Per10 = totalsald_Nao_Venc_Per10 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per10').each(function () { totalsald_Nao_Venc_Per10_n1 = totalsald_Nao_Venc_Per10_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per11').each(function () { totalsald_Nao_Venc_Per11 = totalsald_Nao_Venc_Per11 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per11').each(function () { totalsald_Nao_Venc_Per11_n1 = totalsald_Nao_Venc_Per11_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per12').each(function () { totalsald_Nao_Venc_Per12 = totalsald_Nao_Venc_Per12 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per12').each(function () { totalsald_Nao_Venc_Per12_n1 = totalsald_Nao_Venc_Per12_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_Per_Fim').each(function () { totalsald_Nao_Venc_PerFim = totalsald_Nao_Venc_PerFim + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+                $('#grid .Sald_Nao_Venc_N_1_Per_Fim').each(function () { totalsald_Nao_Venc_PerFim_n1 = totalsald_Nao_Venc_PerFim_n1 + parseFloat($(this)[0].innerHTML.toLocaleString().replace('.', '').replace('.', '').replace('.', '').replace('&nbsp;', '').replace('&nbsp;', '').replace('&nbsp;', '').replace(',', '.')); });
+
+
+
+                $('#grid  tbody .VER').first().prepend('<td class=Sub_Total  ><b>' + "" + '</b></td>');
+                $('#grid  tbody .no').first().prepend('<td class=Sub_Total  ><b>' + "" + '</b></td>');
+                $('#grid  tbody .nome').first().prepend('<td class=Sub_Total  ><b>' + "Total:" + '</b></td>');
+                $('#grid  tbody .Saldo_N').first().prepend('<td  class=Sub_Total >' + Number(totalsaldo.toFixed(2)).toLocaleString('de-DE') + '</td>');
+                $('#grid  tbody .Saldo_N_1').first().prepend('<td  class=Sub_Total >' + Number(totalsaldon1.toFixed(2)).toLocaleString('de-DE') + '</td>');
+                $('#grid  tbody .Sald_Nao_Venc_N').first().prepend('<td class=Sub_Total ><b>' + Number(totalsald_Nao_Venc.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1').first().prepend('<td class=Sub_Total ><b>' + Number(totalsald_Nao_Vencn1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Venc_N').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Venc.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Venc_N_1').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Vencn1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per1').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per1').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per1_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per2').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per2.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per2').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per2_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per3').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per3.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per3').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per3_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per4').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per4.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per4').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per4_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per5').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per5.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per5').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per5_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per6').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per6.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per6').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per6_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per7').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per7.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per7').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per7_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per8').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per8.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per8').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per8_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per9').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per9.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per9').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per9_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per10').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per10.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per10').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per10_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per11').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per11.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per11').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per11_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per12').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per12.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per12').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_Per12_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per_Fim').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_PerFim.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per_Fim').first().prepend('<td  class=Sub_Total ><b>' + Number(totalsald_Nao_Venc_PerFim_n1.toFixed(2)).toLocaleString('de-DE') + '</b></td>');
+
+
+
+                $('#grid  tbody .VER').first().prepend('<td class=header_script2   ><b>' + '_' + '</b></td>');
+                $('#grid  tbody .no').first().prepend('<td class=header_script2   ><b>' + '_' + '</b></td>');
+                $('#grid  tbody .nome').first().prepend('<td class=header_script2  ><b>' + '_' + '</b></td>');
+                $('#grid  tbody .Saldo_N').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Saldo_N_1').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Venc_N').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Venc_N_1').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per1').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per1').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per2').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per2').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per3').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per3').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per4').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per4').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per5').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per5').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per6').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per6').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per7').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per7').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per8').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per8').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per9').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per9').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per10').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per10').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per11').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per11').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per12').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per12').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_Per_Fim').first().prepend('<td  class=header_script1 ><b>' + 'à Data' + '</b></td>');
+                $('#grid  tbody .Sald_Nao_Venc_N_1_Per_Fim').first().prepend('<td  class=header_script1 ><b>' + 'Ante' + '</b></td>');
+
+
+
+                //NOTA TA: quando os textos das células sequencias são iguais ele faz o merge através do script abaixo
+
+                $('#grid th').each(function () {
+                    var colSpan = 1;
+                    while ($(this).text() == $(this).next().text()) {
+                        $(this).next().remove();
+                        colSpan++;
+                        //alert($(this).text() + $(this).next().text());
+
+                    }
+                    $(this).attr('colSpan', colSpan);
+                });
+
+
+                //NOTA TA: Aqui torno os campos da tabela com css .webgrid-table-edit  editáveis.
+
+
+                //$("#body").ready(function () {
+
+                //    $("#grid1").hide();
+
+                //});
+
+
+
+                $(function () {
+
+                    $("#Mostrar").click(function () {
+                        $("#grid1").show();
+                    });
+                    $("#grid1").hide();
+                });
+
+
+                $(function () {
+                    $("#grid .webgrid-table-edit td ").dblclick(function () {
+
+                        var calssconteudoOriginal = $(this).attr('class');
+                        var conteudoOriginal = $(this).text();
+
+                        $(this).html("<input  class='input' value='" + conteudoOriginal + "' />");
+                        $(this).children().first().focus();
+
+                        $(this).children().first().keypress(function (e) {
+
+                            if (e.which == 13) {
+                                var novoConteudo = $(this).val();
+                                $(this).parent().text(novoConteudo);
+                                $(this).parent().removeClass("celulaEmEdicao");
+
+                                //var Interv_01_novo = ($("#grid td.Interv_01_dias ").text());
+                                //document.getElementById('TESTETA1').value = TESTETA;
+
+                                var ReplaceHref = $("#grid td.Acção").html();
+                                var ReplaceHref1 = ReplaceHref.replace(calssconteudoOriginal + '=' + conteudoOriginal, calssconteudoOriginal + '=' + novoConteudo);
+                                $("#grid td.Acção").html(ReplaceHref1);
+
+
+
+                            }
+
+                        });
+
+                        $(this).children().first().blur(function () {
+                            $(this).parent().text(conteudoOriginal);
+                            $(this).parent().removeClass("celulaEmEdicao");
+
+
+
+                        });
+
+                    });
+
+
+
+                });
+
+
+                //Nota TA: Aqui em baixo fui fazendo testes que não estão a ser utilizados
+
+
+            @*            var Interv_01_dias1 = ('@Interv_01_dias');
+            var Interv_02_dias1 = ('@Interv_02_dias');
+            var Interv_03_dias1 = ('@Interv_03_dias');
+            var Interv_04_dias1 = ('@Interv_04_dias');
+            var Interv_05_dias1 = ('@Interv_05_dias');
+            var Interv_06_dias1 = ('@Interv_06_dias');
+            var Interv_07_dias1 = ('@Interv_07_dias');
+            var Interv_08_dias1 = ('@Interv_08_dias');
+            var Interv_09_dias1 = ('@Interv_09_dias');
+            var Interv_10_dias1 = ('@Interv_10_dias');
+            var Interv_11_dias1 = ('@Interv_11_dias');
+            var Interv_12_dias1 = ('@Interv_12_dias');*@
+
+
+            //$('#grid tbody').prepend('<tr><td colspan="3" class=Sub_Total_Texto ><b>Total</b></td><td class=Sub_Total ><b>'
+            //+ Number(totalsaldo.toFixed(2)).toLocaleString('de-DE') + '<b><td class=Sub_Total><b>'
+            //+ Number(totalsald_Nao_Venc.toFixed(2)).toLocaleString('de-DE') + '<b><td class=Sub_Total><b>'
+            //+ Number(totalsald_Venc.toFixed(2)).toLocaleString('de-DE') + '<b><td colspan="14" class=Sub_Total><b>' + '</b></td></tr>');
+
+
+            //$('#grid thead').find("a:contains('VER')").prepend('<td   class=header_script><b>' + "Ver1" + '</td>');
+            //$('#grid thead').find("td.header_script:contains('Ver1')").prepend('<td class=header_script><b>' + "VER3" + '</td>');
+
+            //$('#grid thead').find("a:contains('Nome')").prepend('<td class=header_script ><b>' + "teste" + '</td>');
+            //$('#grid thead').find("a:contains('Número')").prepend('<td   class=header_script><b>' + "teste" + '</td>');
+
+
+            //$('#grid ').find("a:contains('Não Venc_')").append('<td   class=header_script1><b>' + "Ano N" + '</td>');
+            //$('#grid ').find("a:contains('Não Venc n-1')").append('<td   class=header_script1><b>' + "Ano N-1" + '</td>');
+            //$('#grid thead').find("a:contains('Vencido_')").prepend('<td   class=header_script><b>' + "Ano N" + '</td></tr>');
+            //$('#grid thead').find("a:contains('Vencido n-1')").prepend('<td   class=header_script><b>' + "Ano N-1" + '</td>');
+            //$('#grid thead').find("a:contains('Interv_01')").prepend('<td   class=header_script><b>' + Interv_01_dias1 + '</td>');
+            //$("#grid   .header_script1").after("TESTE6");
+
+            //$('#grid thead').prepend('<th><td class=header_script1  ><b>' + "Fazer aqui o MERGE1" + '</td></th>');
+
+
+            //$('#grid thead').find("a:contains('Saldo_')").prepend('<td class=header_script1><b>' + "Saldo" + '</td>');
+            //$('#grid thead').find("a:contains('Saldo n-1')").prepend('<td class=header_script1><b>' + "Saldo1" + '</td>');
+            //$('#grid thead b:contains("Saldo1"),b:contains("Saldo")').replaceWith('<td class=header_script1 ">SALDO</td>');
+
+
+            //$('#grid thead').find("a:contains('Saldo_'), a:contains('Saldo n-1')").prepend('<td class=header_script1><b>' + "Saldo" + '</td></tr>');
+            ////$('#grid thead').find("td.header_script1").replaceWith('<th><td class=header_script1 colspan="2"><b>' + "Fazer aqui o MERGE" + '</td></th>');
+
+
+            //$('<th><td class=header_script2><b>' + "TESTE" + '</td>' + '<td class=header_script2><b>' + "TESTE" + '</td></th>').appendTo("#grid  a:contains('Nome')");
+            //$("#grid  td:contains('TESTE1')").after("Teste5");
+            //$("#grid  th:contains('Nome_')").after('<tr><th><td class=header_script2><b>' + "TESTE7" + '</td></th></tr>');
+
+            //$('#grid').find("th:contains('Não Venc n-1')").prependTo("#grid ");
+            //$('#grid').find("th:contains('Não Venc_')").prependTo("#grid  ");
+            //$('#grid').find("th:contains('Nome')").prependTo("#grid");
+            //$('#grid').find("th:contains('Número')").prependTo("#grid ");
+            //$('#grid').find("th:contains('VER')").prependTo("#grid  ");
+
+
+
+            //$('#grid tbody').find(".no").first().prepend('<tr><td ><b>Total</b></td>');
+            //$('#grid tbody').find(".nome").first().prepend('<tr><td ><b>Total</b></td>');
+
+
+
+
+
+        });
+
+
+
+
+
+
+        </script>
+
+
+
+}
+
+
+
+
+

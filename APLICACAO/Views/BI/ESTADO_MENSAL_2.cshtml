@@ -1,0 +1,593 @@
+﻿@{
+    ViewBag.Title = "ESTADO_MENSAL_2";
+}
+
+
+
+
+<style type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        text-align: right;
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-rubrica
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+
+    }
+        .webgrid-rubrica-sub
+    {
+         text-align: center;
+        background-color: #3c48ea;   
+        color: white;
+        padding: 3px 7px 2px;
+
+    }
+                .webgrid-rubrica-TOTAL
+    {
+         text-align: center;
+        background-color: #02020a;   
+        color: white;
+        padding: 3px 7px 2px;
+
+    }
+        .webgrid-total
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+         .webgrid-total-sub
+    {
+         text-align: center;
+        background-color: #3c48ea;   
+        color: white;
+        padding: 3px 7px 2px;
+    }
+                 .webgrid-total-TOTAL
+    {
+         text-align: center;
+        background-color: #02020a;   
+        color: white;
+        padding: 3px 7px 2px;
+    }
+        .webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+
+    </style>
+
+
+@{
+    var ANO_VERSAO_ANTE = @ViewData["ANO_VERSAO_ANTE"];
+   
+}
+<h2>ESTADO E OUTROS ENTES PÚBLICOS DE @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_ANTE)))   </h2>
+
+<table class="webgrid-table" border="1">
+    <tr>
+        <td class="webgrid-header"> Rúbrica </td> 
+        <td class="webgrid-header"> Janeiro </td> 
+        <td class="webgrid-header"> Fevereiro </td>
+        <td class="webgrid-header"> Março  </td>
+        <td class="webgrid-header"> Abril  </td>
+        <td class="webgrid-header"> Maio  </td>
+        <td class="webgrid-header"> Junho  </td>
+        <td class="webgrid-header"> Julho  </td>
+        <td class="webgrid-header"> Agosto  </td>
+        <td class="webgrid-header"> Setembro  </td>
+        <td class="webgrid-header"> Outubro  </td>
+        <td class="webgrid-header"> Novembro  </td>
+        <td class="webgrid-header"> Dezembro  </td>
+    
+</tr>
+
+
+
+       <tr> 
+         <td  >  Taxa Média de IRC+Derrama (%)                      </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_MEDIA_IRC_IRC_DERRAMA_ANO_N_DEZEMBRO"])))  </td> 
+</tr>
+    <tr> 
+    <td  >    Tributação Autónoma Taxa a (%)                     </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_A_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_A_ANO_N_DEZEMBRO"])))  </td> 
+</tr>
+    <tr> 
+    <td  >    Tributação Autónoma Taxa b (%)                    </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="TX_TRIB_AUTON_TIPO_B_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["TX_TRIB_AUTON_TIPO_B_ANO_N_DEZEMBRO"])))  </td> 
+</tr>
+
+    
+     </table>
+
+
+
+<table class="webgrid-table" border="1">
+    <tr>
+        <td class="webgrid-header"> Rúbrica </td> 
+        <td class="webgrid-header"> Janeiro </td> 
+        <td class="webgrid-header"> Fevereiro </td>
+        <td class="webgrid-header"> Março  </td>
+        <td class="webgrid-header"> Abril  </td>
+        <td class="webgrid-header"> Maio  </td>
+        <td class="webgrid-header"> Junho  </td>
+        <td class="webgrid-header"> Julho  </td>
+        <td class="webgrid-header"> Agosto  </td>
+        <td class="webgrid-header"> Setembro  </td>
+        <td class="webgrid-header"> Outubro  </td>
+        <td class="webgrid-header"> Novembro  </td>
+        <td class="webgrid-header"> Dezembro  </td>
+       </tr>
+
+
+
+ <tr> 
+         <td  >  Desp. Representação e Despesas c/ Viaturas                         </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DESP_REPR_DESP_VIATR_ACUM_ANO_N_DEZEMBRO"])))  </td>   
+</tr>
+         <tr> 
+    <td  >    Aj. Custo não Facturadas a Clientes                     </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_AJD_CT_N_FACT_CLI_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+</tr>
+    <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+                        </tr>       
+    <tr> 
+         <td  >  Total de tributações Autónomas                         </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_TOT_TRIB_AUTON_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_TOT_TRIB_AUTON_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+</tr>
+
+
+
+
+
+
+
+
+     </table>
+
+<table class="webgrid-table" border="1">
+    <tr>
+        <td class="webgrid-header"> Rúbrica </td> 
+        <td class="webgrid-header"> Sld. Inic. </td> 
+        <td class="webgrid-header"> Janeiro </td> 
+        <td class="webgrid-header"> Fevereiro </td>
+        <td class="webgrid-header"> Março  </td>
+        <td class="webgrid-header"> Abril  </td>
+        <td class="webgrid-header"> Maio  </td>
+        <td class="webgrid-header"> Junho  </td>
+        <td class="webgrid-header"> Julho  </td>
+        <td class="webgrid-header"> Agosto  </td>
+        <td class="webgrid-header"> Setembro  </td>
+        <td class="webgrid-header"> Outubro  </td>
+        <td class="webgrid-header"> Novembro  </td>
+        <td class="webgrid-header"> Dezembro  </td>
+        <td class="webgrid-header"> Total  </td>
+</tr>
+
+
+       <tr> 
+         <td  >  Resultado antes de Impostos - Acumulado                       </td> 
+<td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="RES_ANTE_IMPOST_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["RES_ANTE_IMPOST_ACUM_ANO_N_SF"])))  </td> 
+</tr>
+         <tr> 
+    <td  >    Report Prejuízos - Exercícios Anteriores                      </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_REP_PREJ_EXER_ANT_ACUM_ANO_N_SF"])))  </td> 
+</tr>    
+       <tr> 
+     <td  >   Acréscimos ao Resultado - Mod. 22                         </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_ACRE_AO_RESUL_MOD22_ACUM_ANO_N_SF"])))  </td> 
+</tr>
+         <tr> 
+    <td  >    Deduções ao Resultado - Mod. 22                        </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_DEDUD_AO_RESUL_MOD22_ACUM_ANO_N_SF"])))  </td> 
+        </tr>
+             <tr> 
+    <td  >   Imposto s/ rendimento Apurado                        </td> 
+       <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_APURAD_CONT_ACUM_ANO_N_SF"])))  </td> 
+
+
+
+
+         </tr>
+
+             <tr> 
+    <td  >   Imposto s/ rendimento Estimado/Apurado                        </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_IMP_REND_ESTIMADO_ACUM_ANO_N_SF"])))  </td> 
+
+         </tr>
+
+
+           <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               </tr>
+       <tr> 
+         <td  >  Saldo da 241 ano anterior                         </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ANTERIOR_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ANTERIOR_ACUM_ANO_N_SF"])))  </td>  
+</tr>
+         <tr> 
+    <td  >    Saldo da 241 ano corrente antes da estimativa                     </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_241_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_241_ACUM_ANO_N_SF"])))  </td> 
+</tr>
+    
+
+       <tr> 
+         <td  >  Saldo da 243 - IVA Apuramento                       </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_243_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_243_ACUM_ANO_N_SF"])))  </td> 
+</tr>
+         <tr> 
+    <td  >   Outros Saldos Devedores - 24                      </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_DEV_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_DEV_ACUM_ANO_N_SF"])))  </td> 
+</tr>
+             <tr> 
+    <td  >   Outros Saldos Credores - 24                      </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_OUT_CRED_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_OUT_CRED_ACUM_ANO_N_SF"])))  </td> 
+</tr>
+               <tr>  <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               <td class="webgrid-total-TOTAL" >    </td> 
+               </tr>
+                  <tr> 
+    <td  >   Saldo Devedor - Calculado                      </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_DEV_CALC_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_DEV_CALC_ACUM_ANO_N_SF"])))  </td>  
+</tr>
+             <tr> 
+    <td  >   Saldo Credor - Calculado                      </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_SI">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_SI"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_JANEIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_FEVEREIRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_MARCO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_ABRIL"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_MAIO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_JUNHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_JULHO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_AGOSTO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_SETEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_OUTUBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_NOVEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total"   id="AUX_SLD_24_CRED_CALC_ACUM_ANO_N_SF">@Html.Raw((string.Format("{0:N}",@ViewData["AUX_SLD_24_CRED_CALC_ACUM_ANO_N_SF"])))  </td> 
+</tr>
+
+     </table>
+
+<div id="CONFIGURARXX" style="visibility:hidden">
+   
+
+    @using (Html.BeginForm("GRC_ALERTAS_RESUMO", "GRC", FormMethod.Get))
+    {
+       <div id="CONFIGURAR_CAMPO" class="CONFIGURAR_CAMPO">
+        @Html.ActionLink("Configurar","BI_CAMP_CALC", "BI", new { id_camp_calc = "id_camp_calc", Pesquisa_User = "tjalmeida" , versao=@ViewData["VERSAO"] }, null)
+       </div> 
+            <p></p> 
+    }
+</div>
+  @section scripts {
+
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $(".webgrid-table td").click(function () {
+                var idconteudoOriginal = $(this).attr('id');
+
+                //alert($("#CONFIGURARXX form").html());
+                if (typeof idconteudoOriginal === "undefined")
+                { }
+                else
+                {
+                    var ReplaceHrefID = $("#CONFIGURARXX form").html().replace('id_camp_calc=id_camp_calc', 'id_camp_calc' + '=' + idconteudoOriginal);
+                    if ($(this).find('.CONFIGURAR_CAMPO').text() == "") {
+                        $(this).prepend(ReplaceHrefID);
+                    }
+                }
+                //alert($(this).find('.CONFIGURAR_CAMPO').text());
+            })
+
+        })
+
+    </script>
+       
+
+}
+
+
+
+

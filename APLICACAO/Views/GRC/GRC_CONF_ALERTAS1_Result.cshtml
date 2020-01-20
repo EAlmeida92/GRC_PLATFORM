@@ -1,0 +1,116 @@
+﻿@model IEnumerable<APLICACAO.PROC_GRC_CONF_ALERTAS1_Result>
+
+
+
+
+
+<style type="text/css">
+    .webgrid-table-edit
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+     
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        text-align: center;
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+      
+    }
+    .webgrid-footer
+    {
+    }
+    .ParametrosNum
+        {text-align: left;
+    }
+    .Parametros
+        {text-align: left;
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-alternating-row
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+
+</style>
+
+@{
+    var grid = new WebGrid(source: Model, defaultSort: "ParametrosNum", canPage: true, rowsPerPage: 30, selectionFieldName: "selectedRow");
+    grid.SortDirection = SortDirection.Ascending; 
+}
+
+
+@{
+
+ 
+       
+
+    var gridColumns = new List<WebGridColumn>();
+    {
+
+        //gridColumns.Add(grid.Column("Acção", style: "Acção", header: null, format: @<text>@Html.ActionLink("Gravar", "GRC_CONF_ALERTAS_Result_ALT", "GRC", new { Pesquisa_User = "tjalmeida"}, null)</text>));
+
+        gridColumns.Add(grid.Column("ParametrosNum", header: "Nº", style: "ParametrosNum", format: item => item.ParametrosNum < 10 ? "0" + item.ParametrosNum : item.ParametrosNum));
+        gridColumns.Add(grid.Column("Parametros", header: "Parametros", style: "Parametros", format:  @<text>@if (item.ParametrosNum == 1){<text>Alerta está Activo?</text>}else{if (item.ParametrosNum == 2){<text>"Intrv. Meses" - Compára  dados actuais com quantos meses atrás?</text>}else{if (item.ParametrosNum == 3){<text>"Máx. PMR" - Numero dias máximo de PMR aceite para Clientes</text>}else{if (item.ParametrosNum == 4){<text>Mostra Clientes que estão acima do "Máx. PMR"</text>}else{if (item.ParametrosNum == 5){<text>Mostra Clientes que estão abaixo do "Máx. PMR"</text>}else{if (item.ParametrosNum == 8){<text>Mostra Clientes que no "Intrv. Meses" descem abaixo do "Máx. PMR"</text>}else{if (item.ParametrosNum == 9){<text>Mostra Clientes que no "Intrv. Meses" sobem acima do "Máx. PMR"</text>}else{if (item.ParametrosNum == 10){<text>"Min. PMR" - Numero dias minimo de PMR aceite para Clientes</text>}else{if (item.ParametrosNum == 11){<text>Mostra Clientes que estão abaixo do "Min. PMR"</text>}else{if (item.ParametrosNum == 12){<text>Mostra Clientes que estão acima do "Min. PMR"</text>}else{if (item.ParametrosNum == 13){<text>Mostra Clientes que no "Intrv. Meses" descem abaixo do "Min. PMR"</text>}else{if (item.ParametrosNum == 14){<text>Mostra Clientes que no "Intrv. Meses" sobem acima do "Máx. PMR"</text>}else{if (item.ParametrosNum == 17){<text>Mostra Clientes que no "Intrv. Meses" tem Volume Negócios</text>}else{if (item.ParametrosNum == 20){<text>Mostra Clientes que no "Intrv. Meses" o PMR sobe em "x"%</text>}else{if (item.ParametrosNum == 21){<text>Mostra Clientes que no "Intrv. Meses" o PMR sobe em "x" dias</text>}else{if (item.ParametrosNum == 22){<text>Mostra Clientes que no "Intrv. Meses" o Crédito Concedido sobe em "x"%</text>}else{if (item.ParametrosNum == 23){<text>Mostra Clientes que no "Intrv. Meses" o Crédito Concedido sobe em "x" euros</text>}else{if (item.ParametrosNum == 24){<text>Mostra Clientes que no "Intrv. Meses" o Crédito Vencido sobe em "x"%</text>}else{if (item.ParametrosNum == 25){<text>Mostra Clientes que no "Intrv. Meses" o Crédito Vencido sobe em "x" euros</text>}else{if (item.ParametrosNum == 26){<text>Mostra Clientes que no "Intrv. Meses" o Volume de Negócios desce em "x"%</text>}else{if (item.ParametrosNum == 27){<text>Mostra Clientes que no "Intrv. Meses" o Volume de Negócios desce em "x" euros</text>}else{if (item.ParametrosNum == 28){<text>Mostra Clientes cujo o Peso do Crédito Concedido no Capital Próprio da Empresa é superior a "x"%</text>}else{if (item.ParametrosNum == 29){<text>Mostra Clientes cujo o Peso do seu Volume de Négócios é superior a "x"% do Total de Volume de Negócios da Empresa</text>}else{if (item.ParametrosNum == 30){<text>Mostra Clientes cujo a utilização do Plafond atribuído é superior a "x"%</text>}else{@item.Parametros}}}}}}}}}}}}}}}}}}}}}}}}</text>));
+        gridColumns.Add(grid.Column("AO01", header: "Alerta 01", style: "AO01", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO01 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO01)}</text>));
+        gridColumns.Add(grid.Column("AO02", header: "Alerta 02", style: "AO02", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO02 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO02)}</text>));
+        gridColumns.Add(grid.Column("AO03", header: "Alerta 03", style: "AO03", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO03 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO03)}</text>));
+        gridColumns.Add(grid.Column("AO04", header: "Alerta 04", style: "AO04", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO04 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO04)}</text>));
+        gridColumns.Add(grid.Column("AO05", header: "Alerta 05", style: "AO05", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO05 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO05)}</text>));
+        gridColumns.Add(grid.Column("AO06", header: "Alerta 06", style: "AO06", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO06 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO06)}</text>));
+        gridColumns.Add(grid.Column("AO07", header: "Alerta 07", style: "AO07", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO07 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO07)}</text>));
+        gridColumns.Add(grid.Column("AO08", header: "Alerta 08", style: "AO08", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO08 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO08)}</text>));
+        gridColumns.Add(grid.Column("AO09", header: "Alerta 09", style: "AO09", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO09 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO09)}</text>));
+        gridColumns.Add(grid.Column("AO10", header: "Alerta 10", style: "AO10", format:  @<text>@if ((item.ParametrosNum == 1 || item.ParametrosNum == 4 || item.ParametrosNum == 5 || item.ParametrosNum == 6 || item.ParametrosNum == 7 || item.ParametrosNum == 8 || item.ParametrosNum == 9 || item.ParametrosNum == 11 || item.ParametrosNum == 12 || item.ParametrosNum == 13 || item.ParametrosNum == 14 || item.ParametrosNum == 15 || item.ParametrosNum == 16 || item.ParametrosNum == 17 )){if (item.AO10 == 1){<text>Sim</text>} else {<text>Não</text>}}  else {@Math.Round(item.AO10)}</text>));
+
+        
+
+
+    } 
+        
+}
+
+<div id="grid">
+
+ @grid.GetHtml(
+         tableStyle: "webgrid-table-edit",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+                mode: WebGridPagerModes.All, columns: grid.Columns(gridColumns.ToArray()));
+
+</div>
+
+

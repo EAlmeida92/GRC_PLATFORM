@@ -1,0 +1,93 @@
+﻿@model APLICACAO.Models.LoginModel
+
+@*@{
+        ViewBag.Title = "Log in";
+    }*@
+
+
+<script type="text/javascript" src=@Url.Content("~/Scripts/jquery-1.7.1.min.js")>
+
+    document.querySelector('html').style.minWidth = "150px";
+    alert("passei aqui");
+</script>
+
+
+
+
+
+<hgroup class="title">
+    <h1>@ViewBag.Title</h1>
+</hgroup>
+
+<section id="loginForm">
+<h2>Faça aqui o seu Log in:</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Log in Form</legend>
+        <ol>
+             <li>
+                @Html.LabelFor(m => m.Conexao)
+                @Html.TextBoxFor(m => m.Conexao)
+                @Html.ValidationMessageFor(m => m.Conexao)
+            </li>  
+            <li>
+                @Html.LabelFor(m => m.UserName)
+                @Html.TextBoxFor(m => m.UserName)
+                @Html.ValidationMessageFor(m => m.UserName)
+            </li>
+
+          
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+            <li>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
+            </li>
+        </ol>
+        <input type="submit" value="Log in" />
+        <input id="entrar_em_demo" class="entrar_em_demo" type="submit" value="Entar em Demo" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Registe-se", "Register") se ainda não tem a sua conta.
+    </p>
+}
+   
+</section>
+
+<section class="social" id="socialLoginForm">
+   
+
+</section>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")"></script>
+     
+<script type="text/javascript">
+
+   
+        $(' .entrar_em_demo').click(function () {
+
+            var Conexao = 'demo'
+            var UserName = 'demo'
+            var Password = 'demo123'
+            $("#Conexao").val(Conexao);
+            $("#UserName").val(UserName);
+            $("#Password").val(Password);
+
+
+
+            //alert("estou aqui");
+        });
+</script>
+
+        }
+
+

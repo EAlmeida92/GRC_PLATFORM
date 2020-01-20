@@ -1,0 +1,90 @@
+﻿@model IEnumerable<APLICACAO.PROC_GRC_VER_CLIENTE_Grid3_Result>
+
+
+
+
+<style type="text/css">
+    .webgrid-table
+    {
+        font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        
+    }
+    .webgrid-table td, th
+    {
+             
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-header
+    {
+      padding: 6px 5px;
+      text-align: center;
+      background-color: #e8eef4;
+      border-bottom: 2px solid #A4A4A4;
+      height: 40px;
+
+    }
+    .webgrid-footer
+    {
+    }
+    .webgrid-row-style
+    {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+    .webgrid-alternating-row
+    {
+         text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+.webgrid-selected-row
+    {
+    font-weight: bold;
+     background-color: #E3DFFF;
+    }
+.Webgrid_col_data
+    {
+  text-align: center;
+    }
+
+</style>
+
+@{
+    var grid = new WebGrid(source: Model, defaultSort: "Data", canPage: true, rowsPerPage: 13, selectionFieldName: "selectedRow");
+ grid.SortDirection = SortDirection.Descending; 
+}
+
+@{
+
+    var gridColumns = new List<WebGridColumn>();
+       {
+           gridColumns.Add(grid.Column("Data", header: "Data", style: "Webgrid_col_data", format: item => item.Data.ToString("dd-MM-yyyy")));
+           gridColumns.Add(grid.Column("Facturacao", header: "Facturaçao Mensal", style: "fact", canSort: true, format: (item) => string.Format("{0:N}", item.Facturacao)));
+           gridColumns.Add(grid.Column("Recebimentos", style: "recebimentos", format: item => string.Format("{0:N}", (item.Saldo_P_Ant + item.Facturacao - item.Saldo))));
+           gridColumns.Add(grid.Column("Saldo", header: "Saldo", canSort: true, format: (item) => string.Format("{0:N}", item.Saldo)));
+           gridColumns.Add(grid.Column("Facturacao_acum", header: "Facturaçao Acumulada", canSort: true, format: (item) => string.Format("{0:N}", item.Facturacao_acum)));
+           gridColumns.Add(grid.Column("Dias", header: "Dias", canSort: true, format: (item) => string.Format("{0:N0}", item.Dias)));
+           gridColumns.Add(grid.Column("PMR", format: item => item.Fact_Acum_dias != 0 ? string.Format("{0:N0}", (item.Saldo / item.Fact_Acum_dias) * item.Dias) : ""));
+
+       }       
+}
+
+<div id="grid">
+
+ @grid.GetHtml(
+         tableStyle: "webgrid-table",
+        headerStyle: "webgrid-header",
+        footerStyle: "webgrid-footer",
+        alternatingRowStyle: "webgrid-alternating-row",
+        selectedRowStyle: "webgrid-selected-row",
+        rowStyle: "webgrid-row-style",
+                mode: WebGridPagerModes.All, columns: grid.Columns(gridColumns.ToArray()));
+
+</div>
+

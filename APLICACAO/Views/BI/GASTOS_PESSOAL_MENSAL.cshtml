@@ -1,0 +1,624 @@
+﻿@{
+    ViewBag.Title = "GASTOS_PESSOAL_MENSAL";
+}
+
+
+
+
+<style id="ccs_style" type="text/css">
+    .webgrid-table {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        width: 100%;
+        display: table;
+        border: solid 1px #FFFFFF;
+        background-color: white;
+        text-align: right;
+    }
+
+        .webgrid-table td, th {
+            border: solid 1px #FFFFFF;
+            padding: 3px 7px 2px;
+        }
+
+    .webgrid-header {
+        padding: 6px 5px;
+        text-align: center;
+        background-color: #e8eef4;
+        border-bottom: 2px solid #A4A4A4;
+        height: 40px;
+    }
+
+    .webgrid-header-acum {
+        padding: 6px 5px;
+        text-align: center;
+        background-color: #e8eef4;
+        border-bottom: 2px solid #A4A4A4;
+        height: 40px;
+        display: none;
+    }
+
+    .webgrid-header-total {
+        padding: 6px 5px;
+        text-align: center;
+        background-color: #e8eef4;
+        border-bottom: 2px solid #A4A4A4;
+        height: 40px;
+    }
+
+    .webgrid-footer {
+    }
+
+    .webgrid-row-style {
+        text-align: right;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-total {
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-total-acum {
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+        display: none;
+    }
+
+    .webgrid-rubrica {
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-total {
+        text-align: right;
+        background-color: #EAF2D3;
+        padding: 3px 7px 2px;
+    }
+
+    .webgrid-selected-row {
+        text-align: right;
+        border: solid 1px #FFFFFF;
+        padding: 3px 7px 2px;
+    }
+
+    .Webgrid_col_data {
+        text-align: center;
+    }
+    /*NOTA table::AQUI DEFINO  O  STYLE DOS BOTÕES*/
+
+.btn:focus, .btn::-moz-focus-inner{
+  outline:none;
+  border:none;
+}
+.btn{
+  font-family: arial;
+  font-size:14px;
+  text-transform: uppercase;
+  font-weight:700;
+  border:none;
+  padding:10px;
+  cursor: pointer;
+  display:inline-block;
+  text-decoration: none;
+  width: auto;
+}
+.btn-green{
+  background:green;
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 #006000 /*rgba(0, 96, 0, 0.6)*/;
+    width: auto;
+}
+.btn-green:hover{
+  background:#006000;
+  box-shadow:0 5px 0 #003f00;
+}
+.btn-blue{
+  background:rgba(0,0,139, 0.6);
+  color:#fff;
+   border:#fff;
+  box-shadow:0 5px 0 rgba(0,0,59, 0.6);
+    width: auto;
+}
+.btn-blue:hover{
+  background:#2153a2;
+  box-shadow:0 5px 0 #00003B;
+}
+.btn-purple{
+  background:purple; opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #670167 /*rgba(103, 1, 103, 0.6)*/;
+    width: auto;
+}
+.btn-purple:hover{
+  background:#670167;
+  box-shadow:0 5px 0 #470047;
+}
+.btn-red{
+  background:red; opacity:0.7;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 #d20000 /*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-red:hover{
+  background:#d20000;
+  box-shadow:0 5px 0 #b00000;
+}
+.btn-orange{
+  background:rgb(204 , 112 , 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(204 , 112 , 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-orange:hover{
+  background:rgb(204 , 112 , 0);
+  box-shadow:0 5px 0 rgb(204 , 112 , 0);
+}
+.btn-brown{
+  background:rgb(102, 0, 0); opacity:0.6;
+  border:#fff;
+  color:#fff;
+  box-shadow:0 5px 0 rgb(102, 0, 0)/*rgba(210, 0, 0, 0.6)*/;
+    width: auto;
+}
+.btn-brown:hover{
+  background:rgb(102, 0, 0);
+  box-shadow:0 5px 0 rgb(102, 0, 0);
+}
+.btn-green:active,.btn-blue:active, .btn-purple:active, .btn-red:active, .btn-orange:active, .btn-brown:active{
+  position:relative;
+  top:5px;
+  box-shadow:inherit;
+}
+</style>
+
+
+
+@{
+    var ANO_VERSAO_REAL = @ViewData["ANO_VERSAO_REAL"];
+    var MES_ACUM_REAL = @ViewData["MES_ACUM_REAL"];
+    var MES_INI_PER_REAL = @ViewData["MES_INI_PER_REAL"];
+    var MES_FIN_PER_REAL = @ViewData["MES_FIN_PER_REAL"];
+
+}
+
+
+<h2 id="gastos_pessoal_mensal_titulo_tabela">GASTOS COM PESSOAL MENSAIS DE @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_REAL)))   </h2>
+<p></p>
+<p></p>
+<iframe id="txtArea1" style="display:none"></iframe>
+<button type=button id="btnExport1" class="btn-blue" style="display:none" onclick="fnExcelReport('GASTOS_PESSOAL_MENSAL', 'Export HTML Table to Excel')">Excel</button>
+<p></p>
+<p></p>
+<p></p>
+<table id="GASTOS_PESSOAL_MENSAL"  class="webgrid-table" border="1" style="width:1200px">
+    <thead>
+        <tr>
+            <td class="webgrid-header"> Rúbrica </td>
+            <td class="webgrid-header"> Janeiro </td>
+            <td class="webgrid-header"> Fevereiro </td>
+            <td class="webgrid-header"> Março  </td>
+            <td class="webgrid-header"> Abril  </td>
+            <td class="webgrid-header"> Maio  </td>
+            <td class="webgrid-header"> Junho  </td>
+            <td class="webgrid-header"> Julho  </td>
+            <td class="webgrid-header"> Agosto  </td>
+            <td class="webgrid-header"> Setembro  </td>
+            <td class="webgrid-header"> Outubro  </td>
+            <td class="webgrid-header"> Novembro  </td>
+            <td class="webgrid-header"> Dezembro  </td>
+            <td class="webgrid-header-total"> Total  </td>
+            <td class="webgrid-header-acum"> Acum de Jan a 
+@{if (MES_ACUM_REAL.Equals("1")){ <text>Jan</text>;} else 
+{ if (MES_ACUM_REAL.Equals("2")){ <text>Fev</text>;} else
+{ if (MES_ACUM_REAL.Equals("3")){ <text>Mar</text>;} else
+{ if (MES_ACUM_REAL.Equals("4")){ <text>Abr</text>;} else
+{ if (MES_ACUM_REAL.Equals("5")){ <text>Mai</text>;} else 
+{ if (MES_ACUM_REAL.Equals("6")){ <text>Jun</text>;} else 
+{ if (MES_ACUM_REAL.Equals("7")){ <text>Jul</text>;} else
+{ if (MES_ACUM_REAL.Equals("8")){ <text>Ago</text>;} else 
+{ if (MES_ACUM_REAL.Equals("9")){ <text>Set</text>;} else
+{ if (MES_ACUM_REAL.Equals("10")){ <text>Out</text>;} else 
+{ if (MES_ACUM_REAL.Equals("11")){ <text>Nov</text>;} else
+{ if (MES_ACUM_REAL.Equals("12")){ <text>Dez</text>;} }}}}}}}}}}}} 
+             de @Html.Raw((string.Format("{0:N}",@ANO_VERSAO_REAL)))  </td>
+        </tr>
+    </thead>
+<tr>
+    <td  class="webgrid-rubrica"> Gastos com Pessoal                           </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_JANEIRO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_FEVEREIRO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_MARCO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_ABRIL"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_MAIO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_JUNHO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_JULHO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_AGOSTO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_SETEMBRO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_OUTUBRO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_NOVEMBRO"])))  </td> 
+    <td class="webgrid-rubrica" id="GASTOS_PESSOAL_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ANO_N"])))  </td> 
+    <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_REAL_ACUM" itemid="GASTOS_PESSOAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_REAL_ACUM"])))  </td>
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Remuneração de Orgãos Sociais                           </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_REM_ORG_SOC_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_ORG_SOC_ANO_N"])))  </td> 
+        <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_REM_ORG_SOC_REAL_ACUM" itemid="GASTOS_PESSOAL_REM_ORG_SOC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_REM_ORG_SOC_REAL_ACUM"])))  </td>
+</tr>
+     <tr>
+    <td  class="webgrid-rubrica"> Remuneração de Pessoal                           </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_REM_PESSOAL_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_REM_PESSOAL_ANO_N"])))  </td> 
+         <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_REM_PESSOAL_REAL_ACUM" itemid="GASTOS_PESSOAL_REM_PESSOAL_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_REM_PESSOAL_REAL_ACUM"])))  </td>
+</tr>
+     <tr>
+    <td  class="webgrid-rubrica"> Benefícios Pós-Emprego                           </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_BEN_POS_EMP_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_BEN_POS_EMP_ANO_N"])))  </td> 
+         <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_BEN_POS_EMP_REAL_ACUM" itemid="GASTOS_PESSOAL_BEN_POS_EMP_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_BEN_POS_EMP_REAL_ACUM"])))  </td>
+</tr>
+<tr>
+    <td  class="webgrid-rubrica"> Indemnizações                         </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_INDEMNIZACOES_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_INDEMNIZACOES_ANO_N"])))  </td> 
+    <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_INDEMNIZACOES_REAL_ACUM" itemid="GASTOS_PESSOAL_INDEMNIZACOES_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_INDEMNIZACOES_REAL_ACUM"])))  </td>
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Encargos Sobre Remunerações                       </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_ANO_N"])))  </td> 
+        <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_ENC_SEG_SOC_REAL_ACUM" itemid="GASTOS_PESSOAL_ENC_SEG_SOC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_ENC_SEG_SOC_REAL_ACUM"])))  </td>
+</tr>
+<tr>
+    <td  class="webgrid-rubrica"> Seguros de Acidentes no Trabalho e Doenças                      </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_ANO_N"])))  </td> 
+    <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_SEG_ACI_TRAB_REAL_ACUM" itemid="GASTOS_PESSOAL_SEG_ACI_TRAB_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_SEG_ACI_TRAB_REAL_ACUM"])))  </td>
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Gastos de Acção Social                      </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_ANO_N"])))  </td> 
+        <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_GAST_ACAO_SOC_REAL_ACUM" itemid="GASTOS_PESSOAL_GAST_ACAO_SOC_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_GAST_ACAO_SOC_REAL_ACUM"])))  </td>
+</tr>
+    <tr>
+    <td  class="webgrid-rubrica"> Outros Gastos com Pessoal                      </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_JANEIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_JANEIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_FEVEREIRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_FEVEREIRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_MARCO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_MARCO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_ABRIL">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_ABRIL"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_MAIO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_MAIO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_JUNHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_JUNHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_JULHO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_JULHO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_AGOSTO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_AGOSTO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_SETEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_SETEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_OUTUBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_OUTUBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_NOVEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_NOVEMBRO"])))  </td> 
+    <td  style="text-align:right" id="GASTOS_PESSOAL_OUTROS_ANO_N_DEZEMBRO">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N_DEZEMBRO"])))  </td> 
+    <td  class="webgrid-total" id="GASTOS_PESSOAL_OUTROS_ANO_N">@Html.Raw((string.Format("{0:N}",@ViewData["GASTOS_PESSOAL_OUTROS_ANO_N"])))  </td> 
+        <td class="webgrid-total-acum" style="text-align:right" id="GASTOS_PESSOAL_OUTROS_REAL_ACUM" itemid="GASTOS_PESSOAL_OUTROS_ACUM" itemref="@ViewData["versao_real"]">@Html.Raw((string.Format("{0:N}", @ViewData["GASTOS_PESSOAL_OUTROS_REAL_ACUM"])))  </td>
+</tr>
+
+
+     </table>
+
+
+<div id="CONFIGURARXX" style="display:none">
+   
+
+    @using (Html.BeginForm("GRC_ALERTAS_RESUMO", "GRC", FormMethod.Get))
+    {
+       <div id="CONFIGURAR_CAMPO" class="CONFIGURAR_CAMPO">
+        @Html.ActionLink("Configurar","BI_CAMP_CALC", "BI", new { id_camp_calc = "id_camp_calc", Pesquisa_User = "tjalmeida" , versao=@ViewData["VERSAO"] }, null)
+       </div> 
+    }
+</div>
+
+ @section scripts {
+
+
+
+
+@{int DESATIVA_DATATBLE = Convert.ToInt32(@ViewData["desativa_datatable"]);
+}
+@if (DESATIVA_DATATBLE.Equals(1)) { }
+    else
+    {
+
+    <script src="@Url.Content("~/Scripts/jquery.dataTables.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/dataTables.fixedColumns.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/dataTables.buttons.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/buttons.flash.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/jszip.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/pdfmake.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/vfs_fonts.js")"></script>
+        <script src="@Url.Content("~/Scripts/buttons.html5.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/buttons.print.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/dataTables.responsive.min.js")"></script>
+        <script src="@Url.Content("~/Scripts/dataTables.fixedHeader.min.js")"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
+}
+
+
+
+    <script type="text/javascript">
+
+            //$(document).ready(function () {
+                //------------------ NOTA TA: INICIO DE TRATAMENTO DE TABELA COM DATATABLE-------------------
+
+
+                var userAgent = navigator.userAgent.toLowerCase();
+                if (userAgent.search(/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i) != -1) {
+                    var table = $('#GASTOS_PESSOAL_MENSAL').DataTable( {
+                        aaSorting: [],
+                        columnDefs: [
+                          { orderable: false, targets: '_all' }
+                        ],
+                        scrollY:        "800px",
+                        scrollX:        true,
+                        scrollCollapse: true,
+                        paging:         false,
+
+                        fixedColumns:   {
+                            leftColumns: 1,
+                            rightColumns: 1
+                        },
+                        buttons: [
+                                'copy', 'csv', 'print',
+                         {
+                            extend: 'pdfHtml5',
+                            orientation: 'landscape',
+                            pageSize: 'LEGAL'
+                        },
+
+                        {extend: 'excelHtml5',
+                            customize: function(xlsx) { var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                                //nota ta: exemplo de como pintar coluna a melhorar
+                                //$('row c[r^="A"]', sheet).each( function () {
+                                // $(this).attr( 's', '15' );});
+                            }}
+                                                ],
+
+                    } );
+                    $('#btnExport1').attr('style', 'display:block');
+                }
+
+                    //--------------NOTA TA: SE NÃO FOR MOBILE DOU UM TRATENTO DIFERENTE-------
+
+
+                else {  var table = $('#GASTOS_PESSOAL_MENSAL').DataTable( {
+                    aaSorting: [],
+                    dom: 'Bfrtip',
+                    columnDefs: [
+                    { orderable: false, targets: '_all' }
+                                       ],
+                    paging: false,
+                    responsive: false,
+                    fixedHeader: true,
+
+                   // scrollY:        "800",
+                   // scrollX:        true,
+                    //scrollCollapse: true,
+                    //paging:         false,
+                    //fixedColumns:   {
+                    //    leftColumns: 1,
+                    //    rightColumns: 1
+                    //},
+
+
+
+
+
+                    buttons: [
+                        'copy', 'csv', 'print',
+                    {
+                    extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL'
+                    },
+
+                    {extend: 'excelHtml5',
+                    customize: function(xlsx) { var sheet = xlsx.xl.worksheets['sheet1.xml'];
+                            //nota ta: exemplo de como pintar coluna a melhorar
+                            //$('row c[r^="A"]', sheet).each( function () {
+                           // $(this).attr( 's', '15' );});
+                    }}
+                    ],
+
+
+
+                } );
+
+                    //NOTA TA: AQUI DEVERIA CONSEGUIR FIXAR O HEADER, MAS NÃO ESTOU A CONSEGUIR... A MELHORAR
+                    //new $.fn.dataTable.FixedHeader(table);
+                }
+
+                $(".DTFC_LeftBodyWrapper").css("top", "10px");
+                $(".DTFC_RightBodyWrapper").css("top", "10px");
+                $('button').addClass('btn-blue');
+                //------------------ NOTA TA: FIM DE TRATAMENTO DE TABELA COM DATATABLE-------------------
+
+
+
+
+                $(".webgrid-table td").click(function () {
+                    var idconteudoOriginal = $(this).attr('id');
+
+                    //alert($("#CONFIGURARXX form").html());
+                    if (typeof idconteudoOriginal === "undefined")
+                    { }
+                    else
+                    {
+                        var ReplaceHrefID = $("#CONFIGURARXX form").html().replace('id_camp_calc=id_camp_calc', 'id_camp_calc' + '=' + idconteudoOriginal);
+                        if ($(this).find('.CONFIGURAR_CAMPO').text() == "") {
+                            $(this).prepend(ReplaceHrefID);
+                        }
+                    }
+                    //alert($(this).find('.CONFIGURAR_CAMPO').text());
+                })
+
+            //})
+
+    </script>
+
+    @*-----------------------------NOTA TA: INICIO DE EXTRAIR PARA EXCEL E HTML ---------------------------------------------------------*@
+
+    <script type="text/javascript">
+            function fnExcelReport(table, name) {
+                var table1 = '#' + table
+                var ccs_style = $("#ccs_style").html();
+                var styletabela = $(table1).attr("class");
+                var indexOf_Ini_styletabela = $("#ccs_style").html().indexOf(styletabela)
+                var indexOf_Fim_styletabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).indexOf("}");
+                var ccs_style_tabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).substring(0, indexOf_Fim_styletabela).replace("{", "").replace(styletabela, "");
+
+
+                var tab_text = "<table style=" + "'" + ccs_style_tabela + "'" + "><tr>";
+                var textRange; var j = 0; var i = 0;
+                tab = document.getElementById(table); // id of table
+
+
+
+                for (j = 0 ; j < tab.rows.length ; j++) {
+                    var tab_rows = tab.rows[j].innerHTML;
+                    for (i = 0 ; i < tab.rows[j].cells.length ; i++) {
+
+                        var texto_linha = tab_rows;
+                        var style_celula_ini = texto_linha.indexOf('class="');
+                        var style_celula_fim = texto_linha.substring(style_celula_ini, 999999999999).replace('class="', '').indexOf('"');
+                        var style_celula = texto_linha.substring(style_celula_ini, 999999999999).replace('class="', '').substring(0, style_celula_fim);
+
+                        var indexOf_Ini_styletabela = $("#ccs_style").html().indexOf(style_celula)
+                        var indexOf_Fim_styletabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).indexOf("}");
+                        var ccs_style_tabela = ccs_style.substring(indexOf_Ini_styletabela, 999999999999).substring(0, indexOf_Fim_styletabela).replace("{", "").replace(style_celula, "");
+
+                        tab_rows = tab_rows.replace('class="' + style_celula + '"', 'style="' + ccs_style_tabela + '"')
+
+                    }
+
+                    tab_text = tab_text + tab_rows + "</tr>";
+                    //tab_text=tab_text+"</tr>";
+                }
+
+                tab_text = tab_text + "</table>";
+                tab_text = tab_text.split('&nbsp;').join('.');
+                tab_text = tab_text.replace(/<A[^>]*>|<\/A>/g, "");//remove if u want links in your table
+                tab_text = tab_text.replace(/<img[^>]*>/gi, ""); // remove if u want images in your table
+                tab_text = tab_text.replace(/<input[^>]*>|<\/input>/gi, ""); // reomves input params
+
+                var ua = window.navigator.userAgent;
+                var msie = ua.indexOf("MSIE ");
+
+                if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))      // If Internet Explorer
+                {
+                    txtArea1.document.open("txt/html", "replace");
+                    txtArea1.document.write(tab_text);
+                    txtArea1.document.close();
+                    txtArea1.focus();
+                    sa = txtArea1.document.execCommand("SaveAs", true, "Transferir.xls");
+
+                    return (sa);
+                }
+                else                 //other browser not tested on IE 11
+
+                 sa = window.open('data:application/vnd.ms-excel,' + encodeURIComponent(tab_text));
+
+                return (sa);
+
+
+            }
+    </script>
+
+    @*-----------------------------NOTA TA: FIM DE EXTRAIR PARA EXCEL E HTML ---------------------------------------------------------*@
+
+
+
+
+
+}
