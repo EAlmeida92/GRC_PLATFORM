@@ -23,6 +23,8 @@ namespace APLICACAO.Controllers
         //
         // GET: /Account/Login
 
+
+
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
